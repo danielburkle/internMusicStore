@@ -13,7 +13,7 @@
 {
     self = [super init];
     if (self) {
-        [self setTitle:@"Welcome"];
+        [self setTitle:[self localizedTitle]];
     }
     return self;
 }
@@ -23,19 +23,54 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UILabel *welcomeLabel = [[UILabel alloc] init];
-    [welcomeLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [welcomeLabel setText:@"Welcome To NISC"];
-    
-    UIView *view = [self view];
+
+    [self configureViewsForView:[self view]];
+}
+
+#pragma mark - View Configuration
+
+- (void)configureViewsForView:(nonnull UIView *)view
+{
     [view setBackgroundColor:[UIColor whiteColor]];
+
+    [self addWelcomeMessageLabelToView:view];
+}
+
+- (void)addWelcomeMessageLabelToView:(nonnull UIView *)view
+{
+    UILabel *welcomeLabel = [self labelForDisplayingWelcomeMessage];
+
     [view addSubview:welcomeLabel];
-    
+
+    [self addCenterConstraintsToLabel:welcomeLabel inView:view];
+}
+
+- (nonnull UILabel *)labelForDisplayingWelcomeMessage
+{
+    UILabel *label = [[UILabel alloc] init];
+    [label setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [label setText:[self localizedWelcomeMessage]];
+    return label;
+}
+
+- (void)addCenterConstraintsToLabel:(nonnull UILabel *)label inView:(nonnull UIView *)view
+{
     [NSLayoutConstraint activateConstraints:@[
-         [[welcomeLabel centerXAnchor] constraintEqualToAnchor:[view centerXAnchor]],
-         [[welcomeLabel centerYAnchor] constraintEqualToAnchor:[view centerYAnchor]]
+        [[label centerXAnchor] constraintEqualToAnchor:[view centerXAnchor]],
+        [[label centerYAnchor] constraintEqualToAnchor:[view centerYAnchor]]
     ]];
+}
+
+#pragma mark - Localized Strings
+
+- (nonnull NSString *)localizedTitle
+{
+    return @"Welcome";
+}
+
+- (nonnull NSString *)localizedWelcomeMessage
+{
+    return @"Welcome To NISC!";
 }
 
 @end

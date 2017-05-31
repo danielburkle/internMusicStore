@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57D047DEA6BAE1B7EE1440E1 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04B655513F5D1D9EF4485 /* Album.m */; };
+		57D04A66A3A688AD74E1347F /* JSON.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57D04CDE6C968D98F3B1D724 /* JSON.txt */; };
 		5DEF82791CE66A0800985B5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF82781CE66A0800985B5D /* main.m */; };
 		5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82831CE66A0800985B5D /* Assets.xcassets */; };
 		5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */; };
@@ -15,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57D047787F9F60FD7534BEB5 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		57D04B655513F5D1D9EF4485 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		57D04CDE6C968D98F3B1D724 /* JSON.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON.txt; sourceTree = "<group>"; };
 		5DEF82741CE66A0800985B5D /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DEF82781CE66A0800985B5D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5DEF82831CE66A0800985B5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,6 +67,9 @@
 				5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */,
 				5DEF82881CE66A0800985B5D /* Info.plist */,
 				5DEF82771CE66A0800985B5D /* Supporting Files */,
+				57D04B655513F5D1D9EF4485 /* Album.m */,
+				57D047787F9F60FD7534BEB5 /* Album.h */,
+				57D04CDE6C968D98F3B1D724 /* JSON.txt */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -151,6 +159,7 @@
 			files = (
 				5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */,
 				5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */,
+				57D04A66A3A688AD74E1347F /* JSON.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +173,7 @@
 				5DEF82951CE66B2B00985B5D /* SCCAppDelegate.m in Sources */,
 				5DEF82991CE66B4100985B5D /* SCCWelcomeViewController.m in Sources */,
 				5DEF82791CE66A0800985B5D /* main.m in Sources */,
+				57D047DEA6BAE1B7EE1440E1 /* Album.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,9 +1,5 @@
-//
-//  Created by Brian M Coyner on 5/20/14.
-//  Copyright (c) 2014 National Information Solutions Cooperative. All rights reserved.
-//
-
 #import "SCCWelcomeViewController.h"
+#import "Album.h"
 
 @implementation SCCWelcomeViewController
 
@@ -25,6 +21,39 @@
     [super viewDidLoad];
 
     [self configureViewsForView:[self view]];
+
+    //Temporary importer of .txt file to output Albums
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"JSON" ofType:@"txt"];
+    NSData *fileContents = [[NSData alloc] initWithContentsOfFile:filepath];
+
+    NSError *jsonError;
+    NSArray *parsedJSONArray = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
+    if (jsonError){
+        NSLog(@"Error reading NSData: %@", jsonError.localizedDescription);
+    }
+
+    NSArray *innerJSONResults = [[NSArray alloc] initWithArray:[parsedJSONArray valueForKey:@"results"]];
+    NSMutableArray *albums = [[NSMutableArray alloc] init];
+
+    for (int i = 0; i < innerJSONResults.count; i++){
+        NSDictionary *tempDict = innerJSONResults[i];
+        Album *albumToAdd = [[Album alloc] initWithJSON:[tempDict valueForKey:@"collectionName"]
+                                              albumArtist:[tempDict valueForKey:@"artistName"]
+                                                  albumID:[tempDict valueForKey:@"collectionId"]
+                                              releaseDate:[tempDict valueForKey:@"releaseDate"]
+                                           numberOfTracks:[tempDict valueForKey:@"trackCount"]
+                                                    genre:[tempDict valueForKey:@"primaryGenreName"]
+                                                    price:[tempDict valueForKey:@"collectionPrice"]
+                                                  country:[tempDict valueForKey:@"country"]
+                                              explictness:[tempDict valueForKey:@"collectionExplicitness"]];
+        [albums addObject:albumToAdd];
+    }
+
+    for (int i =0; i < albums.count; i++){
+        Album *albumToPrint = albums[i];
+        NSLog(albumToPrint.description);
+    }
+
 }
 
 #pragma mark - View Configuration

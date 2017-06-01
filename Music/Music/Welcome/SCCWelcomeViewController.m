@@ -1,4 +1,10 @@
+//
+//  Created by Brian M Coyner on 5/20/14.
+//  Copyright (c) 2014 National Information Solutions Cooperative. All rights reserved.
+//
+
 #import "SCCWelcomeViewController.h"
+
 #import "Album.h"
 
 @implementation SCCWelcomeViewController
@@ -22,38 +28,43 @@
 
     [self configureViewsForView:[self view]];
 
-    //Temporary importer of .txt file to output Albums
-    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"JSON" ofType:@"txt"];
-    NSData *fileContents = [[NSData alloc] initWithContentsOfFile:filepath];
+    [self dumpAlbumObject:[self albumArrayFromJson]];
+}
 
+- (nonnull NSArray *)albumArrayFromJson{
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"AlbumResults" ofType:@"json"];
+    NSData *fileContents = [[NSData alloc] initWithContentsOfFile:filepath];
     NSError *jsonError;
-    NSArray *parsedJSONArray = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
+
+    NSArray<NSDictionary *> *parsedJsonArray = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
     if (jsonError){
         NSLog(@"Error reading NSData: %@", jsonError.localizedDescription);
     }
 
-    NSArray *innerJSONResults = [[NSArray alloc] initWithArray:[parsedJSONArray valueForKey:@"results"]];
-    NSMutableArray *albums = [[NSMutableArray alloc] init];
+    NSArray<NSArray *> *innerJsonResults = [[NSArray alloc] initWithArray:[parsedJsonArray valueForKey:@"results"]];
+    NSMutableArray<Album *> *albums = [[NSMutableArray alloc] init];
 
-    for (int i = 0; i < innerJSONResults.count; i++){
-        NSDictionary *tempDict = innerJSONResults[i];
-        Album *albumToAdd = [[Album alloc] initWithJSON:[tempDict valueForKey:@"collectionName"]
-                                              albumArtist:[tempDict valueForKey:@"artistName"]
-                                                  albumID:[tempDict valueForKey:@"collectionId"]
-                                              releaseDate:[tempDict valueForKey:@"releaseDate"]
-                                           numberOfTracks:[tempDict valueForKey:@"trackCount"]
-                                                    genre:[tempDict valueForKey:@"primaryGenreName"]
-                                                    price:[tempDict valueForKey:@"collectionPrice"]
-                                                  country:[tempDict valueForKey:@"country"]
-                                              explictness:[tempDict valueForKey:@"collectionExplicitness"]];
+    for (int i = 0; i < innerJsonResults.count; i++){
+        NSDictionary<NSString *, NSString *> *tempDict = innerJsonResults[i];
+        Album *albumToAdd = [[Album alloc] initWithAlbumName:[tempDict valueForKey:@"collectionName"]
+                                            albumArtist:[tempDict valueForKey:@"artistName"]
+                                                albumID:[tempDict valueForKey:@"collectionId"]
+                                            releaseDate:[tempDict valueForKey:@"releaseDate"]
+                                         numberOfTracks:[tempDict valueForKey:@"trackCount"]
+                                                  genre:[tempDict valueForKey:@"primaryGenreName"]
+                                                  price:[tempDict valueForKey:@"collectionPrice"]
+                                                country:[tempDict valueForKey:@"country"]
+                                            explictness:[tempDict valueForKey:@"collectionExplicitness"]];
         [albums addObject:albumToAdd];
     }
+    return albums;
+}
 
-    for (int i =0; i < albums.count; i++){
-        Album *albumToPrint = albums[i];
+- (void)dumpAlbumObject:(nonnull NSArray *)albumArray{
+    for (int i =0; i < albumArray.count; i++){
+        Album *albumToPrint = albumArray[i];
         NSLog(albumToPrint.description);
     }
-
 }
 
 #pragma mark - View Configuration

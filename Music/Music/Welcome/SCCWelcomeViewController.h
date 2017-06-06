@@ -7,7 +7,4 @@
 
 @interface SCCWelcomeViewController : UIViewController
 
-- (NSArray *)albumArrayFromJson;
-
-- (void)dumpAlbumObject:(NSArray *)albumArray;
 @end

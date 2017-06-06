@@ -28,42 +28,56 @@
 
     [self configureViewsForView:[self view]];
 
-    [self dumpAlbumObject:[self albumArrayFromJson]];
+    NSArray *albumArray = [self retrieveAlbumArrayFromDictionary:[self retrieveAlbumDictionaryFromJSONFile]];
+    [self dumpAlbumObject:[self albumArrayFromDictionary:albumArray]];
 }
 
-- (nonnull NSArray *)albumArrayFromJson{
+#pragma mark - JSON Processing
+
+- (nonnull NSDictionary<NSString *, id> *)retrieveAlbumDictionaryFromJSONFile
+{
     NSString *filepath = [[NSBundle mainBundle] pathForResource:@"AlbumResults" ofType:@"json"];
     NSData *fileContents = [[NSData alloc] initWithContentsOfFile:filepath];
     NSError *jsonError;
-
-    NSArray<NSDictionary *> *parsedJsonArray = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
-    if (jsonError){
-        NSLog(@"Error reading NSData: %@", jsonError.localizedDescription);
+    NSDictionary<NSString *, id> *parsedJSONArray = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
+    if (jsonError) {
+        NSLog(@"Error reading NSData: %@", [jsonError localizedDescription]);
     }
-
-    NSArray<NSArray *> *innerJsonResults = [[NSArray alloc] initWithArray:[parsedJsonArray valueForKey:@"results"]];
-    NSMutableArray<Album *> *albums = [[NSMutableArray alloc] init];
-
-    for (int i = 0; i < innerJsonResults.count; i++){
-        NSDictionary<NSString *, NSString *> *tempDict = innerJsonResults[i];
-        Album *albumToAdd = [[Album alloc] initWithAlbumName:[tempDict valueForKey:@"collectionName"]
-                                            albumArtist:[tempDict valueForKey:@"artistName"]
-                                                albumID:[tempDict valueForKey:@"collectionId"]
-                                            releaseDate:[tempDict valueForKey:@"releaseDate"]
-                                         numberOfTracks:[tempDict valueForKey:@"trackCount"]
-                                                  genre:[tempDict valueForKey:@"primaryGenreName"]
-                                                  price:[tempDict valueForKey:@"collectionPrice"]
-                                                country:[tempDict valueForKey:@"country"]
-                                            explictness:[tempDict valueForKey:@"collectionExplicitness"]];
-        [albums addObject:albumToAdd];
-    }
-    return albums;
+    return parsedJSONArray;
 }
 
-- (void)dumpAlbumObject:(nonnull NSArray *)albumArray{
-    for (int i =0; i < albumArray.count; i++){
+- (nonnull NSArray<NSDictionary <NSString *, id> *> *)retrieveAlbumArrayFromDictionary:(nonnull NSDictionary<NSString *, id> *)JsonDictionary
+{
+    NSArray<NSDictionary <NSString *, id> *> *innerJsonResults = [[NSArray alloc] initWithArray:[JsonDictionary valueForKey:@"results"]];
+    return innerJsonResults;
+}
+
+- (nonnull NSArray<Album *> *)albumArrayFromDictionary:(nonnull NSArray <NSDictionary<NSString *, id > *> *)dictionaryArray
+{
+    NSMutableArray<Album *> *albums = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [dictionaryArray count]; i++) {
+        NSDictionary<NSString *, id> *tempDict = dictionaryArray[i];
+        Album *albumToAdd = [[Album alloc] initWithAlbumName:[tempDict valueForKey:@"collectionName"]
+                                                 albumArtist:[tempDict valueForKey:@"artistName"]
+                                                     albumID:[tempDict valueForKey:@"collectionId"]
+                                                 releaseDate:[tempDict valueForKey:@"releaseDate"]
+                                              numberOfTracks:[tempDict valueForKey:@"trackCount"]
+                                                       genre:[tempDict valueForKey:@"primaryGenreName"]
+                                                       price:[tempDict valueForKey:@"collectionPrice"]
+                                                     country:[tempDict valueForKey:@"country"]
+                                                 explictness:[tempDict valueForKey:@"collectionExplicitness"]
+                                                    artistID:[tempDict valueForKey:@"artistId"]];
+        [albums addObject:albumToAdd];
+    }
+    NSArray<Album *> *nonMutableArray = [[NSArray alloc] initWithArray:albums];
+    return nonMutableArray;
+}
+
+- (void)dumpAlbumObject:(nonnull NSArray<Album *> *)albumArray
+{
+    for (int i = 0; i < [albumArray count]; i++) {
         Album *albumToPrint = albumArray[i];
-        NSLog(albumToPrint.description);
+        NSLog([albumToPrint description]);
     }
 }
 

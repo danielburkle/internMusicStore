@@ -8,21 +8,21 @@
 @property (nonnull, nonatomic, strong, readonly) NSString *releaseDate;
 @property (nonatomic, assign, readonly) int32_t numberOfTracks;
 @property (nonnull, nonatomic, strong, readonly) NSString *genre;
-@property (nonnull, nonatomic, strong, readonly) NSString *price;
+@property (nonatomic, assign, readonly) float_t price;
 @property (nonnull, nonatomic, strong, readonly) NSString *country;
 @property (nonnull, nonatomic, strong, readonly) NSString *explicitness;
 @property (nonatomic, assign, readonly) int32_t artistID;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithAlbumName:(NSString *)albumName
-                              albumArtist:(NSString *)name
-                                  albumID:(int32_t)ID
-                              releaseDate:(NSString *)date
-                           numberOfTracks:(int32_t)number
-                                    genre:(NSString *)genre
-                                    price:(NSString *)price
-                                  country:(NSString *)country
-                              explictness:(NSString *)explicit
+- (nonnull instancetype)initWithAlbumName:(nonnull NSString *)albumName
+                              albumArtist:(nonnull NSString *)albumArtist
+                                  albumID:(int32_t)albumID
+                              releaseDate:(nonnull NSString *)releaseDate
+                           numberOfTracks:(int32_t)numberOfTracks
+                                    genre:(nonnull NSString *)genre
+                                    price:(float_t)price
+                                  country:(nonnull NSString *)country
+                              explictness:(nonnull NSString *)explicitness
                                  artistID:(int32_t)artistID NS_DESIGNATED_INITIALIZER;
 @end

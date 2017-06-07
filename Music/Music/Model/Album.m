@@ -4,15 +4,15 @@
 
 #pragma mark - Object Life Cycle
 
-- (instancetype)initWithAlbumName:(NSString *)albumName
-                      albumArtist:(NSString *)name
+- (instancetype)initWithAlbumName:(nonnull NSString *)albumName
+                      albumArtist:(nonnull NSString *)name
                           albumID:(int32_t)ID
-                      releaseDate:(NSString *)date
+                      releaseDate:(nonnull NSString *)date
                    numberOfTracks:(int32_t)number
-                            genre:(NSString *)genre
-                            price:(NSString *)price
-                          country:(NSString *)country
-                      explictness:(NSString *)explicit
+                            genre:(nonnull NSString *)genre
+                            price:(float_t)price
+                          country:(nonnull NSString *)country
+                      explictness:(nonnull NSString *)explicit
                          artistID:(int32_t)artistID
 {
 
@@ -35,7 +35,7 @@
 - (NSString *)description
 {
     return [[NSString alloc] initWithFormat:@"Album: %@, Artist: %@, AlbumID: %d, "
-                                                "Release Date: %@, Number of Tracks: %d, Genre: %@, Price: %@, Country of Origin: %@, Explicit: %@, Artist ID: %d",
+                                                "Release Date: %@, Number of Tracks: %d, Genre: %@, Price: %f, Country of Origin: %@, Explicit: %@, Artist ID: %d",
                                             _albumName,
                                             _albumArtist,
                                             _albumID,

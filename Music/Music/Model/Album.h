@@ -1,3 +1,8 @@
+//
+//  Created by Daniel Burkle on 6/7/2017.
+//  Copyright (c) 2014 National Information Solutions Cooperative. All rights reserved.
+//
+
 @import Foundation;
 
 @interface Album : NSObject

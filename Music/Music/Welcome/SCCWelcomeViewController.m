@@ -28,23 +28,23 @@
 
     [self configureViewsForView:[self view]];
 
-    NSArray *albumArray = [self resultsFromDictionary:[self AlbumDictionary]];
+    NSArray<NSDictionary <NSString *, id> *> *albumArray = [self resultsFromDictionary:[self albumDictionary]];
     [self printAlbumDescription:[self objectsFromArray:albumArray]];
 }
 
 #pragma mark - JSON Processing
 
-- (nonnull NSDictionary<NSString *, id> *)AlbumDictionary
+- (nonnull NSDictionary<NSString *, id> *)albumDictionary
 {
     NSString *filepath = [[NSBundle mainBundle] pathForResource:@"AlbumResults" ofType:@"json"];
     NSData *fileContents = [[NSData alloc] initWithContentsOfFile:filepath];
     NSError *jsonError;
-    NSDictionary<NSString *, id> *parsedJSONArray = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
-    if (parsedJSONArray == nil) {
+    NSDictionary<NSString *, id> *parsedJSONDictionary = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
+    if (parsedJSONDictionary == nil) {
         NSLog(@"Error reading NSData: %@", [jsonError localizedDescription]);
         return [[NSDictionary alloc] init];
     }
-    return parsedJSONArray;
+    return parsedJSONDictionary;
 }
 
 - (nonnull NSArray<NSDictionary <NSString *, id> *> *)resultsFromDictionary:(nonnull NSDictionary<NSString *, id> *)dictionary
@@ -56,17 +56,16 @@
 {
     NSMutableArray<Album *> *albums = [[NSMutableArray alloc] init];
     for (NSDictionary <NSString *, id> *albumDictionary in dictionaryArray) {
-        NSDictionary<NSString *, id> *tempDictionary = albumDictionary;
-        Album *albumToAdd = [[Album alloc] initWithAlbumName:[tempDictionary objectForKey:@"collectionName"]
-                                                 albumArtist:[tempDictionary objectForKey:@"artistName"]
-                                                     albumID:[[tempDictionary objectForKey:@"collectionId"] intValue]
-                                                 releaseDate:[tempDictionary objectForKey:@"releaseDate"]
-                                              numberOfTracks:[[tempDictionary objectForKey:@"trackCount"] intValue]
-                                                       genre:[tempDictionary objectForKey:@"primaryGenreName"]
-                                                       price:[[tempDictionary objectForKey:@"collectionPrice"] floatValue]
-                                                     country:[tempDictionary objectForKey:@"country"]
-                                                 explictness:[tempDictionary objectForKey:@"collectionExplicitness"]
-                                                    artistID:[[tempDictionary objectForKey:@"artistId"] intValue]];
+        Album *albumToAdd = [[Album alloc] initWithName:[albumDictionary objectForKey:@"collectionName"]
+                                             artistName:[albumDictionary objectForKey:@"artistName"]
+                                                     ID:[[albumDictionary objectForKey:@"collectionId"] intValue]
+                                            releaseDate:[albumDictionary objectForKey:@"releaseDate"]
+                                         numberOfTracks:[[albumDictionary objectForKey:@"trackCount"] intValue]
+                                                  genre:[albumDictionary objectForKey:@"primaryGenreName"]
+                                                  price:[[albumDictionary objectForKey:@"collectionPrice"] floatValue]
+                                                country:[albumDictionary objectForKey:@"country"]
+                                            explictness:[albumDictionary objectForKey:@"collectionExplicitness"]
+                                               artistID:[[albumDictionary objectForKey:@"artistId"] intValue]];
         [albums addObject:albumToAdd];
     }
     return [albums copy];

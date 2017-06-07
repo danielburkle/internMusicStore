@@ -75,7 +75,7 @@
 - (void)printAlbumDescription:(nonnull NSArray<Album *> *)albumArray
 {
     for (Album *album in albumArray) {
-        NSLog([album description]);
+        NSLog(@"%@", [album description]);
     }
 }
 

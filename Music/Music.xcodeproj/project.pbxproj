@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		57D047DEA6BAE1B7EE1440E1 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04B655513F5D1D9EF4485 /* Album.m */; };
-		57D04A66A3A688AD74E1347F /* JSON.txt in Resources */ = {isa = PBXBuildFile; fileRef = 57D04CDE6C968D98F3B1D724 /* JSON.txt */; };
+		4C20FB4B1EE891D700FAD125 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB4A1EE891D700FAD125 /* Album.m */; };
+		4C20FB551EE8925C00FAD125 /* AlbumResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C20FB541EE8925C00FAD125 /* AlbumResults.json */; };
 		5DEF82791CE66A0800985B5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF82781CE66A0800985B5D /* main.m */; };
 		5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82831CE66A0800985B5D /* Assets.xcassets */; };
 		5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */; };
@@ -17,9 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		57D047787F9F60FD7534BEB5 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
-		57D04B655513F5D1D9EF4485 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
-		57D04CDE6C968D98F3B1D724 /* JSON.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON.txt; sourceTree = "<group>"; };
+		4C20FB491EE891D700FAD125 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Album.h; path = Model/Album.h; sourceTree = "<group>"; };
+		4C20FB4A1EE891D700FAD125 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Album.m; path = Model/Album.m; sourceTree = "<group>"; };
+		4C20FB541EE8925C00FAD125 /* AlbumResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AlbumResults.json; path = "JSON Files/AlbumResults.json"; sourceTree = "<group>"; };
 		5DEF82741CE66A0800985B5D /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DEF82781CE66A0800985B5D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5DEF82831CE66A0800985B5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +42,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C20FB481EE891B400FAD125 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4C20FB491EE891D700FAD125 /* Album.h */,
+				4C20FB4A1EE891D700FAD125 /* Album.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4C20FB4D1EE891FD00FAD125 /* JSON Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C20FB541EE8925C00FAD125 /* AlbumResults.json */,
+			);
+			name = "JSON Files";
+			sourceTree = "<group>";
+		};
 		5DEF826B1CE66A0800985B5D = {
 			isa = PBXGroup;
 			children = (
@@ -61,15 +78,14 @@
 		5DEF82761CE66A0800985B5D /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				4C20FB4D1EE891FD00FAD125 /* JSON Files */,
+				4C20FB481EE891B400FAD125 /* Model */,
 				5DEF828E1CE66B2B00985B5D /* App Delegate */,
 				5DEF82911CE66B2B00985B5D /* Welcome */,
 				5DEF82831CE66A0800985B5D /* Assets.xcassets */,
 				5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */,
 				5DEF82881CE66A0800985B5D /* Info.plist */,
 				5DEF82771CE66A0800985B5D /* Supporting Files */,
-				57D04B655513F5D1D9EF4485 /* Album.m */,
-				57D047787F9F60FD7534BEB5 /* Album.h */,
-				57D04CDE6C968D98F3B1D724 /* JSON.txt */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -159,7 +175,7 @@
 			files = (
 				5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */,
 				5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */,
-				57D04A66A3A688AD74E1347F /* JSON.txt in Resources */,
+				4C20FB551EE8925C00FAD125 /* AlbumResults.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +189,7 @@
 				5DEF82951CE66B2B00985B5D /* SCCAppDelegate.m in Sources */,
 				5DEF82991CE66B4100985B5D /* SCCWelcomeViewController.m in Sources */,
 				5DEF82791CE66A0800985B5D /* main.m in Sources */,
-				57D047DEA6BAE1B7EE1440E1 /* Album.m in Sources */,
+				4C20FB4B1EE891D700FAD125 /* Album.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,15 +15,15 @@
     abort();
 }
 
-- (instancetype)initWithName:(nonnull NSString *)name
-                  artistName:(nonnull NSString *)artistName
+- (instancetype)initWithName:(NSString *)name
+                  artistName:(NSString *)artistName
                      albumID:(int32_t)albumID
-                 releaseDate:(nonnull NSString *)releaseDate
+                 releaseDate:(NSString *)releaseDate
               numberOfTracks:(int32_t)numberOfTracks
-                       genre:(nonnull NSString *)genre
+                       genre:(NSString *)genre
                        price:(float_t)price
-                     country:(nonnull NSString *)country
-                 explictness:(nonnull NSString *)explicitness
+                     country:(NSString *)country
+                 explictness:(NSString *)explicitness
                     artistID:(int32_t)artistID
 {
 

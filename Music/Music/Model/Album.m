@@ -15,15 +15,15 @@
     abort();
 }
 
-- (instancetype)initWithName:(NSString *)name
-                  artistName:(NSString *)artistName
-                          ID:(int32_t)ID
-                 releaseDate:(NSString *)releaseDate
+- (instancetype)initWithName:(nonnull NSString *)name
+                  artistName:(nonnull NSString *)artistName
+                     albumID:(int32_t)albumID
+                 releaseDate:(nonnull NSString *)releaseDate
               numberOfTracks:(int32_t)numberOfTracks
-                       genre:(NSString *)genre
+                       genre:(nonnull NSString *)genre
                        price:(float_t)price
-                     country:(NSString *)country
-                 explictness:(NSString *)explicitness
+                     country:(nonnull NSString *)country
+                 explictness:(nonnull NSString *)explicitness
                     artistID:(int32_t)artistID
 {
 
@@ -31,7 +31,7 @@
     if (self) {
         _name = name;
         _artistName = artistName;
-        _ID = ID;
+        _albumID = albumID;
         _releaseDate = releaseDate;
         _numberOfTracks = numberOfTracks;
         _genre = genre;
@@ -48,7 +48,7 @@
     return [[NSString alloc] initWithFormat:@"Album: %@, Artist: %@, AlbumID: %d, Release Date: %@, Number of Tracks: %d, Genre: %@, Price: %f, Country of Origin: %@, Explicit: %@, artistID: %d",
                                             _name,
                                             _artistName,
-                                            _ID,
+                                            _albumID,
                                             _releaseDate,
                                             _numberOfTracks,
                                             _genre,

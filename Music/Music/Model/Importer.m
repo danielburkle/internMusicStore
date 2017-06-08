@@ -5,9 +5,6 @@
 
 #import "Importer.h"
 
-#import "Album.h"
-#import "Track.h"
-
 @implementation Importer
 
 #pragma mark -JSON Processing
@@ -25,7 +22,7 @@
     NSError *jsonError;
     NSDictionary<NSString *, id> *parsedJsonDictionary = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
     if (parsedJsonDictionary == nil) {
-        NSLog(@"Error reading album NSData: %@", jsonError.localizedDescription);
+        NSLog(@"Error reading album NSData: %@", [jsonError localizedDescription]);
         return [[NSDictionary alloc] init];
     }
     return parsedJsonDictionary;
@@ -42,7 +39,7 @@
     for (NSDictionary <NSString *, id> *albumDictionary in dictionaryArray) {
         Album *albumToAdd = [[Album alloc] initWithName:[albumDictionary objectForKey:@"collectionName"]
                                              artistName:[albumDictionary objectForKey:@"artistName"]
-                                                     ID:[[albumDictionary objectForKey:@"collectionId"] integerValue]
+                                                albumID:[[albumDictionary objectForKey:@"collectionId"] integerValue]
                                             releaseDate:[albumDictionary objectForKey:@"releaseDate"]
                                          numberOfTracks:[[albumDictionary objectForKey:@"trackCount"] integerValue]
                                                   genre:[albumDictionary objectForKey:@"primaryGenreName"]
@@ -55,7 +52,7 @@
     return [albums copy];
 }
 
-+ (void)printAlbumDescription:(nonnull NSArray *)albumArray
++ (void)printAlbumDescription:(nonnull NSArray<Album *> *)albumArray
 {
     for (Album *album in albumArray) {
         NSLog(@"%@", [album description]);
@@ -74,7 +71,7 @@
     NSError *jsonError;
     NSDictionary<NSString *, id> *parsedJsonDictionary = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
     if (parsedJsonDictionary == nil) {
-        NSLog(@"Error reading track NSData: %@", jsonError.localizedDescription);
+        NSLog(@"Error reading track NSData: %@", [jsonError localizedDescription]);
         return [[NSDictionary alloc] init];
     }
     return parsedJsonDictionary;
@@ -102,13 +99,13 @@
                                                artistID:[[trackDictionary objectForKey:@"artistId"] integerValue]
                                                 country:[trackDictionary objectForKey:@"country"]
                                               diskCount:[[trackDictionary objectForKey:@"discCount"] integerValue]
-                                                     ID:[[trackDictionary objectForKey:@"trackId"] integerValue]];
+                                                trackID:[[trackDictionary objectForKey:@"trackId"] integerValue]];
         [tracks addObject:trackToAdd];
     }
     return [tracks copy];
 }
 
-+ (void)printTrackDescription:(nonnull NSArray *)trackArray
++ (void)printTrackDescription:(nonnull NSArray<Track *> *)trackArray
 {
     for (Track *track in trackArray) {
         NSLog(@"%@", [track description]);

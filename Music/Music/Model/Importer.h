@@ -3,7 +3,7 @@
 //  Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "Album.h"
 #import "Track.h"
@@ -12,9 +12,10 @@
 
 + (nonnull NSArray<Album *> *)buildAlbumsFromJson;
 
-+ (void)printAlbumDescription:(nonnull NSArray *)albumArray;
++ (void)printAlbumDescription:(nonnull NSArray<Album *> *)albumArray;
 
 + (nonnull NSArray<Track *> *)buildTracksFromJson;
 
-+ (void)printTrackDescription:(nonnull NSArray *)trackArray;
++ (void)printTrackDescription:(nonnull NSArray<Track *> *)trackArray;
+
 @end

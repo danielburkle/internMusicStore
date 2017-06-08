@@ -28,7 +28,7 @@
                     artistID:(int32_t)artistID
                      country:(nonnull NSString *)country
                    diskCount:(int32_t)diskCount
-                          ID:(int32_t)ID
+                     trackID:(int32_t)trackID
 {
 
     self = [super init];
@@ -46,7 +46,7 @@
         _artistID = artistID;
         _country = country;
         _diskCount = diskCount;
-        _ID = ID;
+        _trackID = trackID;
     }
     return self;
 }
@@ -69,7 +69,7 @@
                                                                    _artistID,
                                                                    _country,
                                                                    _diskCount,
-                                                                   _ID];
+                                                                   _trackID];
     return descriptionString;
 }
 

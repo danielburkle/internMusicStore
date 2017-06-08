@@ -1,6 +1,6 @@
 //
-//  Created by Daniel Burkle on 6/7/2017.
-//  Copyright (c) 2014 National Information Solutions Cooperative. All rights reserved.
+//  Created by Daniel Burkle on 6/2/17.
+//  Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
 @import Foundation;

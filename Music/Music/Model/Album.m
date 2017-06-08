@@ -1,6 +1,6 @@
 //
-//  Created by Daniel Burkle on 6/7/2017.
-//  Copyright (c) 2014 National Information Solutions Cooperative. All rights reserved.
+//  Created by Daniel Burkle on 6/2/17.
+//  Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
 #import "Album.h"
@@ -9,15 +9,21 @@
 
 #pragma mark - Object Life Cycle
 
-- (instancetype)initWithName:(nonnull NSString *)name
-                  artistName:(nonnull NSString *)artistName
-                          ID:(int32_t)ID
-                 releaseDate:(nonnull NSString *)releaseDate
+- (instancetype)init
+{
+    NSLog(@"Programmer Error! This initializer is for %@, should not be used", NSStringFromClass([self class]));
+    abort();
+}
+
+- (instancetype)initWithName:(NSString *)name
+                  artistName:(NSString *)artistName
+                     albumID:(int32_t)albumID
+                 releaseDate:(NSString *)releaseDate
               numberOfTracks:(int32_t)numberOfTracks
-                       genre:(nonnull NSString *)genre
+                       genre:(NSString *)genre
                        price:(float_t)price
-                     country:(nonnull NSString *)country
-                 explictness:(nonnull NSString *)explicitness
+                     country:(NSString *)country
+                 explictness:(NSString *)explicitness
                     artistID:(int32_t)artistID
 {
 
@@ -25,7 +31,7 @@
     if (self) {
         _name = name;
         _artistName = artistName;
-        _ID = ID;
+        _albumID = albumID;
         _releaseDate = releaseDate;
         _numberOfTracks = numberOfTracks;
         _genre = genre;
@@ -39,11 +45,10 @@
 
 - (NSString *)description
 {
-    return [[NSString alloc] initWithFormat:@"Album: %@, Artist: %@, AlbumID: %d, "
-                                                "Release Date: %@, Number of Tracks: %d, Genre: %@, Price: %f, Country of Origin: %@, Explicit: %@, Artist ID: %d",
+    return [[NSString alloc] initWithFormat:@"Album: %@, Artist: %@, AlbumID: %d, Release Date: %@, Number of Tracks: %d, Genre: %@, Price: %f, Country of Origin: %@, Explicit: %@, artistID: %d",
                                             _name,
                                             _artistName,
-                                            _ID,
+                                            _albumID,
                                             _releaseDate,
                                             _numberOfTracks,
                                             _genre,

@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C20FB4B1EE891D700FAD125 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB4A1EE891D700FAD125 /* Album.m */; };
-		4C20FB551EE8925C00FAD125 /* AlbumResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C20FB541EE8925C00FAD125 /* AlbumResults.json */; };
+		4C20FB5D1EE89ADC00FAD125 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB581EE89ADC00FAD125 /* Album.m */; };
+		4C20FB5E1EE89ADC00FAD125 /* Importer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB5A1EE89ADC00FAD125 /* Importer.m */; };
+		4C20FB5F1EE89ADC00FAD125 /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB5C1EE89ADC00FAD125 /* Track.m */; };
+		4C20FB631EE89B1400FAD125 /* AlbumResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C20FB611EE89B1400FAD125 /* AlbumResults.json */; };
+		4C20FB641EE89B1400FAD125 /* TrackResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C20FB621EE89B1400FAD125 /* TrackResults.json */; };
 		5DEF82791CE66A0800985B5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF82781CE66A0800985B5D /* main.m */; };
 		5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82831CE66A0800985B5D /* Assets.xcassets */; };
 		5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */; };
@@ -17,9 +20,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C20FB491EE891D700FAD125 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Album.h; path = Model/Album.h; sourceTree = "<group>"; };
-		4C20FB4A1EE891D700FAD125 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Album.m; path = Model/Album.m; sourceTree = "<group>"; };
-		4C20FB541EE8925C00FAD125 /* AlbumResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AlbumResults.json; path = "JSON Files/AlbumResults.json"; sourceTree = "<group>"; };
+		4C20FB571EE89ADC00FAD125 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Album.h; path = Model/Album.h; sourceTree = "<group>"; };
+		4C20FB581EE89ADC00FAD125 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Album.m; path = Model/Album.m; sourceTree = "<group>"; };
+		4C20FB591EE89ADC00FAD125 /* Importer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Importer.h; path = Model/Importer.h; sourceTree = "<group>"; };
+		4C20FB5A1EE89ADC00FAD125 /* Importer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Importer.m; path = Model/Importer.m; sourceTree = "<group>"; };
+		4C20FB5B1EE89ADC00FAD125 /* Track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Track.h; path = Model/Track.h; sourceTree = "<group>"; };
+		4C20FB5C1EE89ADC00FAD125 /* Track.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Track.m; path = Model/Track.m; sourceTree = "<group>"; };
+		4C20FB611EE89B1400FAD125 /* AlbumResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AlbumResults.json; path = "JSON Files/AlbumResults.json"; sourceTree = "<group>"; };
+		4C20FB621EE89B1400FAD125 /* TrackResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TrackResults.json; path = "JSON Files/TrackResults.json"; sourceTree = "<group>"; };
 		5DEF82741CE66A0800985B5D /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DEF82781CE66A0800985B5D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5DEF82831CE66A0800985B5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,19 +50,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4C20FB481EE891B400FAD125 /* Model */ = {
+		4C20FB561EE89ABC00FAD125 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4C20FB491EE891D700FAD125 /* Album.h */,
-				4C20FB4A1EE891D700FAD125 /* Album.m */,
+				4C20FB571EE89ADC00FAD125 /* Album.h */,
+				4C20FB581EE89ADC00FAD125 /* Album.m */,
+				4C20FB591EE89ADC00FAD125 /* Importer.h */,
+				4C20FB5A1EE89ADC00FAD125 /* Importer.m */,
+				4C20FB5B1EE89ADC00FAD125 /* Track.h */,
+				4C20FB5C1EE89ADC00FAD125 /* Track.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
 		};
-		4C20FB4D1EE891FD00FAD125 /* JSON Files */ = {
+		4C20FB601EE89AEC00FAD125 /* JSON Files */ = {
 			isa = PBXGroup;
 			children = (
-				4C20FB541EE8925C00FAD125 /* AlbumResults.json */,
+				4C20FB611EE89B1400FAD125 /* AlbumResults.json */,
+				4C20FB621EE89B1400FAD125 /* TrackResults.json */,
 			);
 			name = "JSON Files";
 			sourceTree = "<group>";
@@ -78,8 +91,8 @@
 		5DEF82761CE66A0800985B5D /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				4C20FB4D1EE891FD00FAD125 /* JSON Files */,
-				4C20FB481EE891B400FAD125 /* Model */,
+				4C20FB601EE89AEC00FAD125 /* JSON Files */,
+				4C20FB561EE89ABC00FAD125 /* Model */,
 				5DEF828E1CE66B2B00985B5D /* App Delegate */,
 				5DEF82911CE66B2B00985B5D /* Welcome */,
 				5DEF82831CE66A0800985B5D /* Assets.xcassets */,
@@ -173,9 +186,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C20FB641EE89B1400FAD125 /* TrackResults.json in Resources */,
 				5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */,
 				5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */,
-				4C20FB551EE8925C00FAD125 /* AlbumResults.json in Resources */,
+				4C20FB631EE89B1400FAD125 /* AlbumResults.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,10 +200,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C20FB5F1EE89ADC00FAD125 /* Track.m in Sources */,
 				5DEF82951CE66B2B00985B5D /* SCCAppDelegate.m in Sources */,
+				4C20FB5E1EE89ADC00FAD125 /* Importer.m in Sources */,
 				5DEF82991CE66B4100985B5D /* SCCWelcomeViewController.m in Sources */,
 				5DEF82791CE66A0800985B5D /* main.m in Sources */,
-				4C20FB4B1EE891D700FAD125 /* Album.m in Sources */,
+				4C20FB5D1EE89ADC00FAD125 /* Album.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

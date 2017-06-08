@@ -1,6 +1,6 @@
 //
-//  Created by Daniel Burkle on 6/7/2017.
-//  Copyright (c) 2014 National Information Solutions Cooperative. All rights reserved.
+//  Created by Daniel Burkle on 6/2/17.
+//  Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
 @import Foundation;
@@ -9,7 +9,7 @@
 
 @property (nonnull, nonatomic, strong, readonly) NSString *name;
 @property (nonnull, nonatomic, strong, readonly) NSString *artistName;
-@property (nonatomic, assign, readonly) int32_t ID;
+@property (nonatomic, assign, readonly) int32_t albumID;
 @property (nonnull, nonatomic, strong, readonly) NSString *releaseDate;
 @property (nonatomic, assign, readonly) int32_t numberOfTracks;
 @property (nonnull, nonatomic, strong, readonly) NSString *genre;
@@ -22,7 +22,7 @@
 
 - (nonnull instancetype)initWithName:(nonnull NSString *)name
                           artistName:(nonnull NSString *)artistName
-                                  ID:(int32_t)ID
+                             albumID:(int32_t)albumID
                          releaseDate:(nonnull NSString *)releaseDate
                       numberOfTracks:(int32_t)numberOfTracks
                                genre:(nonnull NSString *)genre
@@ -30,4 +30,5 @@
                              country:(nonnull NSString *)country
                          explictness:(nonnull NSString *)explicitness
                             artistID:(int32_t)artistID NS_DESIGNATED_INITIALIZER;
+
 @end

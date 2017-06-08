@@ -5,7 +5,7 @@
 
 #import "SCCWelcomeViewController.h"
 
-#import "Album.h"
+#import "Importer.h"
 
 @implementation SCCWelcomeViewController
 
@@ -28,54 +28,8 @@
 
     [self configureViewsForView:[self view]];
 
-    NSArray<NSDictionary <NSString *, id> *> *albumArray = [self resultsFromDictionary:[self albumDictionary]];
-    [self printAlbumDescription:[self objectsFromArray:albumArray]];
-}
-
-#pragma mark - JSON Processing
-
-- (nonnull NSDictionary<NSString *, id> *)albumDictionary
-{
-    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"AlbumResults" ofType:@"json"];
-    NSData *fileContents = [[NSData alloc] initWithContentsOfFile:filepath];
-    NSError *jsonError;
-    NSDictionary<NSString *, id> *parsedJSONDictionary = [NSJSONSerialization JSONObjectWithData:fileContents options:NSJSONReadingMutableContainers error:&jsonError];
-    if (parsedJSONDictionary == nil) {
-        NSLog(@"Error reading NSData: %@", [jsonError localizedDescription]);
-        return [[NSDictionary alloc] init];
-    }
-    return parsedJSONDictionary;
-}
-
-- (nonnull NSArray<NSDictionary <NSString *, id> *> *)resultsFromDictionary:(nonnull NSDictionary<NSString *, id> *)dictionary
-{
-    return [[NSArray alloc] initWithArray:[dictionary valueForKey:@"results"]];
-}
-
-- (nonnull NSArray<Album *> *)objectsFromArray:(nonnull NSArray <NSDictionary<NSString *, id > *> *)dictionaryArray
-{
-    NSMutableArray<Album *> *albums = [[NSMutableArray alloc] init];
-    for (NSDictionary <NSString *, id> *albumDictionary in dictionaryArray) {
-        Album *albumToAdd = [[Album alloc] initWithName:[albumDictionary objectForKey:@"collectionName"]
-                                             artistName:[albumDictionary objectForKey:@"artistName"]
-                                                     ID:[[albumDictionary objectForKey:@"collectionId"] intValue]
-                                            releaseDate:[albumDictionary objectForKey:@"releaseDate"]
-                                         numberOfTracks:[[albumDictionary objectForKey:@"trackCount"] intValue]
-                                                  genre:[albumDictionary objectForKey:@"primaryGenreName"]
-                                                  price:[[albumDictionary objectForKey:@"collectionPrice"] floatValue]
-                                                country:[albumDictionary objectForKey:@"country"]
-                                            explictness:[albumDictionary objectForKey:@"collectionExplicitness"]
-                                               artistID:[[albumDictionary objectForKey:@"artistId"] intValue]];
-        [albums addObject:albumToAdd];
-    }
-    return [albums copy];
-}
-
-- (void)printAlbumDescription:(nonnull NSArray<Album *> *)albumArray
-{
-    for (Album *album in albumArray) {
-        NSLog(@"%@", [album description]);
-    }
+    [Importer printAlbumDescription:[Importer buildAlbumsFromJson]];
+    [Importer printTrackDescription:[Importer buildTracksFromJson]];
 }
 
 #pragma mark - View Configuration

@@ -5,7 +5,7 @@
 
 #import "SCCAppDelegate.h"
 
-#import "SCCWelcomeViewController.h"
+#import "AlbumTableViewController.h"
 
 @implementation SCCAppDelegate
 
@@ -13,10 +13,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    SCCWelcomeViewController *welcomeViewController = [[SCCWelcomeViewController alloc] init];
+    AlbumTableViewController *albumViewController = [[AlbumTableViewController alloc] init];
 
     UINavigationController *navigationController = [[UINavigationController alloc] init];
-    [navigationController pushViewController:welcomeViewController animated:NO];
+    [navigationController pushViewController:albumViewController animated:NO];
 
     _window = [self instantiateMainWindow];
     [_window setRootViewController:navigationController];

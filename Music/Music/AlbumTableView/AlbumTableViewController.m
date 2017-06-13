@@ -6,7 +6,6 @@
 #import "AlbumTableViewController.h"
 
 #import "Importer.h"
-#import "SubtitleTableViewCell.h"
 
 @interface AlbumTableViewController () {
     NSArray<Album *> *_albums;
@@ -35,8 +34,6 @@
 
     [self configureViewsForView:[self view]];
 
-    [self.tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:@"SubtitleTableView"];
-
     _albums = [Importer buildAlbumsFromJson];
 
     [Importer printAlbumDescription:_albums];
@@ -52,12 +49,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubtitleTableView"
-                                                            forIndexPath:indexPath];
-    Album *album = _albums[indexPath.row];
-    cell.textLabel.text = [album name];
-    cell.detailTextLabel.text = [album artistName];
-
+    NSString *cellIdentifier =@"UITableViewCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        }
+    Album *album = _albums[[indexPath row]];
+    [[cell textLabel] setText:[album name]];
+    [[cell detailTextLabel] setText:[album artistName]];
     return cell;
 }
 

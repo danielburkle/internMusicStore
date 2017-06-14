@@ -32,7 +32,7 @@
 {
     [super viewDidLoad];
 
-    [self configureViewsForView:[self view]];
+    [self configureView:[self view]];
 
     _albums = [Importer buildAlbumsFromJson];
 
@@ -40,7 +40,7 @@
     [Importer printTrackDescription:[Importer buildTracksFromJson]];
 }
 
-#pragma mark - View Configuration
+#pragma mark - UITableView Datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -49,18 +49,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier =@"UITableViewCell";
+    NSString *cellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        }
+    }
     Album *album = _albums[[indexPath row]];
     [[cell textLabel] setText:[album name]];
     [[cell detailTextLabel] setText:[album artistName]];
     return cell;
 }
 
-- (void)configureViewsForView:(nonnull UIView *)view
+- (void)configureView:(nonnull UIView *)view
 {
     [view setBackgroundColor:[UIColor whiteColor]];
 }

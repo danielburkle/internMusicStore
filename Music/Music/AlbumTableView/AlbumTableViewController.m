@@ -36,8 +36,8 @@
 
     _albums = [Importer buildAlbumsFromJson];
 
-    [Importer printAlbumDescription:_albums];
-    [Importer printTrackDescription:[Importer buildTracksFromJson]];
+    [Importer printAlbums:_albums];
+    [Importer printTracks:[Importer buildTracksFromJson]];
 }
 
 #pragma mark - UITableView Datasource
@@ -59,6 +59,8 @@
     [[cell detailTextLabel] setText:[album artistName]];
     return cell;
 }
+
+#pragma mark - View Configuration
 
 - (void)configureView:(nonnull UIView *)view
 {

@@ -12,10 +12,10 @@
 
 + (nonnull NSArray<Album *> *)buildAlbumsFromJson;
 
-+ (void)printAlbumDescription:(nonnull NSArray<Album *> *)albumArray;
++ (void)printAlbums:(nonnull NSArray<Album *> *)albums;
 
 + (nonnull NSArray<Track *> *)buildTracksFromJson;
 
-+ (void)printTrackDescription:(nonnull NSArray<Track *> *)trackArray;
++ (void)printTracks:(nonnull NSArray<Track *> *)tracks;
 
 @end

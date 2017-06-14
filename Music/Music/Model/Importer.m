@@ -52,9 +52,9 @@
     return [albums copy];
 }
 
-+ (void)printAlbumDescription:(nonnull NSArray<Album *> *)albumArray
++ (void)printAlbums:(nonnull NSArray<Album *> *)albums
 {
-    for (Album *album in albumArray) {
+    for (Album *album in albums) {
         NSLog(@"%@", [album description]);
     }
 }
@@ -105,9 +105,9 @@
     return [tracks copy];
 }
 
-+ (void)printTrackDescription:(nonnull NSArray<Track *> *)trackArray
++ (void)printTracks:(nonnull NSArray<Track *> *)tracks
 {
-    for (Track *track in trackArray) {
+    for (Track *track in tracks) {
         NSLog(@"%@", [track description]);
     }
 }

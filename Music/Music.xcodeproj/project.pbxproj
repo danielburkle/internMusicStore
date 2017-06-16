@@ -16,7 +16,7 @@
 		5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82831CE66A0800985B5D /* Assets.xcassets */; };
 		5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */; };
 		5DEF82951CE66B2B00985B5D /* SCCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF82901CE66B2B00985B5D /* SCCAppDelegate.m */; };
-		5DEF82991CE66B4100985B5D /* SCCWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF82981CE66B4100985B5D /* SCCWelcomeViewController.m */; };
+		5DEF82991CE66B4100985B5D /* AlbumTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF82981CE66B4100985B5D /* AlbumTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +35,8 @@
 		5DEF82881CE66A0800985B5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DEF828F1CE66B2B00985B5D /* SCCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCAppDelegate.h; sourceTree = "<group>"; };
 		5DEF82901CE66B2B00985B5D /* SCCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCAppDelegate.m; sourceTree = "<group>"; };
-		5DEF82971CE66B4100985B5D /* SCCWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCWelcomeViewController.h; sourceTree = "<group>"; };
-		5DEF82981CE66B4100985B5D /* SCCWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCWelcomeViewController.m; sourceTree = "<group>"; };
+		5DEF82971CE66B4100985B5D /* AlbumTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTableViewController.h; sourceTree = "<group>"; };
+		5DEF82981CE66B4100985B5D /* AlbumTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +94,7 @@
 				4C20FB601EE89AEC00FAD125 /* JSON Files */,
 				4C20FB561EE89ABC00FAD125 /* Model */,
 				5DEF828E1CE66B2B00985B5D /* App Delegate */,
-				5DEF82911CE66B2B00985B5D /* Welcome */,
+				5DEF82911CE66B2B00985B5D /* AlbumTableView */,
 				5DEF82831CE66A0800985B5D /* Assets.xcassets */,
 				5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */,
 				5DEF82881CE66A0800985B5D /* Info.plist */,
@@ -120,13 +120,13 @@
 			path = "App Delegate";
 			sourceTree = "<group>";
 		};
-		5DEF82911CE66B2B00985B5D /* Welcome */ = {
+		5DEF82911CE66B2B00985B5D /* AlbumTableView */ = {
 			isa = PBXGroup;
 			children = (
-				5DEF82971CE66B4100985B5D /* SCCWelcomeViewController.h */,
-				5DEF82981CE66B4100985B5D /* SCCWelcomeViewController.m */,
+				5DEF82971CE66B4100985B5D /* AlbumTableViewController.h */,
+				5DEF82981CE66B4100985B5D /* AlbumTableViewController.m */,
 			);
-			path = Welcome;
+			path = AlbumTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +203,7 @@
 				4C20FB5F1EE89ADC00FAD125 /* Track.m in Sources */,
 				5DEF82951CE66B2B00985B5D /* SCCAppDelegate.m in Sources */,
 				4C20FB5E1EE89ADC00FAD125 /* Importer.m in Sources */,
-				5DEF82991CE66B4100985B5D /* SCCWelcomeViewController.m in Sources */,
+				5DEF82991CE66B4100985B5D /* AlbumTableViewController.m in Sources */,
 				5DEF82791CE66A0800985B5D /* main.m in Sources */,
 				4C20FB5D1EE89ADC00FAD125 /* Album.m in Sources */,
 			);

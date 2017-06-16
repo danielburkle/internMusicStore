@@ -7,6 +7,4 @@
 
 @interface AlbumTableViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
 
-+ (nonnull NSString *)cellReuseIdentifier;
-
 @end

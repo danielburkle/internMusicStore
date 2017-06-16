@@ -35,9 +35,7 @@
 
     [self configureView:[self view]];
 
-    [self.tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
-
-    [self setCellAutomaticDimension:[self tableView]];
+    [self configureTableView:[self tableView]];
 
     _albums = [Importer buildAlbumsFromJson];
 
@@ -74,8 +72,10 @@
     return cell;
 }
 
-- (void)setCellAutomaticDimension:(UITableView *)tableView
+- (void)configureTableView:(nonnull UITableView *)tableView
 {
+
+    [self.tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
     [tableView setRowHeight:UITableViewAutomaticDimension];
     [tableView setEstimatedRowHeight:75.0];
 }

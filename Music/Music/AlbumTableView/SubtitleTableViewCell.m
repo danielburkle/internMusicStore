@@ -8,12 +8,6 @@
 
 @implementation SubtitleTableViewCell
 
-- (instancetype)init
-{
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
-    return self;
-}
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

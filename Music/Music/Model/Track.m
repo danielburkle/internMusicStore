@@ -15,38 +15,24 @@
     abort();
 }
 
-- (instancetype)initWithName:(NSString *)name
-                  artistName:(NSString *)artistName
-                   albumName:(nonnull NSString *)albumName
-                       price:(float_t)price
-                 trackNumber:(int32_t)trackNumber
-                  diskNumber:(int32_t)diskNumber
-                    duration:(int32_t)duration
-                       genre:(NSString *)genre
-                 explictness:(NSString *)explicitness
-                     albumID:(int32_t)albumID
-                    artistID:(int32_t)artistID
-                     country:(NSString *)country
-                   diskCount:(int32_t)diskCount
-                     trackID:(int32_t)trackID
+- (instancetype)initWithDictionary:(nonnull NSDictionary <NSString *, id> *)trackDictionary
 {
-
     self = [super init];
     if (self) {
-        _name = name;
-        _artistName = artistName;
-        _albumName = albumName;
-        _price = price;
-        _trackNumber = trackNumber;
-        _diskNumber = diskNumber;
-        _duration = duration;
-        _genre = genre;
-        _explicitness = explicitness;
-        _albumID = albumID;
-        _artistID = artistID;
-        _country = country;
-        _diskCount = diskCount;
-        _trackID = trackID;
+        _name = [trackDictionary objectForKey:@"trackName"];
+        _artistName = [trackDictionary objectForKey:@"artistName"];
+        _albumName = [trackDictionary objectForKey:@"collectionName"];
+        _price = [[trackDictionary objectForKey:@"trackPrice"] floatValue];
+        _trackNumber = [[trackDictionary objectForKey:@"trackNumber"] integerValue];
+        _diskNumber = [[trackDictionary objectForKey:@"discNumber"] integerValue];
+        _duration = [[trackDictionary objectForKey:@"trackTimeMillis"] integerValue];
+        _genre = [trackDictionary objectForKey:@"primaryGenreName"];
+        _explicitness = [trackDictionary objectForKey:@"trackExplicitness"];
+        _albumID = [[trackDictionary objectForKey:@"collectionId"] integerValue];
+        _artistID = [[trackDictionary objectForKey:@"artistId"] integerValue];
+        _country = [trackDictionary objectForKey:@"country"];
+        _diskCount = [[trackDictionary objectForKey:@"discCount"] integerValue];
+        _trackID = [[trackDictionary objectForKey:@"trackId"] integerValue];
     }
     return self;
 }

@@ -24,19 +24,6 @@
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithName:(nonnull NSString *)name
-                          artistName:(nonnull NSString *)artistName
-                           albumName:(nonnull NSString *)albumName
-                               price:(float_t)price
-                         trackNumber:(int32_t)trackNumber
-                          diskNumber:(int32_t)diskNumber
-                            duration:(int32_t)duration
-                               genre:(nonnull NSString *)genre
-                         explictness:(nonnull NSString *)explicitness
-                             albumID:(int32_t)albumID
-                            artistID:(int32_t)artistID
-                             country:(nonnull NSString *)country
-                           diskCount:(int32_t)diskCount
-                             trackID:(int32_t)trackID NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithDictionary:(nonnull NSDictionary <NSString *, id> *)trackDictionary NS_DESIGNATED_INITIALIZER;
 
 @end

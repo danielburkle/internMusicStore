@@ -37,16 +37,7 @@
 {
     NSMutableArray<Album *> *albums = [[NSMutableArray alloc] init];
     for (NSDictionary <NSString *, id> *albumDictionary in dictionaryArray) {
-        Album *albumToAdd = [[Album alloc] initWithName:[albumDictionary objectForKey:@"collectionName"]
-                                             artistName:[albumDictionary objectForKey:@"artistName"]
-                                                albumID:[[albumDictionary objectForKey:@"collectionId"] integerValue]
-                                            releaseDate:[albumDictionary objectForKey:@"releaseDate"]
-                                         numberOfTracks:[[albumDictionary objectForKey:@"trackCount"] integerValue]
-                                                  genre:[albumDictionary objectForKey:@"primaryGenreName"]
-                                                  price:[[albumDictionary objectForKey:@"collectionPrice"] floatValue]
-                                                country:[albumDictionary objectForKey:@"country"]
-                                            explictness:[albumDictionary objectForKey:@"collectionExplicitness"]
-                                               artistID:[[albumDictionary objectForKey:@"artistId"] integerValue]];
+        Album *albumToAdd = [[Album alloc] initWithDictionary:albumDictionary];
         [albums addObject:albumToAdd];
     }
     return [albums copy];
@@ -86,20 +77,7 @@
 {
     NSMutableArray<Track *> *tracks = [[NSMutableArray alloc] init];
     for (NSDictionary <NSString *, id> *trackDictionary in dictionaryArray) {
-        Track *trackToAdd = [[Track alloc] initWithName:[trackDictionary objectForKey:@"trackName"]
-                                             artistName:[trackDictionary objectForKey:@"artistName"]
-                                              albumName:[trackDictionary objectForKey:@"collectionName"]
-                                                  price:[[trackDictionary objectForKey:@"trackPrice"] floatValue]
-                                            trackNumber:[[trackDictionary objectForKey:@"trackNumber"] integerValue]
-                                             diskNumber:[[trackDictionary objectForKey:@"discNumber"] integerValue]
-                                               duration:[[trackDictionary objectForKey:@"trackTimeMillis"] integerValue]
-                                                  genre:[trackDictionary objectForKey:@"primaryGenreName"]
-                                            explictness:[trackDictionary objectForKey:@"trackExplicitness"]
-                                                albumID:[[trackDictionary objectForKey:@"collectionId"] integerValue]
-                                               artistID:[[trackDictionary objectForKey:@"artistId"] integerValue]
-                                                country:[trackDictionary objectForKey:@"country"]
-                                              diskCount:[[trackDictionary objectForKey:@"discCount"] integerValue]
-                                                trackID:[[trackDictionary objectForKey:@"trackId"] integerValue]];
+        Track *trackToAdd = [[Track alloc] initWithDictionary:trackDictionary];
         [tracks addObject:trackToAdd];
     }
     return [tracks copy];

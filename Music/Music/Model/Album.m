@@ -15,30 +15,20 @@
     abort();
 }
 
-- (instancetype)initWithName:(NSString *)name
-                  artistName:(NSString *)artistName
-                     albumID:(int32_t)albumID
-                 releaseDate:(NSString *)releaseDate
-              numberOfTracks:(int32_t)numberOfTracks
-                       genre:(NSString *)genre
-                       price:(float_t)price
-                     country:(NSString *)country
-                 explictness:(NSString *)explicitness
-                    artistID:(int32_t)artistID
+- (instancetype)initWithDictionary:(nonnull NSDictionary<NSString *, id> *)albumDictionary
 {
-
     self = [super init];
     if (self) {
-        _name = name;
-        _artistName = artistName;
-        _albumID = albumID;
-        _releaseDate = releaseDate;
-        _numberOfTracks = numberOfTracks;
-        _genre = genre;
-        _price = price;
-        _country = country;
-        _explicitness = explicitness;
-        _artistID = artistID;
+        _name = [albumDictionary objectForKey:@"collectionName"];
+        _artistName = [albumDictionary objectForKey:@"artistName"];
+        _albumID = [[albumDictionary objectForKey:@"collectionId"] integerValue];
+        _releaseDate = [Album formatDate:[albumDictionary objectForKey:@"releaseDate"]];
+        _numberOfTracks = [[albumDictionary objectForKey:@"trackCount"] integerValue];
+        _genre = [albumDictionary objectForKey:@"primaryGenreName"];
+        _price = [[albumDictionary objectForKey:@"collectionPrice"] floatValue];
+        _country = [albumDictionary objectForKey:@"country"];
+        _explicitness = [albumDictionary objectForKey:@"collectionExplicitness"];
+        _artistID = [[albumDictionary objectForKey:@"artistId"] integerValue];
     }
     return self;
 }
@@ -49,13 +39,30 @@
                                             _name,
                                             _artistName,
                                             _albumID,
-                                            _releaseDate,
+                                            [Album dateString:_releaseDate],
                                             _numberOfTracks,
                                             _genre,
                                             _price,
                                             _country,
                                             _explicitness,
                                             _artistID];
+}
+
++ (nonnull NSDate *)formatDate:(NSString *)JSONString
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+    NSDate *date = [dateFormatter dateFromString:JSONString];
+    return date;
+}
+
++ (NSString *)dateString:(NSDate *)date
+{
+    NSDate *dateToConvert = date;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+    NSString *dateString = [dateFormatter stringFromDate:dateToConvert];
+    return dateString;
 }
 
 @end

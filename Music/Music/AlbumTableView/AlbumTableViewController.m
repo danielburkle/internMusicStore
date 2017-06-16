@@ -6,6 +6,7 @@
 #import "AlbumTableViewController.h"
 
 #import "Importer.h"
+#import "SubtitleTableViewCell.h"
 
 @interface AlbumTableViewController () {
     NSArray<Album *> *_albums;
@@ -34,6 +35,11 @@
 
     [self configureView:[self view]];
 
+    [self.tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[SubtitleTableViewCell cellReuseIdentifier]];
+
+    [[self tableView] setRowHeight:UITableViewAutomaticDimension];
+    [[self tableView] setEstimatedRowHeight:75.0];
+
     _albums = [Importer buildAlbumsFromJson];
 
     [Importer printAlbums:_albums];
@@ -47,17 +53,10 @@
     return [_albums count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (nonnull UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier = @"UITableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    }
-    Album *album = _albums[[indexPath row]];
-    [[cell textLabel] setText:[album name]];
-    [[cell detailTextLabel] setText:[album artistName]];
-    return cell;
+    SubtitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SubtitleTableViewCell cellReuseIdentifier] forIndexPath:indexPath];
+    return [AlbumTableViewController setCellProperties:cell album:_albums[[indexPath row]]];
 }
 
 #pragma mark - View Configuration
@@ -65,6 +64,15 @@
 - (void)configureView:(nonnull UIView *)view
 {
     [view setBackgroundColor:[UIColor whiteColor]];
+}
+
++ (nonnull UITableViewCell *)setCellProperties:(SubtitleTableViewCell *)cell album:(Album *)album
+{
+    [cell setAlbumName:[album name]];
+    [cell setArtistName:[album artistName]];
+    [cell setReleaseYear:[Album dateString:[album releaseDate]]];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    return cell;
 }
 
 #pragma mark - Localized Strings

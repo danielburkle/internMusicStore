@@ -21,14 +21,14 @@
     if (self) {
         _name = [albumDictionary objectForKey:@"collectionName"];
         _artistName = [albumDictionary objectForKey:@"artistName"];
-        _albumID = [[albumDictionary objectForKey:@"collectionId"] integerValue];
+        _albumID = [[albumDictionary objectForKey:@"collectionId"] intValue];
         _releaseDate = [Album formatDate:[albumDictionary objectForKey:@"releaseDate"]];
-        _numberOfTracks = [[albumDictionary objectForKey:@"trackCount"] integerValue];
+        _numberOfTracks = [[albumDictionary objectForKey:@"trackCount"] intValue];
         _genre = [albumDictionary objectForKey:@"primaryGenreName"];
         _price = [[albumDictionary objectForKey:@"collectionPrice"] floatValue];
         _country = [albumDictionary objectForKey:@"country"];
         _explicitness = [albumDictionary objectForKey:@"collectionExplicitness"];
-        _artistID = [[albumDictionary objectForKey:@"artistId"] integerValue];
+        _artistID = [[albumDictionary objectForKey:@"artistId"] intValue];
     }
     return self;
 }
@@ -39,7 +39,7 @@
                                             _name,
                                             _artistName,
                                             _albumID,
-                                            [Album dateString:_releaseDate],
+                                            _releaseDate,
                                             _numberOfTracks,
                                             _genre,
                                             _price,
@@ -54,15 +54,6 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
     NSDate *date = [dateFormatter dateFromString:JSONString];
     return date;
-}
-
-+ (NSString *)dateString:(NSDate *)date
-{
-    NSDate *dateToConvert = date;
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
-    NSString *dateString = [dateFormatter stringFromDate:dateToConvert];
-    return dateString;
 }
 
 @end

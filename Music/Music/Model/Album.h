@@ -7,21 +7,20 @@
 
 @interface Album : NSObject
 
-@property (nonnull, nonatomic, strong, readonly) NSString *name;
-@property (nonnull, nonatomic, strong, readonly) NSString *artistName;
+@property (nonnull, nonatomic, copy, readonly) NSString *name;
+@property (nonnull, nonatomic, copy, readonly) NSString *artistName;
 @property (nonatomic, assign, readonly) int32_t albumID;
-@property (nonnull, nonatomic, strong, readonly) NSDate *releaseDate;
+@property (nonnull, nonatomic, copy, readonly) NSDate *releaseDate;
 @property (nonatomic, assign, readonly) int32_t numberOfTracks;
-@property (nonnull, nonatomic, strong, readonly) NSString *genre;
+@property (nonnull, nonatomic, copy, readonly) NSString *genre;
 @property (nonatomic, assign, readonly) float_t price;
-@property (nonnull, nonatomic, strong, readonly) NSString *country;
-@property (nonnull, nonatomic, strong, readonly) NSString *explicitness;
+@property (nonnull, nonatomic, copy, readonly) NSString *country;
+@property (nonnull, nonatomic, copy, readonly) NSString *explicitness;
 @property (nonatomic, assign, readonly) int32_t artistID;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
 - (nonnull instancetype)initWithDictionary:(nonnull NSDictionary<NSString *, id> *)albumDictionary NS_DESIGNATED_INITIALIZER;
 
-+ (nonnull NSString *)dateString:(NSDate *)date;
 
 @end

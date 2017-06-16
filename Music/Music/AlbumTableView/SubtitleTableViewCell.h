@@ -8,10 +8,8 @@
 
 @interface SubtitleTableViewCell : UITableViewCell
 
-@property (nonnull, nonatomic, strong) NSString *albumName;
-@property (nonnull, nonatomic, strong) NSString *artistName;
-@property (nonnull, nonatomic, strong) NSString *releaseYear;
-
-+ (nonnull NSString *)cellReuseIdentifier;
+@property (nonnull, nonatomic, strong, readwrite) UILabel *albumName;
+@property (nonnull, nonatomic, strong, readwrite) UILabel *artistName;
+@property (nonnull, nonatomic, strong, readwrite) UILabel *releaseYear;
 
 @end

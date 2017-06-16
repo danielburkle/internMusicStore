@@ -35,10 +35,9 @@
 
     [self configureView:[self view]];
 
-    [self.tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[SubtitleTableViewCell cellReuseIdentifier]];
+    [self.tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
 
-    [[self tableView] setRowHeight:UITableViewAutomaticDimension];
-    [[self tableView] setEstimatedRowHeight:75.0];
+    [self setCellAutomaticDimension:[self tableView]];
 
     _albums = [Importer buildAlbumsFromJson];
 
@@ -55,7 +54,7 @@
 
 - (nonnull UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubtitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SubtitleTableViewCell cellReuseIdentifier] forIndexPath:indexPath];
+    SubtitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AlbumTableViewController cellReuseIdentifier] forIndexPath:indexPath];
     return [AlbumTableViewController setCellProperties:cell album:_albums[[indexPath row]]];
 }
 
@@ -68,11 +67,29 @@
 
 + (nonnull UITableViewCell *)setCellProperties:(SubtitleTableViewCell *)cell album:(Album *)album
 {
-    [cell setAlbumName:[album name]];
-    [cell setArtistName:[album artistName]];
-    [cell setReleaseYear:[Album dateString:[album releaseDate]]];
+    [[cell albumName] setText:[album name]];
+    [[cell artistName] setText:[album artistName]];
+    [[cell releaseYear] setText:[self releaseYearFromReleaseDate:[album releaseDate]]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
+}
+
+- (void)setCellAutomaticDimension:(UITableView *)tableView
+{
+    [tableView setRowHeight:UITableViewAutomaticDimension];
+    [tableView setEstimatedRowHeight:75.0];
+}
+
++ (nonnull NSString *)releaseYearFromReleaseDate:(NSDate *)releaseDate
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy"];
+    return [dateFormatter stringFromDate:releaseDate];
+}
+
++ (nonnull NSString *)cellReuseIdentifier
+{
+    return NSStringFromClass([SubtitleTableViewCell class]);
 }
 
 #pragma mark - Localized Strings

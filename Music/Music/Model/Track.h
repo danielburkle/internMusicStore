@@ -7,18 +7,18 @@
 
 @interface Track : NSObject
 
-@property (nonnull, nonatomic, strong, readonly) NSString *name;
-@property (nonnull, nonatomic, strong, readonly) NSString *artistName;
-@property (nonnull, nonatomic, strong, readonly) NSString *albumName;
+@property (nonnull, nonatomic, copy, readonly) NSString *name;
+@property (nonnull, nonatomic, copy, readonly) NSString *artistName;
+@property (nonnull, nonatomic, copy, readonly) NSString *albumName;
 @property (nonatomic, assign, readonly) float_t price;
 @property (nonatomic, assign, readonly) int32_t trackNumber;
 @property (nonatomic, assign, readonly) int32_t diskNumber;
 @property (nonatomic, assign, readonly) int32_t duration;
-@property (nonnull, nonatomic, strong, readonly) NSString *genre;
-@property (nonnull, nonatomic, strong, readonly) NSString *explicitness;
+@property (nonnull, nonatomic, copy, readonly) NSString *genre;
+@property (nonnull, nonatomic, copy, readonly) NSString *explicitness;
 @property (nonatomic, assign, readonly) int32_t albumID;
 @property (nonatomic, assign, readonly) int32_t artistID;
-@property (nonnull, nonatomic, strong, readonly) NSString *country;
+@property (nonnull, nonatomic, copy, readonly) NSString *country;
 @property (nonatomic, assign, readonly) int32_t diskCount;
 @property (nonatomic, assign, readonly) int32_t trackID;
 

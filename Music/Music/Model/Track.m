@@ -23,16 +23,16 @@
         _artistName = [trackDictionary objectForKey:@"artistName"];
         _albumName = [trackDictionary objectForKey:@"collectionName"];
         _price = [[trackDictionary objectForKey:@"trackPrice"] floatValue];
-        _trackNumber = [[trackDictionary objectForKey:@"trackNumber"] integerValue];
-        _diskNumber = [[trackDictionary objectForKey:@"discNumber"] integerValue];
-        _duration = [[trackDictionary objectForKey:@"trackTimeMillis"] integerValue];
+        _trackNumber = [[trackDictionary objectForKey:@"trackNumber"] intValue];
+        _diskNumber = [[trackDictionary objectForKey:@"discNumber"] intValue];
+        _duration = [[trackDictionary objectForKey:@"trackTimeMillis"] intValue];
         _genre = [trackDictionary objectForKey:@"primaryGenreName"];
         _explicitness = [trackDictionary objectForKey:@"trackExplicitness"];
-        _albumID = [[trackDictionary objectForKey:@"collectionId"] integerValue];
-        _artistID = [[trackDictionary objectForKey:@"artistId"] integerValue];
+        _albumID = [[trackDictionary objectForKey:@"collectionId"] intValue];
+        _artistID = [[trackDictionary objectForKey:@"artistId"] intValue];
         _country = [trackDictionary objectForKey:@"country"];
-        _diskCount = [[trackDictionary objectForKey:@"discCount"] integerValue];
-        _trackID = [[trackDictionary objectForKey:@"trackId"] integerValue];
+        _diskCount = [[trackDictionary objectForKey:@"discCount"] intValue];
+        _trackID = [[trackDictionary objectForKey:@"trackId"] intValue];
     }
     return self;
 }

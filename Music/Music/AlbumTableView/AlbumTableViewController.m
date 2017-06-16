@@ -34,11 +34,8 @@
     [super viewDidLoad];
 
     [self configureView:[self view]];
-
     [self configureTableView:[self tableView]];
-
     _albums = [Importer buildAlbumsFromJson];
-
     [Importer printAlbums:_albums];
     [Importer printTracks:[Importer buildTracksFromJson]];
 }
@@ -74,8 +71,7 @@
 
 - (void)configureTableView:(nonnull UITableView *)tableView
 {
-
-    [self.tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
+    [tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
     [tableView setRowHeight:UITableViewAutomaticDimension];
     [tableView setEstimatedRowHeight:75.0];
 }

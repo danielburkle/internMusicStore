@@ -37,8 +37,8 @@
 {
     NSMutableArray<Album *> *albums = [[NSMutableArray alloc] init];
     for (NSDictionary <NSString *, id> *albumDictionary in dictionaryArray) {
-        Album *albumToAdd = [[Album alloc] initWithDictionary:albumDictionary];
-        [albums addObject:albumToAdd];
+        Album *album = [[Album alloc] initWithDictionary:albumDictionary];
+        [albums addObject:album];
     }
     return [albums copy];
 }
@@ -77,8 +77,8 @@
 {
     NSMutableArray<Track *> *tracks = [[NSMutableArray alloc] init];
     for (NSDictionary <NSString *, id> *trackDictionary in dictionaryArray) {
-        Track *trackToAdd = [[Track alloc] initWithDictionary:trackDictionary];
-        [tracks addObject:trackToAdd];
+        Track *track = [[Track alloc] initWithDictionary:trackDictionary];
+        [tracks addObject:track];
     }
     return [tracks copy];
 }

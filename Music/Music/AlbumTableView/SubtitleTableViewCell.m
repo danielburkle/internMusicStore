@@ -4,11 +4,12 @@
 //
 
 #import "SubtitleTableViewCell.h"
-#import "AlbumTableViewController.h"
 
 @implementation SubtitleTableViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier
+#pragma mark - Object Life Cycle
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -19,12 +20,7 @@
     return self;
 }
 
-- (void)initializeLabels
-{
-    _albumName = [[UILabel alloc] init];
-    _artistName = [[UILabel alloc] init];
-    _releaseYear = [[UILabel alloc] init];
-}
+#pragma mark - View Life Cycle
 
 - (void)prepareForReuse
 {
@@ -32,6 +28,15 @@
 
     [self applyFonts];
 }
+
+- (void)initializeLabels
+{
+    _albumName = [[UILabel alloc] init];
+    _artistName = [[UILabel alloc] init];
+    _releaseYear = [[UILabel alloc] init];
+}
+
+#pragma mark - Cell Customization
 
 - (void)applyFonts
 {

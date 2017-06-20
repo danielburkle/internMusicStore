@@ -7,6 +7,21 @@
 
 @implementation Track
 
+static NSString *const TrackArtistName = @"artistName";
+static NSString *const TrackArtistID = @"artistId";
+static NSString *const TrackCollectionID = @"collectionId";
+static NSString *const TrackCollectionName = @"collectionName";
+static NSString *const TrackCountry = @"country";
+static NSString *const TrackDiscCount = @"discCount";
+static NSString *const TrackDiscNumber = @"discNumber";
+static NSString *const TrackExplicitness = @"collectionExplicitness";
+static NSString *const TrackGenreName = @"primaryGenreName";
+static NSString *const TrackTrackPrice = @"trackPrice";
+static NSString *const TrackTrackNumber = @"trackNumber";
+static NSString *const TrackTrackDuration = @"trackTimeMillis";
+static NSString *const TrackTrackID = @"trackId";
+static NSString *const TrackTrackName = @"trackName";
+
 #pragma mark - Object Life Cycle
 
 - (instancetype)init
@@ -15,27 +30,29 @@
     abort();
 }
 
-- (instancetype)initWithDictionary:(nonnull NSDictionary <NSString *, id> *)trackDictionary
+- (instancetype)initWithDictionary:(NSDictionary <NSString *, id> *)dictionary
 {
     self = [super init];
     if (self) {
-        _name = [trackDictionary objectForKey:@"trackName"];
-        _artistName = [trackDictionary objectForKey:@"artistName"];
-        _albumName = [trackDictionary objectForKey:@"collectionName"];
-        _price = [[trackDictionary objectForKey:@"trackPrice"] floatValue];
-        _trackNumber = [[trackDictionary objectForKey:@"trackNumber"] intValue];
-        _diskNumber = [[trackDictionary objectForKey:@"discNumber"] intValue];
-        _duration = [[trackDictionary objectForKey:@"trackTimeMillis"] intValue];
-        _genre = [trackDictionary objectForKey:@"primaryGenreName"];
-        _explicitness = [trackDictionary objectForKey:@"trackExplicitness"];
-        _albumID = [[trackDictionary objectForKey:@"collectionId"] intValue];
-        _artistID = [[trackDictionary objectForKey:@"artistId"] intValue];
-        _country = [trackDictionary objectForKey:@"country"];
-        _diskCount = [[trackDictionary objectForKey:@"discCount"] intValue];
-        _trackID = [[trackDictionary objectForKey:@"trackId"] intValue];
+        _albumID = [[dictionary objectForKey:TrackCollectionID] intValue];
+        _albumName = [dictionary objectForKey:TrackCollectionName];
+        _artistName = [dictionary objectForKey:TrackArtistName];
+        _artistID = [[dictionary objectForKey:TrackArtistID] intValue];
+        _country = [dictionary objectForKey:TrackCountry];
+        _diskCount = [[dictionary objectForKey:TrackDiscCount] intValue];
+        _diskNumber = [[dictionary objectForKey:TrackDiscNumber] intValue];
+        _explicitness = [dictionary objectForKey:TrackExplicitness];
+        _genre = [dictionary objectForKey:TrackGenreName];
+        _price = [[dictionary objectForKey:TrackTrackPrice] floatValue];
+        _duration = [[dictionary objectForKey:TrackTrackDuration] intValue];
+        _name = [dictionary objectForKey:TrackTrackName];
+        _trackNumber = [[dictionary objectForKey:TrackTrackNumber] intValue];
+        _trackID = [[dictionary objectForKey:TrackTrackID] intValue];
     }
     return self;
 }
+
+#pragma mark - NSObject Implementation
 
 - (NSString *)description
 {

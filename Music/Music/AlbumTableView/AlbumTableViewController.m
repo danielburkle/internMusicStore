@@ -8,7 +8,7 @@
 #import "Importer.h"
 #import "SubtitleTableViewCell.h"
 
-@interface AlbumTableViewController () {
+@interface AlbumTableViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSArray<Album *> *_albums;
 }
 
@@ -35,6 +35,7 @@
 
     [self configureView:[self view]];
     [self configureTableView:[self tableView]];
+
     _albums = [Importer buildAlbumsFromJson];
     [Importer printAlbums:_albums];
     [Importer printTracks:[Importer buildTracksFromJson]];
@@ -50,7 +51,7 @@
 - (nonnull UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SubtitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AlbumTableViewController cellReuseIdentifier] forIndexPath:indexPath];
-    return [AlbumTableViewController setCellProperties:cell album:_albums[[indexPath row]]];
+    return [AlbumTableViewController updateCell:cell withAlbum:_albums[[indexPath row]]];
 }
 
 #pragma mark - View Configuration
@@ -60,7 +61,14 @@
     [view setBackgroundColor:[UIColor whiteColor]];
 }
 
-+ (nonnull UITableViewCell *)setCellProperties:(SubtitleTableViewCell *)cell album:(Album *)album
+- (void)configureTableView:(nonnull UITableView *)tableView
+{
+    [tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
+    [tableView setRowHeight:UITableViewAutomaticDimension];
+    [tableView setEstimatedRowHeight:75.0];
+}
+
++ (nonnull UITableViewCell *)updateCell:(SubtitleTableViewCell *)cell withAlbum:(Album *)album
 {
     [[cell albumName] setText:[album name]];
     [[cell artistName] setText:[album artistName]];
@@ -69,12 +77,7 @@
     return cell;
 }
 
-- (void)configureTableView:(nonnull UITableView *)tableView
-{
-    [tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
-    [tableView setRowHeight:UITableViewAutomaticDimension];
-    [tableView setEstimatedRowHeight:75.0];
-}
+#pragma mark - String Formatting
 
 + (nonnull NSString *)releaseYearFromReleaseDate:(NSDate *)releaseDate
 {

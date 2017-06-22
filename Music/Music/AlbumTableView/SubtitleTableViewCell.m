@@ -29,14 +29,14 @@
     [self applyFonts];
 }
 
+#pragma mark - Cell Customization
+
 - (void)initializeLabels
 {
     _albumName = [[UILabel alloc] init];
     _artistName = [[UILabel alloc] init];
     _releaseYear = [[UILabel alloc] init];
 }
-
-#pragma mark - Cell Customization
 
 - (void)applyFonts
 {

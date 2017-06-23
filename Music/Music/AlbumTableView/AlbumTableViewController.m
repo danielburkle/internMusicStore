@@ -48,7 +48,7 @@
     return [_albums count];
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SubtitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AlbumTableViewController cellReuseIdentifier] forIndexPath:indexPath];
     return [AlbumTableViewController updateCell:cell withAlbum:_albums[[indexPath row]]];
@@ -72,18 +72,18 @@
 {
     [[cell albumName] setText:[album name]];
     [[cell artistName] setText:[album artistName]];
-    [[cell releaseYear] setText:[self releaseYearFromReleaseDate:[album releaseDate]]];
+    [[cell releaseYear] setText:[self formattedYearFromDate:[album releaseDate]]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
 }
 
 #pragma mark - String Formatting
 
-+ (nonnull NSString *)releaseYearFromReleaseDate:(nonnull NSDate *)releaseDate
++ (nonnull NSString *)formattedYearFromDate:(nonnull NSDate *)date
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy"];
-    return [dateFormatter stringFromDate:releaseDate];
+    return [dateFormatter stringFromDate:date];
 }
 
 + (nonnull NSString *)cellReuseIdentifier

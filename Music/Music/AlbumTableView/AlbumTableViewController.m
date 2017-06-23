@@ -6,8 +6,9 @@
 #import "AlbumTableViewController.h"
 
 #import "Importer.h"
+#import "SubtitleTableViewCell.h"
 
-@interface AlbumTableViewController () {
+@interface AlbumTableViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSArray<Album *> *_albums;
 }
 
@@ -33,9 +34,9 @@
     [super viewDidLoad];
 
     [self configureView:[self view]];
+    [self configureTableView:[self tableView]];
 
     _albums = [Importer buildAlbumsFromJson];
-
     [Importer printAlbums:_albums];
     [Importer printTracks:[Importer buildTracksFromJson]];
 }
@@ -49,15 +50,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier = @"UITableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    }
-    Album *album = _albums[[indexPath row]];
-    [[cell textLabel] setText:[album name]];
-    [[cell detailTextLabel] setText:[album artistName]];
-    return cell;
+    SubtitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AlbumTableViewController cellReuseIdentifier] forIndexPath:indexPath];
+    return [AlbumTableViewController updateCell:cell withAlbum:_albums[[indexPath row]]];
 }
 
 #pragma mark - View Configuration
@@ -65,6 +59,36 @@
 - (void)configureView:(nonnull UIView *)view
 {
     [view setBackgroundColor:[UIColor whiteColor]];
+}
+
+- (void)configureTableView:(nonnull UITableView *)tableView
+{
+    [tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
+    [tableView setRowHeight:UITableViewAutomaticDimension];
+    [tableView setEstimatedRowHeight:75.0];
+}
+
++ (nonnull UITableViewCell *)updateCell:(nonnull SubtitleTableViewCell *)cell withAlbum:(nonnull Album *)album
+{
+    [[cell albumName] setText:[album name]];
+    [[cell artistName] setText:[album artistName]];
+    [[cell releaseYear] setText:[self formattedYearFromDate:[album releaseDate]]];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    return cell;
+}
+
+#pragma mark - String Formatting
+
++ (nonnull NSString *)formattedYearFromDate:(nonnull NSDate *)date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy"];
+    return [dateFormatter stringFromDate:date];
+}
+
++ (nonnull NSString *)cellReuseIdentifier
+{
+    return NSStringFromClass([SubtitleTableViewCell class]);
 }
 
 #pragma mark - Localized Strings

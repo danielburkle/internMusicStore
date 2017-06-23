@@ -7,6 +7,16 @@
 
 @implementation Album
 
+static NSString *const AlbumArtistName = @"artistName";
+static NSString *const AlbumCollectionID = @"collectionId";
+static NSString *const AlbumCollectionName = @"collectionName";
+static NSString *const AlbumCollectionPrice = @"collectionPrice";
+static NSString *const AlbumCountry = @"country";
+static NSString *const AlbumExplicitness = @"collectionExplicitness";
+static NSString *const AlbumGenreName = @"primaryGenreName";
+static NSString *const AlbumReleaseDate = @"releaseDate";
+static NSString *const AlbumTrackCount = @"trackCount";
+
 #pragma mark - Object Life Cycle
 
 - (instancetype)init
@@ -15,33 +25,24 @@
     abort();
 }
 
-- (instancetype)initWithName:(NSString *)name
-                  artistName:(NSString *)artistName
-                     albumID:(int32_t)albumID
-                 releaseDate:(NSString *)releaseDate
-              numberOfTracks:(int32_t)numberOfTracks
-                       genre:(NSString *)genre
-                       price:(float_t)price
-                     country:(NSString *)country
-                 explictness:(NSString *)explicitness
-                    artistID:(int32_t)artistID
+- (instancetype)initWithDictionary:(NSDictionary<NSString *, id> *)dictionary
 {
-
     self = [super init];
     if (self) {
-        _name = name;
-        _artistName = artistName;
-        _albumID = albumID;
-        _releaseDate = releaseDate;
-        _numberOfTracks = numberOfTracks;
-        _genre = genre;
-        _price = price;
-        _country = country;
-        _explicitness = explicitness;
-        _artistID = artistID;
+        _name = [dictionary objectForKey:AlbumCollectionName];
+        _albumID = [[dictionary objectForKey:AlbumCollectionID] intValue];
+        _artistName = [dictionary objectForKey:AlbumArtistName];
+        _country = [dictionary objectForKey:AlbumCountry];
+        _explicitness = [dictionary objectForKey:AlbumExplicitness];
+        _genre = [dictionary objectForKey:AlbumGenreName];
+        _numberOfTracks = [[dictionary objectForKey:AlbumTrackCount] intValue];
+        _price = [[dictionary objectForKey:AlbumCollectionPrice] floatValue];
+        _releaseDate = [Album formatJSONDate:[dictionary objectForKey:AlbumReleaseDate]];
     }
     return self;
 }
+
+#pragma mark - NSObject Implementation
 
 - (NSString *)description
 {
@@ -56,6 +57,16 @@
                                             _country,
                                             _explicitness,
                                             _artistID];
+}
+
+#pragma mark - String Formatting
+
++ (nonnull NSDate *)formatJSONDate:(nonnull NSString *)JSONDate
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+    NSDate *date = [dateFormatter dateFromString:JSONDate];
+    return date;
 }
 
 @end

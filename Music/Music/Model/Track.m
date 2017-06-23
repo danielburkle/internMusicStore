@@ -7,6 +7,21 @@
 
 @implementation Track
 
+static NSString *const TrackArtistName = @"artistName";
+static NSString *const TrackArtistID = @"artistId";
+static NSString *const TrackCollectionID = @"collectionId";
+static NSString *const TrackCollectionName = @"collectionName";
+static NSString *const TrackCountry = @"country";
+static NSString *const TrackDiscCount = @"discCount";
+static NSString *const TrackDiscNumber = @"discNumber";
+static NSString *const TrackExplicitness = @"collectionExplicitness";
+static NSString *const TrackGenreName = @"primaryGenreName";
+static NSString *const TrackTrackPrice = @"trackPrice";
+static NSString *const TrackTrackNumber = @"trackNumber";
+static NSString *const TrackTrackDuration = @"trackTimeMillis";
+static NSString *const TrackTrackID = @"trackId";
+static NSString *const TrackTrackName = @"trackName";
+
 #pragma mark - Object Life Cycle
 
 - (instancetype)init
@@ -15,41 +30,29 @@
     abort();
 }
 
-- (instancetype)initWithName:(NSString *)name
-                  artistName:(NSString *)artistName
-                   albumName:(nonnull NSString *)albumName
-                       price:(float_t)price
-                 trackNumber:(int32_t)trackNumber
-                  diskNumber:(int32_t)diskNumber
-                    duration:(int32_t)duration
-                       genre:(NSString *)genre
-                 explictness:(NSString *)explicitness
-                     albumID:(int32_t)albumID
-                    artistID:(int32_t)artistID
-                     country:(NSString *)country
-                   diskCount:(int32_t)diskCount
-                     trackID:(int32_t)trackID
+- (instancetype)initWithDictionary:(NSDictionary <NSString *, id> *)dictionary
 {
-
     self = [super init];
     if (self) {
-        _name = name;
-        _artistName = artistName;
-        _albumName = albumName;
-        _price = price;
-        _trackNumber = trackNumber;
-        _diskNumber = diskNumber;
-        _duration = duration;
-        _genre = genre;
-        _explicitness = explicitness;
-        _albumID = albumID;
-        _artistID = artistID;
-        _country = country;
-        _diskCount = diskCount;
-        _trackID = trackID;
+        _albumID = [[dictionary objectForKey:TrackCollectionID] intValue];
+        _albumName = [dictionary objectForKey:TrackCollectionName];
+        _artistName = [dictionary objectForKey:TrackArtistName];
+        _artistID = [[dictionary objectForKey:TrackArtistID] intValue];
+        _country = [dictionary objectForKey:TrackCountry];
+        _diskCount = [[dictionary objectForKey:TrackDiscCount] intValue];
+        _diskNumber = [[dictionary objectForKey:TrackDiscNumber] intValue];
+        _explicitness = [dictionary objectForKey:TrackExplicitness];
+        _genre = [dictionary objectForKey:TrackGenreName];
+        _price = [[dictionary objectForKey:TrackTrackPrice] floatValue];
+        _duration = [[dictionary objectForKey:TrackTrackDuration] intValue];
+        _name = [dictionary objectForKey:TrackTrackName];
+        _trackNumber = [[dictionary objectForKey:TrackTrackNumber] intValue];
+        _trackID = [[dictionary objectForKey:TrackTrackID] intValue];
     }
     return self;
 }
+
+#pragma mark - NSObject Implementation
 
 - (NSString *)description
 {

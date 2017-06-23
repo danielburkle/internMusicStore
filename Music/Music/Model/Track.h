@@ -7,36 +7,23 @@
 
 @interface Track : NSObject
 
-@property (nonnull, nonatomic, strong, readonly) NSString *name;
-@property (nonnull, nonatomic, strong, readonly) NSString *artistName;
-@property (nonnull, nonatomic, strong, readonly) NSString *albumName;
-@property (nonatomic, assign, readonly) float_t price;
-@property (nonatomic, assign, readonly) int32_t trackNumber;
+@property (nonatomic, assign, readonly) int32_t albumID;
+@property (nonnull, nonatomic, copy, readonly) NSString *albumName;
+@property (nonatomic, assign, readonly) int32_t artistID;
+@property (nonnull, nonatomic, copy, readonly) NSString *artistName;
+@property (nonnull, nonatomic, copy, readonly) NSString *country;
+@property (nonatomic, assign, readonly) int32_t diskCount;
 @property (nonatomic, assign, readonly) int32_t diskNumber;
 @property (nonatomic, assign, readonly) int32_t duration;
-@property (nonnull, nonatomic, strong, readonly) NSString *genre;
-@property (nonnull, nonatomic, strong, readonly) NSString *explicitness;
-@property (nonatomic, assign, readonly) int32_t albumID;
-@property (nonatomic, assign, readonly) int32_t artistID;
-@property (nonnull, nonatomic, strong, readonly) NSString *country;
-@property (nonatomic, assign, readonly) int32_t diskCount;
+@property (nonnull, nonatomic, copy, readonly) NSString *explicitness;
+@property (nonnull, nonatomic, copy, readonly) NSString *genre;
+@property (nonnull, nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, assign, readonly) float_t price;
 @property (nonatomic, assign, readonly) int32_t trackID;
+@property (nonatomic, assign, readonly) int32_t trackNumber;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithName:(nonnull NSString *)name
-                          artistName:(nonnull NSString *)artistName
-                           albumName:(nonnull NSString *)albumName
-                               price:(float_t)price
-                         trackNumber:(int32_t)trackNumber
-                          diskNumber:(int32_t)diskNumber
-                            duration:(int32_t)duration
-                               genre:(nonnull NSString *)genre
-                         explictness:(nonnull NSString *)explicitness
-                             albumID:(int32_t)albumID
-                            artistID:(int32_t)artistID
-                             country:(nonnull NSString *)country
-                           diskCount:(int32_t)diskCount
-                             trackID:(int32_t)trackID NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithDictionary:(nonnull NSDictionary<NSString *, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 @end

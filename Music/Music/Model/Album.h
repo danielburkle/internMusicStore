@@ -7,28 +7,19 @@
 
 @interface Album : NSObject
 
-@property (nonnull, nonatomic, strong, readonly) NSString *name;
-@property (nonnull, nonatomic, strong, readonly) NSString *artistName;
 @property (nonatomic, assign, readonly) int32_t albumID;
-@property (nonnull, nonatomic, strong, readonly) NSString *releaseDate;
-@property (nonatomic, assign, readonly) int32_t numberOfTracks;
-@property (nonnull, nonatomic, strong, readonly) NSString *genre;
-@property (nonatomic, assign, readonly) float_t price;
-@property (nonnull, nonatomic, strong, readonly) NSString *country;
-@property (nonnull, nonatomic, strong, readonly) NSString *explicitness;
 @property (nonatomic, assign, readonly) int32_t artistID;
+@property (nonnull, nonatomic, copy, readonly) NSString *artistName;
+@property (nonnull, nonatomic, copy, readonly) NSString *country;
+@property (nonnull, nonatomic, copy, readonly) NSString *explicitness;
+@property (nonnull, nonatomic, copy, readonly) NSString *genre;
+@property (nonnull, nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, assign, readonly) int32_t numberOfTracks;
+@property (nonatomic, assign, readonly) float_t price;
+@property (nonnull, nonatomic, copy, readonly) NSDate *releaseDate;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithName:(nonnull NSString *)name
-                          artistName:(nonnull NSString *)artistName
-                             albumID:(int32_t)albumID
-                         releaseDate:(nonnull NSString *)releaseDate
-                      numberOfTracks:(int32_t)numberOfTracks
-                               genre:(nonnull NSString *)genre
-                               price:(float_t)price
-                             country:(nonnull NSString *)country
-                         explictness:(nonnull NSString *)explicitness
-                            artistID:(int32_t)artistID NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithDictionary:(nonnull NSDictionary<NSString *, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -6,10 +6,14 @@
 @import Foundation;
 @import UIKit;
 
-#import "Album.h"
+@class Album;
 
 @interface SCCAlbumDetailView : UITableViewController
 
-@property (nonnull, nonatomic, strong, readwrite) Album *album;
+@property (nonnull, nonatomic, strong, readonly) Album *album;
+
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithAlbum:(Album *)album NS_DESIGNATED_INITIALIZER;
 
 @end

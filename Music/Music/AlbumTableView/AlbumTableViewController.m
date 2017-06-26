@@ -96,8 +96,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     _album = _albums[(NSUInteger)[indexPath row]];
-    SCCAlbumDetailView *albumDetailView = [[SCCAlbumDetailView alloc] init];
-    [albumDetailView setAlbum:_album];
+    SCCAlbumDetailView *albumDetailView = [[SCCAlbumDetailView alloc] initWithAlbum:_album];
     [[self navigationController] pushViewController:albumDetailView animated:YES];
 }
 

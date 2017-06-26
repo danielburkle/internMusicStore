@@ -17,6 +17,8 @@
 @property (nonnull, nonatomic, strong, readwrite) UILabel *genre;
 @property (nonnull, nonatomic, strong, readwrite) UILabel *releaseDate;
 
-- (nonnull instancetype)initWithAlbum:(nonnull Album *)album;
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithAlbum:(nonnull Album *)album NS_DESIGNATED_INITIALIZER;
 
 @end

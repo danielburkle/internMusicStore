@@ -4,18 +4,27 @@
 //
 
 #import "SCCHeaderDetailView.h"
+
 #import "Album.h"
 
 @implementation SCCHeaderDetailView
 
+static NSString *const SCCHeaderDetailViewNotExplicit = @"notExplicit";
+
 #pragma mark - Object Life Cycle
 
-- (instancetype)initWithAlbum:(nonnull Album *)album
+- (instancetype)init
+{
+    NSLog(@"Programmer Error! This initializer is for %@, should not be used", NSStringFromClass([self class]));
+    abort();
+}
+
+- (instancetype)initWithAlbum:(Album *)album
 {
     self = [super init];
     if (self) {
         [self initializeLabels];
-        [self setLabelText:album];
+        [self updateLabelsForAlbum:album];
         [self applyAutoLayoutConstraints];
         [self applyFonts];
         [[self contentView] setBackgroundColor:[UIColor lightGrayColor]];
@@ -27,8 +36,6 @@
 
 - (void)prepareForReuse
 {
-    [super prepareForReuse];
-
     [self applyFonts];
 }
 
@@ -54,30 +61,28 @@
     [_releaseDate setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]];
 }
 
-- (void)setLabelText:(nonnull Album *)album
+- (void)updateLabelsForAlbum:(nonnull Album *)album
 {
     [_albumName setText:[album name]];
     [_artistName setText:[album artistName]];
     [_country setText:[album country]];
     [_explicitness setText:[self formatExplicitness:[album explicitness]]];
     [_genre setText:[album genre]];
-    [_releaseDate setText:[[self dateFormatProperties] stringFromDate:[album releaseDate]]];
+    [_releaseDate setText:[[self dateFormatterProperties] stringFromDate:[album releaseDate]]];
 }
 
 #pragma mark - Variable Formatting
 
-- (nonnull NSString *)formatExplicitness:(nonnull NSString *)explictness
+- (nonnull NSString *)formatExplicitness:(nonnull NSString *)explicitness
 {
-    if ([explictness isEqualToString:@"notExplicit"]) {
-        NSString *notExplicit = [[NSString alloc] init];
-        notExplicit = @"Not Explicit";
-        return notExplicit;
+    if ([explicitness isEqualToString:SCCHeaderDetailViewNotExplicit]) {
+        return [self localizedNotExplicit];
     } else {
-        return explictness;
+        return explicitness;
     }
 }
 
-- (nonnull NSDateFormatter *)dateFormatProperties
+- (nonnull NSDateFormatter *)dateFormatterProperties
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
@@ -108,6 +113,13 @@
         [[stackView topAnchor] constraintEqualToAnchor:[[view layoutMarginsGuide] topAnchor]],
         [[stackView bottomAnchor] constraintEqualToAnchor:[[view layoutMarginsGuide] bottomAnchor]]
     ]];
+}
+
+#pragma mark - Localized Strings
+
+- (nonnull NSString *)localizedNotExplicit
+{
+    return @"Not Explicit";
 }
 
 @end

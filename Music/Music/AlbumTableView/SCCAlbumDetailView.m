@@ -4,6 +4,7 @@
 //
 
 #import "SCCAlbumDetailView.h"
+
 #import "SCCHeaderDetailView.h"
 
 @implementation SCCAlbumDetailView
@@ -12,9 +13,16 @@
 
 - (instancetype)init
 {
+    NSLog(@"Programmer Error! This initializer is for %@, should not be used", NSStringFromClass([self class]));
+    abort();
+}
+
+- (instancetype)initWithAlbum:(Album *)album
+{
     self = [super initWithStyle:UITableViewStylePlain];
-    if (self) {
+    if (self){
         [self setTitle:[self localizedTitle]];
+        _album = album;
     }
     return self;
 }
@@ -27,6 +35,12 @@
 
     [self configureView:[self view]];
     [self configureTableView:[self tableView]];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    SCCHeaderDetailView *album = [[SCCHeaderDetailView alloc] initWithAlbum:_album];
+    return album;
 }
 
 #pragma mark - View Configuration
@@ -42,12 +56,6 @@
     [tableView setEstimatedRowHeight:75.0];
     [tableView setSectionHeaderHeight:UITableViewAutomaticDimension];
     [tableView setEstimatedSectionHeaderHeight:100.0];
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    SCCHeaderDetailView *album = [[SCCHeaderDetailView alloc] initWithAlbum:_album];
-    return album;
 }
 
 #pragma mark - Localized Strings

@@ -20,7 +20,7 @@
 - (instancetype)initWithAlbum:(Album *)album
 {
     self = [super initWithStyle:UITableViewStylePlain];
-    if (self){
+    if (self) {
         [self setTitle:[self localizedTitle]];
         _album = album;
     }
@@ -37,10 +37,12 @@
     [self configureTableView:[self tableView]];
 }
 
+#pragma mark - UITableView DataSource
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    SCCHeaderDetailView *album = [[SCCHeaderDetailView alloc] initWithAlbum:_album];
-    return album;
+    SCCHeaderDetailView *headerDetailView = [[SCCHeaderDetailView alloc] initWithAlbum:_album];
+    return headerDetailView;
 }
 
 #pragma mark - View Configuration

@@ -14,6 +14,6 @@
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
-- (instancetype)initWithAlbum:(Album *)album NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithAlbum:(nonnull Album *)album NS_DESIGNATED_INITIALIZER;
 
 @end

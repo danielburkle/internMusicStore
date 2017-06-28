@@ -7,9 +7,11 @@
 
 #import "Importer.h"
 #import "SubtitleTableViewCell.h"
+#import "SCCAlbumDetailView.h"
 
 @interface AlbumTableViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSArray<Album *> *_albums;
+    Album *_album;
 }
 
 @end
@@ -89,6 +91,13 @@
 + (nonnull NSString *)cellReuseIdentifier
 {
     return NSStringFromClass([SubtitleTableViewCell class]);
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    _album = _albums[(NSUInteger)[indexPath row]];
+    SCCAlbumDetailView *albumDetailView = [[SCCAlbumDetailView alloc] initWithAlbum:_album];
+    [[self navigationController] pushViewController:albumDetailView animated:YES];
 }
 
 #pragma mark - Localized Strings

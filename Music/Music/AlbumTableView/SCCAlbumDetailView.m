@@ -6,6 +6,13 @@
 #import "SCCAlbumDetailView.h"
 
 #import "SCCHeaderDetailView.h"
+#import "Importer.h"
+
+@interface SCCAlbumDetailView () {
+    NSArray<Track *> *_tracks;
+}
+
+@end
 
 @implementation SCCAlbumDetailView
 
@@ -13,7 +20,25 @@
 
 - (instancetype)init
 {
-    NSLog(@"Programmer Error! This initializer is for %@, should not be used", NSStringFromClass([self class]));
+    NSLog(@"Programmer Error! This initializer is init for %@, should not be used", NSStringFromClass([self class]));
+    abort();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    NSLog(@"Programmer Error! This initializer is initWithCoder for %@, should not be used", NSStringFromClass([self class]));
+    abort();
+}
+
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil
+{
+    NSLog(@"Programmer Error! This initializer is initWithNibName for %@, should not be used", NSStringFromClass([self class]));
+    abort();
+}
+
+- (instancetype)initWithStyle:(UITableViewStyle)style
+{
+    NSLog(@"Programmer Error! This initializer is initWithStyle for %@, should not be used", NSStringFromClass([self class]));
     abort();
 }
 
@@ -35,14 +60,34 @@
 
     [self configureView:[self view]];
     [self configureTableView:[self tableView]];
+
+    _tracks = [Importer buildTracksFromJson];
+}
+
+#pragma mark - UITableView Datasource
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [_tracks count];
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    NSString *cellIdentifier = @"UITableViewCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    Track *track = _tracks[(NSUInteger)[indexPath row]];
+    [[cell textLabel] setText:[self localizedTrackDescriptionNumberName:track]];
+    return cell;
 }
 
 #pragma mark - UITableView DataSource
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    SCCHeaderDetailView *headerDetailView = [[SCCHeaderDetailView alloc] initWithAlbum:_album];
-    return headerDetailView;
+    return [[SCCHeaderDetailView alloc] initWithAlbum:_album];
 }
 
 #pragma mark - View Configuration
@@ -55,9 +100,10 @@
 - (void)configureTableView:(nonnull UITableView *)tableView
 {
     [tableView setRowHeight:UITableViewAutomaticDimension];
-    [tableView setEstimatedRowHeight:75.0];
+    [tableView setEstimatedRowHeight:44.0];
     [tableView setSectionHeaderHeight:UITableViewAutomaticDimension];
-    [tableView setEstimatedSectionHeaderHeight:100.0];
+    [tableView setEstimatedSectionHeaderHeight:50.0];
+    [tableView setBounces:NO];
 }
 
 #pragma mark - Localized Strings
@@ -65,6 +111,11 @@
 - (nonnull NSString *)localizedTitle
 {
     return @"Album Details";
+}
+
+- (nonnull NSString *)localizedTrackDescriptionNumberName:(Track *)track
+{
+    return [NSString stringWithFormat:@"Track %d - %@", [track trackNumber], [track name]];
 }
 
 @end

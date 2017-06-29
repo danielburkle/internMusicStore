@@ -5,6 +5,14 @@
 
 #import "SubtitleTableViewCell.h"
 
+#import "SCCAlbumPlaceholderArt.h"
+
+@interface SubtitleTableViewCell () {
+    UIImageView *_albumArt;
+}
+
+@end
+
 @implementation SubtitleTableViewCell
 
 #pragma mark - Object Life Cycle
@@ -13,9 +21,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self initializeLabels];
-        [self applyAutoLayoutConstraints];
-        [self applyFonts];
+        [self configureCell];
     }
     return self;
 }
@@ -30,6 +36,19 @@
 }
 
 #pragma mark - Cell Customization
+
+- (void)configureCell
+{
+    [self initializeAlbumArt];
+    [self initializeLabels];
+    [self applyAutoLayoutConstraints];
+    [self applyFonts];
+}
+
+- (void)initializeAlbumArt
+{
+    _albumArt = [SCCAlbumPlaceholderArt placeholderArtFromLocalFile];
+}
 
 - (void)initializeLabels
 {
@@ -47,24 +66,55 @@
 
 - (void)applyAutoLayoutConstraints
 {
-    UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:@[ _albumName, _artistName, _releaseYear ]];
-    [stackView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [stackView setAxis:UILayoutConstraintAxisVertical];
-    [stackView setSpacing:0];
-    [stackView setDistribution:UIStackViewDistributionFillProportionally];
-    [stackView setAlignment:UIStackViewAlignmentLeading];
+    NSArray *albumLabels = @[ _albumName, _artistName, _releaseYear ];
+    UIStackView *labelsStackView = [self verticalStackViewFromSubviews:albumLabels];
+    NSArray *albumViews = @[ _albumArt, labelsStackView ];
+    UIStackView *outerStackView = [self horizontalStackViewFromSubviews:albumViews];
+    [self activateAlbumArtSizeConstraints];
+    [self activateConstraints:outerStackView];
+}
 
+- (void)activateConstraints:(UIStackView *)stackView
+{
     UIView *view = [self contentView];
     [view addSubview:stackView];
-
     UILayoutGuide *marginsGuide = [self layoutMarginsGuide];
-
     [NSLayoutConstraint activateConstraints:@[
         [[stackView leadingAnchor] constraintEqualToAnchor:[marginsGuide leadingAnchor]],
         [[stackView trailingAnchor] constraintEqualToAnchor:[marginsGuide trailingAnchor]],
         [[stackView topAnchor] constraintEqualToAnchor:[[view layoutMarginsGuide] topAnchor]],
         [[stackView bottomAnchor] constraintEqualToAnchor:[[view layoutMarginsGuide] bottomAnchor]]
     ]];
+}
+
+- (void)activateAlbumArtSizeConstraints
+{
+    [_albumArt setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_albumArt attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:70];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_albumArt attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_albumArt attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    [_albumArt addConstraints:@[ widthConstraint, heightConstraint ]];
+}
+
+- (UIStackView *)verticalStackViewFromSubviews:(NSArray *)subviews
+{
+    UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:subviews];
+    [stackView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [stackView setAxis:UILayoutConstraintAxisVertical];
+    [stackView setSpacing:5];
+    [stackView setDistribution:UIStackViewDistributionFillProportionally];
+    [stackView setAlignment:UIStackViewAlignmentLeading];
+    return stackView;
+}
+
+- (UIStackView *)horizontalStackViewFromSubviews:(NSArray *)subviews
+{
+    UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:subviews];
+    [stackView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [stackView setAxis:UILayoutConstraintAxisHorizontal];
+    [stackView setSpacing:15];
+    [stackView setDistribution:UIStackViewDistributionFillProportionally];
+    [stackView setAlignment:UIStackViewAlignmentLeading];
+    return stackView;
 }
 
 @end

@@ -19,6 +19,10 @@
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
+- (nonnull instancetype)initWithReuseIdentifier:(nullable NSString *)reuseIdentifier NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithCoder:(nonnull NSCoder *)aDecoder NS_UNAVAILABLE;
+
 - (nonnull instancetype)initWithAlbum:(nonnull Album *)album NS_DESIGNATED_INITIALIZER;
 
 @end

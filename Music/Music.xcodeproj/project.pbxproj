@@ -14,7 +14,9 @@
 		4C20FB641EE89B1400FAD125 /* TrackResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C20FB621EE89B1400FAD125 /* TrackResults.json */; };
 		57D0417599C374C5D680685A /* SubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D049FCC2AF6449EC3AB49A /* SubtitleTableViewCell.m */; };
 		57D041D71BACAA6B0AD9C1EE /* SCCAlbumDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D0403AE295E0BE5E30272C /* SCCAlbumDetailView.m */; };
+		57D04850E78A7441012C1971 /* SCCAlbumPlaceholderArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04AD1ED1E9E6939381F90 /* SCCAlbumPlaceholderArt.m */; };
 		57D04D6740DAA36C3000054E /* SCCHeaderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D048EE9BB931D6F08DF0DB /* SCCHeaderDetailView.m */; };
+		57D04DDDD99C55A83A23B09E /* AlbumArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D045F11E81AEC32E4C5CCC /* AlbumArt.png */; };
 		5DEF82791CE66A0800985B5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF82781CE66A0800985B5D /* main.m */; };
 		5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82831CE66A0800985B5D /* Assets.xcassets */; };
 		5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */; };
@@ -32,10 +34,13 @@
 		4C20FB611EE89B1400FAD125 /* AlbumResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AlbumResults.json; path = "JSON Files/AlbumResults.json"; sourceTree = "<group>"; };
 		4C20FB621EE89B1400FAD125 /* TrackResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TrackResults.json; path = "JSON Files/TrackResults.json"; sourceTree = "<group>"; };
 		57D0403AE295E0BE5E30272C /* SCCAlbumDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCAlbumDetailView.m; sourceTree = "<group>"; };
+		57D045F11E81AEC32E4C5CCC /* AlbumArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlbumArt.png; sourceTree = "<group>"; };
 		57D048EE9BB931D6F08DF0DB /* SCCHeaderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCHeaderDetailView.m; sourceTree = "<group>"; };
 		57D049FCC2AF6449EC3AB49A /* SubtitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubtitleTableViewCell.m; sourceTree = "<group>"; };
 		57D04AC309BD97E0A2337D6A /* SubtitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubtitleTableViewCell.h; sourceTree = "<group>"; };
+		57D04AD1ED1E9E6939381F90 /* SCCAlbumPlaceholderArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCAlbumPlaceholderArt.m; sourceTree = "<group>"; };
 		57D04AD380254BC5E8A15995 /* SCCHeaderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCHeaderDetailView.h; sourceTree = "<group>"; };
+		57D04F4B43A8E7B08260F7D5 /* SCCAlbumPlaceholderArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCAlbumPlaceholderArt.h; sourceTree = "<group>"; };
 		57D04FFA939BE7FEFEBD6DA7 /* SCCAlbumDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCAlbumDetailView.h; sourceTree = "<group>"; };
 		5DEF82741CE66A0800985B5D /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DEF82781CE66A0800985B5D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -81,6 +86,14 @@
 			name = "JSON Files";
 			sourceTree = "<group>";
 		};
+		57D040C181A17A414893D096 /* Image Files */ = {
+			isa = PBXGroup;
+			children = (
+				57D045F11E81AEC32E4C5CCC /* AlbumArt.png */,
+			);
+			path = "Image Files";
+			sourceTree = "<group>";
+		};
 		5DEF826B1CE66A0800985B5D = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +121,7 @@
 				5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */,
 				5DEF82881CE66A0800985B5D /* Info.plist */,
 				5DEF82771CE66A0800985B5D /* Supporting Files */,
+				57D040C181A17A414893D096 /* Image Files */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -134,12 +148,14 @@
 			children = (
 				5DEF82971CE66B4100985B5D /* AlbumTableViewController.h */,
 				5DEF82981CE66B4100985B5D /* AlbumTableViewController.m */,
+				57D04FFA939BE7FEFEBD6DA7 /* SCCAlbumDetailView.h */,
+				57D0403AE295E0BE5E30272C /* SCCAlbumDetailView.m */,
+				57D04AD380254BC5E8A15995 /* SCCHeaderDetailView.h */,
+				57D048EE9BB931D6F08DF0DB /* SCCHeaderDetailView.m */,
 				57D04AC309BD97E0A2337D6A /* SubtitleTableViewCell.h */,
 				57D049FCC2AF6449EC3AB49A /* SubtitleTableViewCell.m */,
-				57D048EE9BB931D6F08DF0DB /* SCCHeaderDetailView.m */,
-				57D04AD380254BC5E8A15995 /* SCCHeaderDetailView.h */,
-				57D0403AE295E0BE5E30272C /* SCCAlbumDetailView.m */,
-				57D04FFA939BE7FEFEBD6DA7 /* SCCAlbumDetailView.h */,
+				57D04F4B43A8E7B08260F7D5 /* SCCAlbumPlaceholderArt.h */,
+				57D04AD1ED1E9E6939381F90 /* SCCAlbumPlaceholderArt.m */,
 			);
 			path = AlbumTableView;
 			sourceTree = "<group>";
@@ -205,6 +221,7 @@
 				5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */,
 				5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */,
 				4C20FB631EE89B1400FAD125 /* AlbumResults.json in Resources */,
+				57D04DDDD99C55A83A23B09E /* AlbumArt.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +241,7 @@
 				57D0417599C374C5D680685A /* SubtitleTableViewCell.m in Sources */,
 				57D04D6740DAA36C3000054E /* SCCHeaderDetailView.m in Sources */,
 				57D041D71BACAA6B0AD9C1EE /* SCCAlbumDetailView.m in Sources */,
+				57D04850E78A7441012C1971 /* SCCAlbumPlaceholderArt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +351,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Music/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -345,6 +364,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Music/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

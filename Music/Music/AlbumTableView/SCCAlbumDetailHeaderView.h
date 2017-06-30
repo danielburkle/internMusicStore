@@ -8,7 +8,7 @@
 
 @class Album;
 
-@interface SCCHeaderDetailView : UITableViewHeaderFooterView
+@interface SCCAlbumDetailHeaderView : UITableViewHeaderFooterView
 
 @property (nonnull, nonatomic, strong, readwrite) UILabel *albumName;
 @property (nonnull, nonatomic, strong, readwrite) UILabel *artistName;

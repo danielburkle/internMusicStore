@@ -3,18 +3,17 @@
 // Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
-#import "SCCAlbumPlaceholderArt.h"
+#import "SCCImageUtility.h"
 
-@implementation SCCAlbumPlaceholderArt
+@implementation SCCImageUtility
 
 static NSString *const SCCAlbumPlaceholderArtFileName = @"AlbumArt";
 static NSString *const SCCAlbumPlaceHolderArtFileType = @"png";
 
-+ (UIImageView *)placeholderArtFromLocalFile
++ (nonnull UIImageView *)albumPlaceHolderImageView
 {
     NSString *filepath = [[NSBundle mainBundle] pathForResource:SCCAlbumPlaceholderArtFileName ofType:SCCAlbumPlaceHolderArtFileType];
-    UIImageView *placeholderArt = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:filepath]];
-    return placeholderArt;
+    return [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:filepath]];
 }
 
 @end

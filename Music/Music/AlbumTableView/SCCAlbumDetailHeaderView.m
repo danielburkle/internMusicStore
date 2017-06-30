@@ -3,23 +3,21 @@
 // Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
-#import "SCCHeaderDetailView.h"
+#import "SCCAlbumDetailHeaderView.h"
 
 #import "Album.h"
-#import "SCCAlbumPlaceholderArt.h"
+#import "SCCImageUtility.h"
 
-@interface SCCHeaderDetailView () {
+@interface SCCAlbumDetailHeaderView () {
     Album *_album;
-    UIImageView *_albumArt;
-    NSMutableArray *_constraints;
+    UIImageView *_albumArtImageView;
 }
 
 @end
 
-@implementation SCCHeaderDetailView
+@implementation SCCAlbumDetailHeaderView
 
-static NSString *const SCCHeaderDetailViewCleaned = @"cleaned";
-static NSString *const SCCHeaderDetailViewNotExplicit = @"notExplicit";
+static NSString *const SCCHeaderDetailViewExplicit = @"Explicit";
 
 #pragma mark - Object Life Cycle
 
@@ -72,7 +70,7 @@ static NSString *const SCCHeaderDetailViewNotExplicit = @"notExplicit";
 
 - (void)initializeAlbumArt
 {
-    _albumArt = [SCCAlbumPlaceholderArt placeholderArtFromLocalFile];
+    _albumArtImageView = [SCCImageUtility albumPlaceHolderImageView];
 }
 
 - (void)initializeLabels
@@ -102,21 +100,21 @@ static NSString *const SCCHeaderDetailViewNotExplicit = @"notExplicit";
     [_country setText:[album country]];
     [_explicitness setText:[self formatExplicitness:[album explicitness]]];
     [_genre setText:[album genre]];
-    [_releaseDate setText:[[self configureDateFormatter] stringFromDate:[album releaseDate]]];
+    [_releaseDate setText:[[self configuredDateFormatter] stringFromDate:[album releaseDate]]];
 }
 
 #pragma mark - Variable Formatting
 
 - (nonnull NSString *)formatExplicitness:(nonnull NSString *)explicitness
 {
-    if ([explicitness isEqualToString:SCCHeaderDetailViewNotExplicit] || [explicitness isEqualToString:SCCHeaderDetailViewCleaned]) {
-        return [self localizedNotExplicit];
-    } else {
+    if ([explicitness isEqualToString:SCCHeaderDetailViewExplicit]) {
         return [self localizedExplicit];
+    } else {
+        return [self localizedNotExplicit];
     }
 }
 
-- (nonnull NSDateFormatter *)configureDateFormatter
+- (nonnull NSDateFormatter *)configuredDateFormatter
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
@@ -129,15 +127,15 @@ static NSString *const SCCHeaderDetailViewNotExplicit = @"notExplicit";
 
 - (void)applyAutoLayoutConstraints
 {
-    NSArray *albumLabels = @[ _albumName, _artistName, _releaseDate, _explicitness, _genre, _country ];
+    NSArray<UILabel *> *albumLabels = @[ _albumName, _artistName, _releaseDate, _explicitness, _genre, _country ];
     UIStackView *labelsStackView = [self verticalStackViewFromSubviews:albumLabels];
-    NSArray *albumViews = @[ _albumArt, labelsStackView ];
+    NSArray<UIView *> *albumViews = @[ _albumArtImageView, labelsStackView ];
     UIStackView *outerStackView = [self horizontalStackViewFromSubviews:albumViews];
-    [self activateAlbumArtSizeConstraints];
-    [self activateConstraints:outerStackView];
+    [self applyAlbumArtSizeConstraints];
+    [self applyConstraints:outerStackView];
 }
 
-- (void)activateConstraints:(UIStackView *)stackView
+- (void)applyConstraints:(nonnull UIStackView *)stackView
 {
     UIView *view = [self contentView];
     [view setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -151,15 +149,15 @@ static NSString *const SCCHeaderDetailViewNotExplicit = @"notExplicit";
     ]];
 }
 
-- (void)activateAlbumArtSizeConstraints
+- (void)applyAlbumArtSizeConstraints
 {
-    [_albumArt setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_albumArt attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:110];
-    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_albumArt attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_albumArt attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
-    [_albumArt addConstraints:@[ widthConstraint, heightConstraint ]];
+    [_albumArtImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_albumArtImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:110];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_albumArtImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_albumArtImageView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    [_albumArtImageView addConstraints:@[ widthConstraint, heightConstraint ]];
 }
 
-- (UIStackView *)verticalStackViewFromSubviews:(NSArray *)subviews
+- (nonnull UIStackView *)verticalStackViewFromSubviews:(nonnull NSArray<UILabel *> *)subviews
 {
     UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:subviews];
     [stackView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -170,7 +168,7 @@ static NSString *const SCCHeaderDetailViewNotExplicit = @"notExplicit";
     return stackView;
 }
 
-- (UIStackView *)horizontalStackViewFromSubviews:(NSArray *)subviews
+- (nonnull UIStackView *)horizontalStackViewFromSubviews:(nonnull NSArray<UIView *> *)subviews
 {
     UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:subviews];
     [stackView setTranslatesAutoresizingMaskIntoConstraints:NO];

@@ -6,8 +6,8 @@
 #import "AlbumTableViewController.h"
 
 #import "Importer.h"
-#import "SubtitleTableViewCell.h"
-#import "SCCAlbumDetailView.h"
+#import "SCCAlbumTableViewCell.h"
+#import "SCCAlbumDetailViewTableViewController.h"
 
 @interface AlbumTableViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSArray<Album *> *_albums;
@@ -52,7 +52,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubtitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AlbumTableViewController cellReuseIdentifier] forIndexPath:indexPath];
+    SCCAlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AlbumTableViewController cellReuseIdentifier] forIndexPath:indexPath];
     return [AlbumTableViewController updateCell:cell withAlbum:_albums[[indexPath row]]];
 }
 
@@ -65,12 +65,12 @@
 
 - (void)configureTableView:(nonnull UITableView *)tableView
 {
-    [tableView registerClass:[SubtitleTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
+    [tableView registerClass:[SCCAlbumTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
     [tableView setRowHeight:UITableViewAutomaticDimension];
     [tableView setEstimatedRowHeight:75.0];
 }
 
-+ (nonnull UITableViewCell *)updateCell:(nonnull SubtitleTableViewCell *)cell withAlbum:(nonnull Album *)album
++ (nonnull UITableViewCell *)updateCell:(nonnull SCCAlbumTableViewCell *)cell withAlbum:(nonnull Album *)album
 {
     [[cell albumName] setText:[album name]];
     [[cell artistName] setText:[album artistName]];
@@ -90,13 +90,13 @@
 
 + (nonnull NSString *)cellReuseIdentifier
 {
-    return NSStringFromClass([SubtitleTableViewCell class]);
+    return NSStringFromClass([SCCAlbumTableViewCell class]);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     _album = _albums[(NSUInteger)[indexPath row]];
-    SCCAlbumDetailView *albumDetailView = [[SCCAlbumDetailView alloc] initWithAlbum:_album];
+    SCCAlbumDetailViewTableViewController *albumDetailView = [[SCCAlbumDetailViewTableViewController alloc] initWithAlbum:_album];
     [[self navigationController] pushViewController:albumDetailView animated:YES];
 }
 

@@ -6,8 +6,8 @@
 @import Foundation;
 @import UIKit;
 
-@interface SCCAlbumPlaceholderArt : NSObject
+@interface SCCImageUtility : NSObject
 
-+ (UIImageView *)placeholderArtFromLocalFile;
++ (UIImageView *)albumPlaceHolderImageView;
 
 @end

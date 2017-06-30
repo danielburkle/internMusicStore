@@ -8,7 +8,7 @@
 
 @class Album;
 
-@interface SCCAlbumDetailView : UITableViewController
+@interface SCCAlbumDetailViewTableViewController : UITableViewController
 
 @property (nonnull, nonatomic, strong, readonly) Album *album;
 

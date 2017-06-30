@@ -3,18 +3,18 @@
 // Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
-#import "SCCAlbumDetailView.h"
+#import "SCCAlbumDetailViewTableViewController.h"
 
-#import "SCCHeaderDetailView.h"
+#import "SCCAlbumDetailHeaderView.h"
 #import "Importer.h"
 
-@interface SCCAlbumDetailView () {
+@interface SCCAlbumDetailViewTableViewController () {
     NSArray<Track *> *_tracks;
 }
 
 @end
 
-@implementation SCCAlbumDetailView
+@implementation SCCAlbumDetailViewTableViewController
 
 #pragma mark - Object Life Cycle
 
@@ -87,7 +87,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [[SCCHeaderDetailView alloc] initWithAlbum:_album];
+    return [[SCCAlbumDetailHeaderView alloc] initWithAlbum:_album];
 }
 
 #pragma mark - View Configuration

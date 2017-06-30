@@ -3,17 +3,17 @@
 // Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
-#import "SubtitleTableViewCell.h"
+#import "SCCAlbumTableViewCell.h"
 
-#import "SCCAlbumPlaceholderArt.h"
+#import "SCCImageUtility.h"
 
-@interface SubtitleTableViewCell () {
-    UIImageView *_albumArt;
+@interface SCCAlbumTableViewCell () {
+    UIImageView *_albumArtImageView;
 }
 
 @end
 
-@implementation SubtitleTableViewCell
+@implementation SCCAlbumTableViewCell
 
 #pragma mark - Object Life Cycle
 
@@ -47,7 +47,7 @@
 
 - (void)initializeAlbumArt
 {
-    _albumArt = [SCCAlbumPlaceholderArt placeholderArtFromLocalFile];
+    _albumArtImageView = [SCCImageUtility albumPlaceHolderImageView];
 }
 
 - (void)initializeLabels
@@ -66,15 +66,15 @@
 
 - (void)applyAutoLayoutConstraints
 {
-    NSArray *albumLabels = @[ _albumName, _artistName, _releaseYear ];
+    NSArray<UILabel *> *albumLabels = @[ _albumName, _artistName, _releaseYear ];
     UIStackView *labelsStackView = [self verticalStackViewFromSubviews:albumLabels];
-    NSArray *albumViews = @[ _albumArt, labelsStackView ];
+    NSArray<UIView *> *albumViews = @[ _albumArtImageView, labelsStackView ];
     UIStackView *outerStackView = [self horizontalStackViewFromSubviews:albumViews];
     [self activateAlbumArtSizeConstraints];
     [self activateConstraints:outerStackView];
 }
 
-- (void)activateConstraints:(UIStackView *)stackView
+- (void)activateConstraints:(nonnull UIStackView *)stackView
 {
     UIView *view = [self contentView];
     [view addSubview:stackView];
@@ -89,13 +89,13 @@
 
 - (void)activateAlbumArtSizeConstraints
 {
-    [_albumArt setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_albumArt attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:70];
-    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_albumArt attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_albumArt attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
-    [_albumArt addConstraints:@[ widthConstraint, heightConstraint ]];
+    [_albumArtImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_albumArtImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:70];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_albumArtImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_albumArtImageView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    [_albumArtImageView addConstraints:@[ widthConstraint, heightConstraint ]];
 }
 
-- (UIStackView *)verticalStackViewFromSubviews:(NSArray *)subviews
+- (nonnull UIStackView *)verticalStackViewFromSubviews:(nonnull NSArray<UILabel *> *)subviews
 {
     UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:subviews];
     [stackView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -106,7 +106,7 @@
     return stackView;
 }
 
-- (UIStackView *)horizontalStackViewFromSubviews:(NSArray *)subviews
+- (nonnull UIStackView *)horizontalStackViewFromSubviews:(nonnull NSArray<UIView *> *)subviews
 {
     UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:subviews];
     [stackView setTranslatesAutoresizingMaskIntoConstraints:NO];

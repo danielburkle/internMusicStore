@@ -53,7 +53,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SCCAlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SCCAlbumTableViewController cellReuseIdentifier] forIndexPath:indexPath];
-    return [SCCAlbumTableViewController updateCell:cell withAlbum:_albums[[indexPath row]]];
+    return [SCCAlbumTableViewController updateCell:cell withAlbum:_albums[(NSUInteger)[indexPath row]]];
 }
 
 #pragma mark - View Configuration

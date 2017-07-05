@@ -5,11 +5,11 @@
 
 #import "SCCAlbumDetailHeaderView.h"
 
-#import "Album.h"
+#import "SCCAlbum.h"
 #import "SCCImageUtility.h"
 
 @interface SCCAlbumDetailHeaderView () {
-    Album *_album;
+    SCCAlbum *_album;
     UIImageView *_albumArtImageView;
 }
 
@@ -39,7 +39,7 @@ static NSString *const SCCHeaderDetailViewExplicit = @"Explicit";
     abort();
 }
 
-- (instancetype)initWithAlbum:(Album *)album
+- (instancetype)initWithAlbum:(SCCAlbum *)album
 {
     self = [super initWithReuseIdentifier:nil];
     if (self) {
@@ -93,7 +93,7 @@ static NSString *const SCCHeaderDetailViewExplicit = @"Explicit";
     [_releaseDate setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]];
 }
 
-- (void)updateLabelsForAlbum:(nonnull Album *)album
+- (void)updateLabelsForAlbum:(nonnull SCCAlbum *)album
 {
     [_albumName setText:[album name]];
     [_artistName setText:[album artistName]];

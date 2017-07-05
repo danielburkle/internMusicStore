@@ -6,10 +6,10 @@
 #import "SCCAlbumDetailViewTableViewController.h"
 
 #import "SCCAlbumDetailHeaderView.h"
-#import "Importer.h"
+#import "SCCImporter.h"
 
 @interface SCCAlbumDetailViewTableViewController () {
-    NSArray<Track *> *_tracks;
+    NSArray<SCCTrack *> *_tracks;
 }
 
 @end
@@ -42,7 +42,7 @@
     abort();
 }
 
-- (instancetype)initWithAlbum:(Album *)album
+- (instancetype)initWithAlbum:(SCCAlbum *)album
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
@@ -61,7 +61,7 @@
     [self configureView:[self view]];
     [self configureTableView:[self tableView]];
 
-    _tracks = [Importer buildTracksFromJson];
+    _tracks = [SCCImporter buildTracksFromJson];
 }
 
 #pragma mark - UITableView Datasource
@@ -78,7 +78,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    Track *track = _tracks[(NSUInteger)[indexPath row]];
+    SCCTrack *track = _tracks[(NSUInteger)[indexPath row]];
     [[cell textLabel] setText:[self localizedTrackDescriptionNumberName:track]];
     return cell;
 }
@@ -110,12 +110,12 @@
 
 - (nonnull NSString *)localizedTitle
 {
-    return @"Album Details";
+    return @"SCCAlbum Details";
 }
 
-- (nonnull NSString *)localizedTrackDescriptionNumberName:(Track *)track
+- (nonnull NSString *)localizedTrackDescriptionNumberName:(SCCTrack *)track
 {
-    return [NSString stringWithFormat:@"Track %d - %@", [track trackNumber], [track name]];
+    return [NSString stringWithFormat:@"SCCTrack %d - %@", [track trackNumber], [track name]];
 }
 
 @end

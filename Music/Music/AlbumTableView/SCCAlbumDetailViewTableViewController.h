@@ -6,11 +6,11 @@
 @import Foundation;
 @import UIKit;
 
-@class Album;
+@class SCCAlbum;
 
 @interface SCCAlbumDetailViewTableViewController : UITableViewController
 
-@property (nonnull, nonatomic, strong, readonly) Album *album;
+@property (nonnull, nonatomic, strong, readonly) SCCAlbum *album;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
@@ -20,6 +20,6 @@
 
 - (nullable instancetype)initWithCoder:(nonnull NSCoder *)aDecoder NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithAlbum:(nonnull Album *)album NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithAlbum:(nonnull SCCAlbum *)album NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -3,15 +3,15 @@
 // Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
-#import "Importer.h"
+#import "SCCImporter.h"
 
-@implementation Importer
+@implementation SCCImporter
 
 #pragma mark -JSON Processing
 
-+ (nonnull NSArray<Album *> *)buildAlbumsFromJson
++ (nonnull NSArray<SCCAlbum *> *)buildAlbumsFromJson
 {
-    return [Importer initializeAlbums:[Importer albumResultsFromDictionary:[Importer albumDictionary]]];
+    return [SCCImporter initializeAlbums:[SCCImporter albumResultsFromDictionary:[SCCImporter albumDictionary]]];
 }
 
 + (nonnull NSDictionary<NSString *, id> *)albumDictionary
@@ -33,26 +33,26 @@
     return [[NSArray alloc] initWithArray:[dictionary objectForKey:@"results"]];
 }
 
-+ (nonnull NSArray<Album *> *)initializeAlbums:(nonnull NSArray <NSDictionary<NSString *, id > *> *)dictionaryArray
++ (nonnull NSArray<SCCAlbum *> *)initializeAlbums:(nonnull NSArray <NSDictionary<NSString *, id > *> *)dictionaryArray
 {
-    NSMutableArray<Album *> *albums = [[NSMutableArray alloc] init];
+    NSMutableArray<SCCAlbum *> *albums = [[NSMutableArray alloc] init];
     for (NSDictionary <NSString *, id> *albumDictionary in dictionaryArray) {
-        Album *album = [[Album alloc] initWithDictionary:albumDictionary];
+        SCCAlbum *album = [[SCCAlbum alloc] initWithDictionary:albumDictionary];
         [albums addObject:album];
     }
     return [albums copy];
 }
 
-+ (void)printAlbums:(nonnull NSArray<Album *> *)albums
++ (void)printAlbums:(nonnull NSArray<SCCAlbum *> *)albums
 {
-    for (Album *album in albums) {
+    for (SCCAlbum *album in albums) {
         NSLog(@"%@", [album description]);
     }
 }
 
-+ (nonnull NSArray<Track *> *)buildTracksFromJson
++ (nonnull NSArray<SCCTrack *> *)buildTracksFromJson
 {
-    return [Importer initializeTracks:[Importer trackResultsFromDictionary:[Importer trackDictionary]]];
+    return [SCCImporter initializeTracks:[SCCImporter trackResultsFromDictionary:[SCCImporter trackDictionary]]];
 }
 
 + (nonnull NSDictionary<NSString *, id> *)trackDictionary
@@ -73,19 +73,19 @@
     return [[NSArray alloc] initWithArray:[JsonDictionary objectForKey:@"results"]];
 }
 
-+ (nonnull NSArray<Track *> *)initializeTracks:(nonnull NSArray <NSDictionary<NSString *, id > *> *)dictionaryArray
++ (nonnull NSArray<SCCTrack *> *)initializeTracks:(nonnull NSArray <NSDictionary<NSString *, id > *> *)dictionaryArray
 {
-    NSMutableArray<Track *> *tracks = [[NSMutableArray alloc] init];
+    NSMutableArray<SCCTrack *> *tracks = [[NSMutableArray alloc] init];
     for (NSDictionary <NSString *, id> *trackDictionary in dictionaryArray) {
-        Track *track = [[Track alloc] initWithDictionary:trackDictionary];
+        SCCTrack *track = [[SCCTrack alloc] initWithDictionary:trackDictionary];
         [tracks addObject:track];
     }
     return [tracks copy];
 }
 
-+ (void)printTracks:(nonnull NSArray<Track *> *)tracks
++ (void)printTracks:(nonnull NSArray<SCCTrack *> *)tracks
 {
-    for (Track *track in tracks) {
+    for (SCCTrack *track in tracks) {
         NSLog(@"%@", [track description]);
     }
 }

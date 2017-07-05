@@ -3,20 +3,20 @@
 //  Copyright (c) 2014 National Information Solutions Cooperative. All rights reserved.
 //
 
-#import "AlbumTableViewController.h"
+#import "SCCAlbumTableViewController.h"
 
-#import "Importer.h"
+#import "SCCImporter.h"
 #import "SCCAlbumTableViewCell.h"
 #import "SCCAlbumDetailViewTableViewController.h"
 
-@interface AlbumTableViewController ()<UITableViewDelegate, UITableViewDataSource> {
-    NSArray<Album *> *_albums;
-    Album *_album;
+@interface SCCAlbumTableViewController ()<UITableViewDelegate, UITableViewDataSource> {
+    NSArray<SCCAlbum *> *_albums;
+    SCCAlbum *_album;
 }
 
 @end
 
-@implementation AlbumTableViewController
+@implementation SCCAlbumTableViewController
 
 #pragma mark - Object Life Cycle
 
@@ -38,9 +38,9 @@
     [self configureView:[self view]];
     [self configureTableView:[self tableView]];
 
-    _albums = [Importer buildAlbumsFromJson];
-    [Importer printAlbums:_albums];
-    [Importer printTracks:[Importer buildTracksFromJson]];
+    _albums = [SCCImporter buildAlbumsFromJson];
+    [SCCImporter printAlbums:_albums];
+    [SCCImporter printTracks:[SCCImporter buildTracksFromJson]];
 }
 
 #pragma mark - UITableView Datasource
@@ -52,8 +52,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SCCAlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[AlbumTableViewController cellReuseIdentifier] forIndexPath:indexPath];
-    return [AlbumTableViewController updateCell:cell withAlbum:_albums[[indexPath row]]];
+    SCCAlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SCCAlbumTableViewController cellReuseIdentifier] forIndexPath:indexPath];
+    return [SCCAlbumTableViewController updateCell:cell withAlbum:_albums[[indexPath row]]];
 }
 
 #pragma mark - View Configuration
@@ -65,12 +65,12 @@
 
 - (void)configureTableView:(nonnull UITableView *)tableView
 {
-    [tableView registerClass:[SCCAlbumTableViewCell class] forCellReuseIdentifier:[AlbumTableViewController cellReuseIdentifier]];
+    [tableView registerClass:[SCCAlbumTableViewCell class] forCellReuseIdentifier:[SCCAlbumTableViewController cellReuseIdentifier]];
     [tableView setRowHeight:UITableViewAutomaticDimension];
     [tableView setEstimatedRowHeight:75.0];
 }
 
-+ (nonnull UITableViewCell *)updateCell:(nonnull SCCAlbumTableViewCell *)cell withAlbum:(nonnull Album *)album
++ (nonnull UITableViewCell *)updateCell:(nonnull SCCAlbumTableViewCell *)cell withAlbum:(nonnull SCCAlbum *)album
 {
     [[cell albumName] setText:[album name]];
     [[cell artistName] setText:[album artistName]];

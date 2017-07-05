@@ -6,9 +6,9 @@
 @import Foundation;
 @import UIKit;
 
-@class Album;
+@class SCCAlbum;
 
-@interface SCCHeaderDetailView : UITableViewHeaderFooterView
+@interface SCCAlbumDetailHeaderView : UITableViewHeaderFooterView
 
 @property (nonnull, nonatomic, strong, readwrite) UILabel *albumName;
 @property (nonnull, nonatomic, strong, readwrite) UILabel *artistName;
@@ -19,6 +19,10 @@
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithAlbum:(nonnull Album *)album NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithReuseIdentifier:(nullable NSString *)reuseIdentifier NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithCoder:(nonnull NSCoder *)aDecoder NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithAlbum:(nonnull SCCAlbum *)album NS_DESIGNATED_INITIALIZER;
 
 @end

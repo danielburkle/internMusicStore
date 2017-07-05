@@ -6,7 +6,7 @@
 @import Foundation;
 @import UIKit;
 
-@interface SubtitleTableViewCell : UITableViewCell
+@interface SCCAlbumTableViewCell : UITableViewCell
 
 @property (nonnull, nonatomic, strong, readwrite) UILabel *albumName;
 @property (nonnull, nonatomic, strong, readwrite) UILabel *artistName;

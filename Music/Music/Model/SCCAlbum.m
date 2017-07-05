@@ -3,9 +3,9 @@
 //  Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
-#import "Album.h"
+#import "SCCAlbum.h"
 
-@implementation Album
+@implementation SCCAlbum
 
 static NSString *const AlbumArtistName = @"artistName";
 static NSString *const AlbumCollectionID = @"collectionId";
@@ -37,7 +37,7 @@ static NSString *const AlbumTrackCount = @"trackCount";
         _genre = [dictionary objectForKey:AlbumGenreName];
         _numberOfTracks = [[dictionary objectForKey:AlbumTrackCount] intValue];
         _price = [[dictionary objectForKey:AlbumCollectionPrice] floatValue];
-        _releaseDate = [Album formatJSONDate:[dictionary objectForKey:AlbumReleaseDate]];
+        _releaseDate = [SCCAlbum formatJSONDate:[dictionary objectForKey:AlbumReleaseDate]];
     }
     return self;
 }
@@ -46,7 +46,7 @@ static NSString *const AlbumTrackCount = @"trackCount";
 
 - (NSString *)description
 {
-    return [[NSString alloc] initWithFormat:@"Album: %@, Artist: %@, AlbumID: %d, Release Date: %@, Number of Tracks: %d, Genre: %@, Price: %f, Country of Origin: %@, Explicit: %@, artistID: %d",
+    return [[NSString alloc] initWithFormat:@"SCCAlbum: %@, Artist: %@, AlbumID: %d, Release Date: %@, Number of Tracks: %d, Genre: %@, Price: %f, Country of Origin: %@, Explicit: %@, artistID: %d",
                                             _name,
                                             _artistName,
                                             _albumID,

@@ -5,6 +5,6 @@
 
 @import UIKit;
 
-@interface AlbumTableViewController : UITableViewController
+@interface SCCAlbumTableViewController : UITableViewController
 
 @end

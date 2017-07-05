@@ -3,9 +3,9 @@
 //  Copyright (c) 2017 National Information Solutions Cooperative. All rights reserved.
 //
 
-#import "Track.h"
+#import "SCCTrack.h"
 
-@implementation Track
+@implementation SCCTrack
 
 static NSString *const TrackArtistName = @"artistName";
 static NSString *const TrackArtistID = @"artistId";
@@ -56,8 +56,8 @@ static NSString *const TrackTrackName = @"trackName";
 
 - (NSString *)description
 {
-    NSString *descriptionString = [[NSString alloc] initWithFormat:@"Track: %@, Artist: %@, Album: %@, Price: %f,"
-                                                                       "Track Number: %d, Disk Number: %d, Track Duration: %d, Genre: %@, Explicit: %@, AlbumID: %d, ArtistID: %d,"
+    NSString *descriptionString = [[NSString alloc] initWithFormat:@"SCCTrack: %@, Artist: %@, SCCAlbum: %@, Price: %f,"
+                                                                       "SCCTrack Number: %d, Disk Number: %d, SCCTrack Duration: %d, Genre: %@, Explicit: %@, AlbumID: %d, ArtistID: %d,"
                                                                        "Country: %@, Disk Count: %d, TrackID: %d",
                                                                    _name,
                                                                    _artistName,

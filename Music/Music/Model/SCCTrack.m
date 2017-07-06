@@ -56,9 +56,9 @@ static NSString *const TrackTrackName = @"trackName";
 
 - (NSString *)description
 {
-    NSString *descriptionString = [[NSString alloc] initWithFormat:@"SCCTrack: %@, Artist: %@, SCCAlbum: %@, Price: %f,"
-                                                                       "SCCTrack Number: %d, Disk Number: %d, SCCTrack Duration: %d, Genre: %@, Explicit: %@, AlbumID: %d, ArtistID: %d,"
-                                                                       "Country: %@, Disk Count: %d, TrackID: %d",
+    NSString *descriptionString = [[NSString alloc] initWithFormat:@"Track: %@, Artist: %@, Album: %@, Price: %f,"
+                                                                       " Track Number: %d, Disk Number: %d, Track Duration: %d, Genre: %@, Explicit: %@, AlbumID: %d, ArtistID: %d,"
+                                                                       " Country: %@, Disk Count: %d, TrackID: %d",
                                                                    _name,
                                                                    _artistName,
                                                                    _albumName,

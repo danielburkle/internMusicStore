@@ -9,7 +9,7 @@
 #import "SCCImporter.h"
 #import "SCCTrackTableViewCell.h"
 
-@interface SCCAlbumDetailViewTableViewController () <UITableViewDelegate, UITableViewDataSource> {
+@interface SCCAlbumDetailViewTableViewController () {
     NSArray<SCCTrack *> *_tracks;
 }
 
@@ -75,7 +75,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SCCTrackTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SCCAlbumDetailViewTableViewController cellReuseIdentifier] forIndexPath:indexPath];
-    return [SCCAlbumDetailViewTableViewController updateCell:cell withTrack:_tracks[(NSUInteger)[indexPath row]]];
+    SCCTrack *track = _tracks[(NSUInteger)[indexPath row]];
+    [SCCAlbumDetailViewTableViewController setUpCell:cell withTrack:track];
+    return cell;
 }
 
 #pragma mark - UITableView DataSource
@@ -103,30 +105,21 @@
     [tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
-+ (nonnull UITableViewCell *)updateCell:(nonnull SCCTrackTableViewCell *)cell withTrack:(nonnull SCCTrack *)track
++ (void)setUpCell:(nonnull SCCTrackTableViewCell *)cell withTrack:(nonnull SCCTrack *)track
 {
     [[cell trackDuration] setText:[self formatDuration:[track duration]]];
     [[cell trackName] setText:[track name]];
-    [[cell trackNumber] setText:[self formatTrackNumber:[track trackNumber]]];
-    return cell;
+    [[cell trackNumber] setText:[NSString stringWithFormat:@"%d", [track trackNumber]]];
 }
 
 #pragma mark - String Formatting
 
 + (nonnull NSString *)formatDuration:(int32_t)duration
 {
-    long durationTotalSeconds = duration/1000;
+    long durationTotalSeconds = duration / 1000;
     long minutes = durationTotalSeconds / 60;
     long seconds = lround(durationTotalSeconds) % 60;
-    if (seconds < 10) {
-        return [NSString stringWithFormat:@"%lu:0%lu", minutes, seconds];
-    }
-    return [NSString stringWithFormat:@"%lu:%lu", minutes, seconds];
-}
-
-+ (nonnull NSString *)formatTrackNumber:(int32_t)trackNumber
-{
-    return [NSString stringWithFormat:@"%d",trackNumber];
+    return [NSString stringWithFormat:@"%lu:%02lu", minutes, seconds];
 }
 
 + (nonnull NSString *)cellReuseIdentifier

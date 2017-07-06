@@ -23,8 +23,6 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-
-    [self applyFonts];
 }
 
 #pragma mark - Cell Customization
@@ -56,6 +54,7 @@
 {
     NSArray<UILabel *> *trackLabels = @[ _trackNumber, _trackName, _trackDuration ];
     [_trackDuration setContentCompressionResistancePriority:1000 forAxis:UILayoutConstraintAxisHorizontal];
+    [_trackDuration setContentHuggingPriority:1000 forAxis:UILayoutConstraintAxisHorizontal];
     UIStackView *labelsStackView = [self horizontalStackViewFromSubviews:trackLabels];
     [self applyTrackNumberConstraints];
     [self activateConstraints:labelsStackView];

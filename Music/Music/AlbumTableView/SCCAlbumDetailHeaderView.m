@@ -138,7 +138,6 @@ static NSString *const SCCHeaderDetailViewExplicit = @"Explicit";
 - (void)applyConstraints:(nonnull UIStackView *)stackView
 {
     UIView *view = [self contentView];
-    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
     [view addSubview:stackView];
     UILayoutGuide *marginsGuide = [self layoutMarginsGuide];
     [NSLayoutConstraint activateConstraints:@[
@@ -154,6 +153,7 @@ static NSString *const SCCHeaderDetailViewExplicit = @"Explicit";
     [_albumArtImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_albumArtImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:110];
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_albumArtImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_albumArtImageView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    [widthConstraint setPriority:999];
     [_albumArtImageView addConstraints:@[ widthConstraint, heightConstraint ]];
 }
 

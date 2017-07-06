@@ -46,7 +46,7 @@ static NSString *const AlbumTrackCount = @"trackCount";
 
 - (NSString *)description
 {
-    return [[NSString alloc] initWithFormat:@"SCCAlbum: %@, Artist: %@, AlbumID: %d, Release Date: %@, Number of Tracks: %d, Genre: %@, Price: %f, Country of Origin: %@, Explicit: %@, artistID: %d",
+    return [[NSString alloc] initWithFormat:@"Album: %@, Artist: %@, AlbumID: %d, Release Date: %@, Number of Tracks: %d, Genre: %@, Price: %f, Country of Origin: %@, Explicit: %@, artistID: %d",
                                             _name,
                                             _artistName,
                                             _albumID,

@@ -7,6 +7,7 @@
 
 #import "SCCAlbumDetailHeaderView.h"
 #import "SCCImporter.h"
+#import "SCCTrackTableViewCell.h"
 
 @interface SCCAlbumDetailViewTableViewController () {
     NSArray<SCCTrack *> *_tracks;
@@ -15,6 +16,9 @@
 @end
 
 @implementation SCCAlbumDetailViewTableViewController
+
+CGFloat const trackCellEstimatedHeight = 44.0;
+CGFloat const albumHeaderEstimatedHeight = 50.0;
 
 #pragma mark - Object Life Cycle
 
@@ -71,19 +75,13 @@
     return [_tracks count];
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier = @"UITableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
+    SCCTrackTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SCCAlbumDetailViewTableViewController cellReuseIdentifier] forIndexPath:indexPath];
     SCCTrack *track = _tracks[(NSUInteger)[indexPath row]];
-    [[cell textLabel] setText:[self localizedTrackDescriptionNumberName:track]];
+    [SCCAlbumDetailViewTableViewController setUpCell:cell withTrack:track];
     return cell;
 }
-
-#pragma mark - UITableView DataSource
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -99,23 +97,42 @@
 
 - (void)configureTableView:(nonnull UITableView *)tableView
 {
+    [tableView registerClass:[SCCTrackTableViewCell class] forCellReuseIdentifier:[SCCAlbumDetailViewTableViewController cellReuseIdentifier]];
     [tableView setRowHeight:UITableViewAutomaticDimension];
-    [tableView setEstimatedRowHeight:44.0];
+    [tableView setEstimatedRowHeight:trackCellEstimatedHeight];
     [tableView setSectionHeaderHeight:UITableViewAutomaticDimension];
-    [tableView setEstimatedSectionHeaderHeight:50.0];
+    [tableView setEstimatedSectionHeaderHeight:albumHeaderEstimatedHeight];
     [tableView setBounces:NO];
+    [tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+}
+
++ (void)setUpCell:(nonnull SCCTrackTableViewCell *)cell withTrack:(nonnull SCCTrack *)track
+{
+    [[cell trackDuration] setText:[self formatDuration:[track duration]]];
+    [[cell trackName] setText:[track name]];
+    [[cell trackNumber] setText:[NSString stringWithFormat:@"%d", [track trackNumber]]];
+}
+
+#pragma mark - String Formatting
+
++ (nonnull NSString *)formatDuration:(int32_t)duration
+{
+    long durationTotalSeconds = duration / 1000;
+    long minutes = durationTotalSeconds / 60;
+    long seconds = lround(durationTotalSeconds) % 60;
+    return [NSString stringWithFormat:@"%lu:%02lu", minutes, seconds];
+}
+
++ (nonnull NSString *)cellReuseIdentifier
+{
+    return NSStringFromClass([SCCTrackTableViewCell class]);
 }
 
 #pragma mark - Localized Strings
 
 - (nonnull NSString *)localizedTitle
 {
-    return @"SCCAlbum Details";
-}
-
-- (nonnull NSString *)localizedTrackDescriptionNumberName:(SCCTrack *)track
-{
-    return [NSString stringWithFormat:@"SCCTrack %d - %@", [track trackNumber], [track name]];
+    return @"Album Details";
 }
 
 @end

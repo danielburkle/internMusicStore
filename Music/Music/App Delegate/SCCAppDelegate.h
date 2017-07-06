@@ -3,6 +3,7 @@
 //  Copyright (c) 2014 National Information Solutions Cooperative. All rights reserved.
 //
 
+@import Foundation;
 @import UIKit;
 
 @interface SCCAppDelegate : UIResponder<UIApplicationDelegate>

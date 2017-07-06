@@ -18,6 +18,8 @@
 
 @implementation SCCAlbumTableViewController
 
+CGFloat const albumCellEstimatedHeight = 75.0;
+
 #pragma mark - Object Life Cycle
 
 - (instancetype)init
@@ -67,7 +69,7 @@
 {
     [tableView registerClass:[SCCAlbumTableViewCell class] forCellReuseIdentifier:[SCCAlbumTableViewController cellReuseIdentifier]];
     [tableView setRowHeight:UITableViewAutomaticDimension];
-    [tableView setEstimatedRowHeight:75.0];
+    [tableView setEstimatedRowHeight:albumCellEstimatedHeight];
 }
 
 + (nonnull UITableViewCell *)updateCell:(nonnull SCCAlbumTableViewCell *)cell withAlbum:(nonnull SCCAlbum *)album
@@ -77,6 +79,15 @@
     [[cell releaseYear] setText:[self formattedYearFromDate:[album releaseDate]]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
+}
+
+#pragma mark - UITableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    _album = _albums[(NSUInteger)[indexPath row]];
+    SCCAlbumDetailViewTableViewController *albumDetailView = [[SCCAlbumDetailViewTableViewController alloc] initWithAlbum:_album];
+    [[self navigationController] pushViewController:albumDetailView animated:YES];
 }
 
 #pragma mark - String Formatting
@@ -91,13 +102,6 @@
 + (nonnull NSString *)cellReuseIdentifier
 {
     return NSStringFromClass([SCCAlbumTableViewCell class]);
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    _album = _albums[(NSUInteger)[indexPath row]];
-    SCCAlbumDetailViewTableViewController *albumDetailView = [[SCCAlbumDetailViewTableViewController alloc] initWithAlbum:_album];
-    [[self navigationController] pushViewController:albumDetailView animated:YES];
 }
 
 #pragma mark - Localized Strings

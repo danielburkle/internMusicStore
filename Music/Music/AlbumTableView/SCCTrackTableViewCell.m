@@ -23,6 +23,8 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
+
+    [self applyFonts];
 }
 
 #pragma mark - Cell Customization

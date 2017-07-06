@@ -92,6 +92,7 @@
     [_albumArtImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_albumArtImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:70];
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_albumArtImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_albumArtImageView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    [widthConstraint setPriority:999];
     [_albumArtImageView addConstraints:@[ widthConstraint, heightConstraint ]];
 }
 

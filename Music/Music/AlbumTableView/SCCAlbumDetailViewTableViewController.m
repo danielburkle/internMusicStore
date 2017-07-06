@@ -17,6 +17,9 @@
 
 @implementation SCCAlbumDetailViewTableViewController
 
+CGFloat const trackCellEstimatedHeight = 44.0;
+CGFloat const albumHeaderEstimatedHeight = 50.0;
+
 #pragma mark - Object Life Cycle
 
 - (instancetype)init
@@ -80,8 +83,6 @@
     return cell;
 }
 
-#pragma mark - UITableView DataSource
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [[SCCAlbumDetailHeaderView alloc] initWithAlbum:_album];
@@ -98,9 +99,9 @@
 {
     [tableView registerClass:[SCCTrackTableViewCell class] forCellReuseIdentifier:[SCCAlbumDetailViewTableViewController cellReuseIdentifier]];
     [tableView setRowHeight:UITableViewAutomaticDimension];
-    [tableView setEstimatedRowHeight:44.0];
+    [tableView setEstimatedRowHeight:trackCellEstimatedHeight];
     [tableView setSectionHeaderHeight:UITableViewAutomaticDimension];
-    [tableView setEstimatedSectionHeaderHeight:50.0];
+    [tableView setEstimatedSectionHeaderHeight:albumHeaderEstimatedHeight];
     [tableView setBounces:NO];
     [tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
 }

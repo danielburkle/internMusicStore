@@ -8,6 +8,8 @@
 #import "SCCAlbumDetailHeaderView.h"
 #import "SCCImporter.h"
 #import "SCCTrackTableViewCell.h"
+#import "SCCTrackDetailViewUIViewController.h"
+#import "SCCUtility.h"
 
 @interface SCCAlbumDetailViewTableViewController () {
     NSArray<SCCTrack *> *_tracks;
@@ -108,20 +110,21 @@ CGFloat const albumHeaderEstimatedHeight = 50.0;
 
 + (void)setUpCell:(nonnull SCCTrackTableViewCell *)cell withTrack:(nonnull SCCTrack *)track
 {
-    [[cell trackDuration] setText:[self formatDuration:[track duration]]];
+    [[cell trackDuration] setText:[SCCUtility formatDuration:[track duration]]];
     [[cell trackName] setText:[track name]];
     [[cell trackNumber] setText:[NSString stringWithFormat:@"%d", [track trackNumber]]];
 }
 
-#pragma mark - String Formatting
+#pragma mark - UITableView Delegate
 
-+ (nonnull NSString *)formatDuration:(int32_t)duration
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    long durationTotalSeconds = duration / 1000;
-    long minutes = durationTotalSeconds / 60;
-    long seconds = lround(durationTotalSeconds) % 60;
-    return [NSString stringWithFormat:@"%lu:%02lu", minutes, seconds];
+    SCCTrack *track = _tracks[(NSUInteger)[indexPath row]];
+    SCCTrackDetailViewUIViewController *trackDetailView = [[SCCTrackDetailViewUIViewController alloc] initWithTrack:track];
+    [[self navigationController] pushViewController:trackDetailView animated:YES];
 }
+
+#pragma mark - String Formatting
 
 + (nonnull NSString *)cellReuseIdentifier
 {

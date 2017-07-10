@@ -8,6 +8,8 @@
 
 @interface SCCImageUtility : NSObject
 
-+ (UIImageView *)albumPlaceHolderImageView;
++ (nonnull UIImageView *)albumPlaceHolderImageView;
+
++ (nonnull UIImageView *)trackPlaceHolderImageView;
 
 @end

@@ -9,10 +9,18 @@
 
 static NSString *const SCCAlbumPlaceholderArtFileName = @"AlbumArt";
 static NSString *const SCCAlbumPlaceHolderArtFileType = @"png";
+static NSString *const SCCTrackPlaceHolderArtFileName = @"TrackArt";
+static NSString *const SCCTrackPlaceHolderArtFileType = @"png";
 
-+ (nonnull UIImageView *)albumPlaceHolderImageView
++ (UIImageView *)albumPlaceHolderImageView
 {
     NSString *filepath = [[NSBundle mainBundle] pathForResource:SCCAlbumPlaceholderArtFileName ofType:SCCAlbumPlaceHolderArtFileType];
+    return [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:filepath]];
+}
+
++ (UIImageView *)trackPlaceHolderImageView
+{
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:SCCTrackPlaceHolderArtFileName ofType:SCCTrackPlaceHolderArtFileType];
     return [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:filepath]];
 }
 

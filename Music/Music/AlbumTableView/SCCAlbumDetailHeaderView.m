@@ -98,14 +98,14 @@ static NSString *const SCCHeaderDetailViewExplicit = @"Explicit";
     [_albumName setText:[album name]];
     [_artistName setText:[album artistName]];
     [_country setText:[album country]];
-    [_explicitness setText:[self formatExplicitness:[album explicitness]]];
+    [_explicitness setText:[SCCAlbumDetailHeaderView formatExplicitness:[album explicitness]]];
     [_genre setText:[album genre]];
     [_releaseDate setText:[[self configuredDateFormatter] stringFromDate:[album releaseDate]]];
 }
 
 #pragma mark - Variable Formatting
 
-- (nonnull NSString *)formatExplicitness:(nonnull NSString *)explicitness
++ (NSString *)formatExplicitness:(NSString *)explicitness
 {
     if ([explicitness isEqualToString:SCCHeaderDetailViewExplicit]) {
         return [self localizedExplicit];
@@ -181,12 +181,12 @@ static NSString *const SCCHeaderDetailViewExplicit = @"Explicit";
 
 #pragma mark - Localized Strings
 
-- (nonnull NSString *)localizedNotExplicit
++ (nonnull NSString *)localizedNotExplicit
 {
     return @"Not Explicit";
 }
 
-- (nonnull NSString *)localizedExplicit
++ (nonnull NSString *)localizedExplicit
 {
     return @"Explicit";
 }

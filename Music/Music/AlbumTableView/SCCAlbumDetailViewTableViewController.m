@@ -8,9 +8,11 @@
 #import "SCCAlbumDetailHeaderView.h"
 #import "SCCImporter.h"
 #import "SCCTrackTableViewCell.h"
+#import "SCCTrackDetailViewUIViewController.h"
 
 @interface SCCAlbumDetailViewTableViewController () {
     NSArray<SCCTrack *> *_tracks;
+    SCCTrack *_track;
 }
 
 @end
@@ -111,6 +113,15 @@ CGFloat const albumHeaderEstimatedHeight = 50.0;
     [[cell trackDuration] setText:[self formatDuration:[track duration]]];
     [[cell trackName] setText:[track name]];
     [[cell trackNumber] setText:[NSString stringWithFormat:@"%d", [track trackNumber]]];
+}
+
+#pragma mark - UITableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    _track = _tracks[(NSUInteger)[indexPath row]];
+    SCCTrackDetailViewUIViewController *trackDetailView = [[SCCTrackDetailViewUIViewController alloc] initWithTrack:_track];
+    [[self navigationController] pushViewController:trackDetailView animated:YES];
 }
 
 #pragma mark - String Formatting

@@ -25,4 +25,6 @@
 
 - (nonnull instancetype)initWithAlbum:(nonnull SCCAlbum *)album NS_DESIGNATED_INITIALIZER;
 
++ (nonnull NSString *)formatExplicitness:(nonnull NSString *)explicitness;
+
 @end

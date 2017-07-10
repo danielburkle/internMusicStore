@@ -7,8 +7,7 @@
 
 #import "SCCImageUtility.h"
 #import "SCCTrack.h"
-#import "SCCAlbumDetailViewTableViewController.h"
-#import "SCCAlbumDetailHeaderView.h"
+#import "SCCUtility.h"
 
 @interface SCCTrackDetailViewUIViewController () {
     SCCTrack *_track;
@@ -43,7 +42,7 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        [self setTitle: [self localizedTitle]];
+        [self setTitle:[self localizedTitle]];
         _track = track;
     }
     return self;
@@ -67,8 +66,8 @@
     [_albumName setText:[NSString stringWithFormat:@"%@", [_track albumName]]];
     [_diskCount setText:[NSString stringWithFormat:@"Disk Count: %d", [_track diskCount]]];
     [_diskNumber setText:[NSString stringWithFormat:@"Disk Number: %d", [_track diskNumber]]];
-    [_trackDuration setText:[NSString stringWithFormat:@"%@", [SCCAlbumDetailViewTableViewController formatDuration:[_track duration]]]];
-    [_trackExplicitness setText:[SCCAlbumDetailHeaderView formatExplicitness:[_track explicitness]]];
+    [_trackDuration setText:[NSString stringWithFormat:@"%@", [SCCUtility formatDuration:[_track duration]]]];
+    [_trackExplicitness setText:[SCCUtility formatExplicitness:[_track explicitness]]];
     [_trackName setText:[NSString stringWithFormat:@"%@", [_track name]]];
     [_trackNumber setText:[NSString stringWithFormat:@"Track Number: %d", [_track trackNumber]]];
     [_trackPrice setText:[NSString stringWithFormat:@"$%g", [_track price]]];
@@ -136,6 +135,7 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+
     [_trackArtImageView removeConstraints:[_trackArtImageView constraints]];
     [self resizeTrackArtForOrientation];
 }
@@ -150,9 +150,9 @@
     UIStackView *rightLabelsStackView = [self innerVerticalStackViewFromSubviews:rightTrackLabels];
     NSArray<UILabel *> *centerTrackLabels = @[ _trackName, _albumArtist, _albumName ];
     UIStackView *centerLabelsStackView = [self centerVerticalStackViewFromSubviews:centerTrackLabels];
-    NSArray<UIView *> *allLabels = @[ leftLabelsStackView, rightLabelsStackView];
+    NSArray<UIView *> *allLabels = @[ leftLabelsStackView, rightLabelsStackView ];
     UIStackView *allLabelsStackView = [self horizontalStackViewFromSubviews:allLabels];
-    NSArray<UIView *> *trackViews = @[ _trackArtImageView, centerLabelsStackView, allLabelsStackView];
+    NSArray<UIView *> *trackViews = @[ _trackArtImageView, centerLabelsStackView, allLabelsStackView ];
     UIStackView *outerStackView = [self outerVerticalStackViewFromSubviews:trackViews];
     [self resizeTrackArtForOrientation];
     [self activateConstraints:outerStackView];

@@ -7,7 +7,7 @@
 
 @implementation SCCUtility
 
-static NSString *const SCCHeaderDetailViewExplicit = @"Explicit";
+static NSString *const SCCHeaderDetailViewExplicit = @"explicit";
 
 #pragma mark - Utility Methods
 

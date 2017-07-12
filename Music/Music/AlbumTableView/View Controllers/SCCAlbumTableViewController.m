@@ -8,10 +8,14 @@
 #import "SCCImporter.h"
 #import "SCCAlbumTableViewCell.h"
 #import "SCCAlbumDetailViewTableViewController.h"
+#import "SCCPerformSearchOperation.h"
 
-@interface SCCAlbumTableViewController ()<UITableViewDelegate, UITableViewDataSource> {
+@interface SCCAlbumTableViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
     NSArray<SCCAlbum *> *_albums;
     SCCAlbum *_album;
+    UISearchController *_searchController;
+    UIActivityIndicatorView *_loadingIcon;
+    SCCPerformSearchOperation *_searchOperation;
 }
 
 @end
@@ -19,6 +23,7 @@
 @implementation SCCAlbumTableViewController
 
 CGFloat const albumCellEstimatedHeight = 75.0;
+static NSString *const searchPlaceholder = @"Search Albums";
 
 #pragma mark - Object Life Cycle
 
@@ -37,12 +42,18 @@ CGFloat const albumCellEstimatedHeight = 75.0;
 {
     [super viewDidLoad];
 
+    [self configureSearchController];
+    [self setDefinesPresentationContext:YES];
     [self configureView:[self view]];
+    [self configureNavigationItem:[self navigationItem] searchController:_searchController];
     [self configureTableView:[self tableView]];
+}
 
-    _albums = [SCCImporter buildAlbumsFromJson];
-    [SCCImporter printAlbums:_albums];
-    [SCCImporter printTracks:[SCCImporter buildTracksFromJson]];
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+
+    [self cancelOperation];
 }
 
 #pragma mark - UITableView Datasource
@@ -63,6 +74,29 @@ CGFloat const albumCellEstimatedHeight = 75.0;
 - (void)configureView:(nonnull UIView *)view
 {
     [view setBackgroundColor:[UIColor whiteColor]];
+    [[self tableView] setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+}
+
+- (void)configureNavigationItem:(UINavigationItem *)navigationItem searchController:(UISearchController *)searchController
+{
+    [navigationItem setTitleView:[searchController searchBar]];
+}
+
+- (void)configureSearchController
+{
+    _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    [_searchController setHidesNavigationBarDuringPresentation:NO];
+    [_searchController setDimsBackgroundDuringPresentation:YES];
+    [self configureSearchBarForSearchController:_searchController];
+}
+
+- (void)configureSearchBarForSearchController:(UISearchController *)searchController
+{
+    UISearchBar *searchBar = [searchController searchBar];
+    [searchBar setPlaceholder:searchPlaceholder];
+    [searchBar setDelegate:self];
+    [searchBar sizeToFit];
+    [searchBar setBarStyle:UIBarStyleDefault];
 }
 
 - (void)configureTableView:(nonnull UITableView *)tableView
@@ -79,6 +113,56 @@ CGFloat const albumCellEstimatedHeight = 75.0;
     [[cell releaseYear] setText:[self formattedYearFromDate:[album releaseDate]]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
+}
+
+- (void)activityIndicatorStartAnimating
+{
+    [[self tableView] setUserInteractionEnabled:NO];
+    _loadingIcon = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [_loadingIcon startAnimating];
+    [_loadingIcon setCenter:[[self view] center]];
+    [[self view] addSubview:_loadingIcon];
+}
+
+#pragma mark - UISearchController Delegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [_loadingIcon stopAnimating];
+    [_searchController resignFirstResponder];
+    [self activityIndicatorStartAnimating];
+    [self cancelOperation];
+    SCCAlbumTableViewController *__weak weakSelf = self;
+    _searchOperation = [[SCCPerformSearchOperation alloc] initWithSearchCriteria:@""];
+    [_searchOperation setOperationCompletion:^(NSError *error) {
+        _albums = [SCCImporter buildAlbumsFromJson];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf searchOperationDidFinish];
+        });
+    }];
+    [[self searchOperationQueue] addOperation:_searchOperation];
+}
+
+- (void)searchOperationDidFinish
+{
+    [[self tableView] reloadData];
+    [_loadingIcon stopAnimating];
+    [[self tableView] setUserInteractionEnabled:YES];
+    [_searchController setActive:NO];
+}
+
+- (nonnull NSOperationQueue *)searchOperationQueue
+{
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue setMaxConcurrentOperationCount:1];
+    [queue setName:@"coop.nisc.scc.backgroundqueue"];
+    return queue;
+}
+
+- (void)cancelOperation
+{
+    [_searchOperation cancel];
+    _searchOperation = nil;
 }
 
 #pragma mark - UITableView Delegate

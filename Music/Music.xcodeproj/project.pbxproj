@@ -14,6 +14,7 @@
 		4C20FB641EE89B1400FAD125 /* TrackResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C20FB621EE89B1400FAD125 /* TrackResults.json */; };
 		57D0433304F4EAE4C9E6E438 /* TrackArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D04C5BC876229CD1ED6E0F /* TrackArt.png */; };
 		57D044AAD3640D2E816711B2 /* SCCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04E0AC18A1F3AA5AB625B /* SCCUtility.m */; };
+		57D045B6FD014506CEB64FCE /* SCCPerformSearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D047981F6D4C3DEA50A4C2 /* SCCPerformSearchOperation.m */; };
 		57D04883949B7AEDE271B92F /* SCCImageUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04EA785384E944DC86CF9 /* SCCImageUtility.m */; };
 		57D049FEAB50E44F9EE34601 /* SCCAlbumTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04569E71C5A49B35C8082 /* SCCAlbumTableViewController.m */; };
 		57D04B823490BFC537943FEE /* SCCTrackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D043BBCF975D4A537E1183 /* SCCTrackTableViewCell.m */; };
@@ -44,10 +45,12 @@
 		57D045D0E5744605A1F29D18 /* SCCTrackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCTrackTableViewCell.h; sourceTree = "<group>"; };
 		57D045F11E81AEC32E4C5CCC /* AlbumArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlbumArt.png; sourceTree = "<group>"; };
 		57D04782A94999ED5EB5F8FC /* SCCTrackDetailViewUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCTrackDetailViewUIViewController.m; sourceTree = "<group>"; };
+		57D047981F6D4C3DEA50A4C2 /* SCCPerformSearchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCPerformSearchOperation.m; sourceTree = "<group>"; };
 		57D047CCCECFFBC642948EE0 /* SCCUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCUtility.h; sourceTree = "<group>"; };
 		57D047D23669F043AADD4A82 /* SCCAlbumDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCAlbumDetailHeaderView.m; sourceTree = "<group>"; };
 		57D0488C805B34B5043D93D2 /* SCCTrackDetailViewUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCTrackDetailViewUIViewController.h; sourceTree = "<group>"; };
 		57D04B163EFDDDDD08DDC4B4 /* SCCAlbumDetailViewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCAlbumDetailViewTableViewController.h; sourceTree = "<group>"; };
+		57D04B38FC5A9600F14E9110 /* SCCPerformSearchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCPerformSearchOperation.h; sourceTree = "<group>"; };
 		57D04C4CE1C160C90DB0DAEB /* SCCAlbumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCAlbumTableViewCell.h; sourceTree = "<group>"; };
 		57D04C5BC876229CD1ED6E0F /* TrackArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TrackArt.png; sourceTree = "<group>"; };
 		57D04C7453762F66BE0C2413 /* SCCAlbumDetailViewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCAlbumDetailViewTableViewController.m; sourceTree = "<group>"; };
@@ -104,6 +107,15 @@
 				57D04C5BC876229CD1ED6E0F /* TrackArt.png */,
 			);
 			path = "Image Files";
+			sourceTree = "<group>";
+		};
+		57D0419916DB71C2BCCBD947 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				57D047981F6D4C3DEA50A4C2 /* SCCPerformSearchOperation.m */,
+				57D04B38FC5A9600F14E9110 /* SCCPerformSearchOperation.h */,
+			);
+			path = Operations;
 			sourceTree = "<group>";
 		};
 		57D043EE4F3E2EE4B481BF22 /* Custom Views */ = {
@@ -198,6 +210,7 @@
 				57D043EE4F3E2EE4B481BF22 /* Custom Views */,
 				57D0456A47F5DA7B0C6DFA7D /* Utilities */,
 				57D04E8E0E9D57C135E7909D /* View Controllers */,
+				57D0419916DB71C2BCCBD947 /* Operations */,
 			);
 			path = AlbumTableView;
 			sourceTree = "<group>";
@@ -288,6 +301,7 @@
 				57D04EDB7050D2B8D30D6299 /* SCCAlbumTableViewCell.m in Sources */,
 				57D04883949B7AEDE271B92F /* SCCImageUtility.m in Sources */,
 				57D044AAD3640D2E816711B2 /* SCCUtility.m in Sources */,
+				57D045B6FD014506CEB64FCE /* SCCPerformSearchOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

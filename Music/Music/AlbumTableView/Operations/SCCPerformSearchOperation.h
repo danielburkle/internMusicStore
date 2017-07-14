@@ -5,10 +5,14 @@
 
 @import Foundation;
 
+@class SCCAlbum;
+
 @interface SCCPerformSearchOperation : NSOperation
 
-@property (nullable, nonatomic, copy, readwrite) void(^operationCompletion)(NSError *_Nullable error);
+@property (nullable, nonatomic, copy, readwrite) void(^operationCompletion)(NSArray<SCCAlbum *> *_Nullable album, NSError *_Nullable error);
 
-- (nonnull instancetype)initWithSearchCriteria:(nonnull NSString *)searchCriteria;
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithSearchCriteria:(nonnull NSString *)searchCriteria NS_DESIGNATED_INITIALIZER;
 
 @end

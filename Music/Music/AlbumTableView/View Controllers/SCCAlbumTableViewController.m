@@ -20,6 +20,8 @@
 
 @end
 
+static NSString *const SCCAlbumTableViewControllerQueueName = @"coop.nisc.scc.backgroundqueue";
+
 @implementation SCCAlbumTableViewController
 
 CGFloat const albumCellEstimatedHeight = 75.0;
@@ -124,6 +126,18 @@ static NSString *const searchPlaceholder = @"Search Albums";
     [[self view] addSubview:_loadingIcon];
 }
 
+- (void)configureErrorAlertWithError:(NSError *)error
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Search Failed"
+                                                                   message:[[NSString alloc] initWithFormat:@"%@", [error localizedDescription]]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+                                                          }];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 #pragma mark - UISearchController Delegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -133,12 +147,18 @@ static NSString *const searchPlaceholder = @"Search Albums";
     [self activityIndicatorStartAnimating];
     [self cancelOperation];
     SCCAlbumTableViewController *__weak weakSelf = self;
-    _searchOperation = [[SCCPerformSearchOperation alloc] initWithSearchCriteria:@""];
-    [_searchOperation setOperationCompletion:^(NSError *error) {
-        _albums = [SCCImporter buildAlbumsFromJson];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf searchOperationDidFinish];
-        });
+    _searchOperation = [[SCCPerformSearchOperation alloc] initWithSearchCriteria:[[NSString alloc] initWithFormat:@"%@", [searchBar text]]];
+    [_searchOperation setOperationCompletion:^(NSArray<SCCAlbum *> *albums, NSError *error) {
+        if (albums != nil) {
+            _albums = albums;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf searchOperationDidFinish];
+            });
+        } else {
+            if (error != NULL) {
+                [weakSelf searchOperationDidFinishWithError:error];
+            }
+        }
     }];
     [[self searchOperationQueue] addOperation:_searchOperation];
 }
@@ -155,7 +175,7 @@ static NSString *const searchPlaceholder = @"Search Albums";
 {
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue setMaxConcurrentOperationCount:1];
-    [queue setName:@"coop.nisc.scc.backgroundqueue"];
+    [queue setName:SCCAlbumTableViewControllerQueueName];
     return queue;
 }
 
@@ -163,6 +183,13 @@ static NSString *const searchPlaceholder = @"Search Albums";
 {
     [_searchOperation cancel];
     _searchOperation = nil;
+}
+
+- (void)searchOperationDidFinishWithError:(nonnull NSError *)error
+{
+    [_loadingIcon stopAnimating];
+    [self configureErrorAlertWithError:error];
+    [[self tableView] reloadData];
 }
 
 #pragma mark - UITableView Delegate

@@ -5,17 +5,30 @@
 
 #import "SCCPerformSearchOperation.h"
 
+#import "SCCAlbum.h"
+
 @interface SCCPerformSearchOperation () {
     NSString *_searchCriteria;
 }
 @end
 
+static NSString *const SCCPerformSearchOperationRootURL = @"https://itunes.apple.com/search?term=";
+static NSString *const SCCPerformSearchOperation25AlbumURLSuffix = @"&entity=album&limit=25";
+
+#pragma mark - Object Life Cycle
+
 @implementation SCCPerformSearchOperation
+
+- (instancetype)init
+{
+    NSLog(@"Programmer Error! This initializer is for %@, should not be used", NSStringFromClass([self class]));
+    abort();
+}
 
 - (instancetype)initWithSearchCriteria:(NSString *)searchCriteria
 {
     self = [super init];
-    if (self){
+    if (self) {
         _searchCriteria = searchCriteria;
     }
     return self;
@@ -25,10 +38,53 @@
 
 - (void)main
 {
-    [NSThread sleepForTimeInterval:5.0f];
     if (![self isCancelled]) {
-        _operationCompletion(nil);
+        NSError *error = nil;
+        NSDictionary<NSString *, NSArray *> *json = [SCCPerformSearchOperation jsonFromPath:[SCCPerformSearchOperation albumURLFromSearchTerms:_searchCriteria] error:&error];
+        _operationCompletion([SCCPerformSearchOperation resultsFromJSON:json], error);
     }
+}
+
+#pragma mark - Result Formatting
+
++ (nullable NSDictionary<NSString *, NSArray *> *)jsonFromPath:(nonnull NSString *)path error:(NSError **)error
+{
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path] options:kNilOptions error:error];
+    if (data != nil) {
+        return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:error];
+    } else {
+        return nil;
+    }
+}
+
++ (nullable NSArray<SCCAlbum *> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json
+{
+    NSArray<NSDictionary<NSString *, id> *> *results = [json objectForKey:@"results"];
+    if (results == nil) {
+        return nil;
+    } else {
+        return [self albumsFromResults:results];
+    }
+}
+
++ (nonnull NSArray<SCCAlbum *> *)albumsFromResults:(nonnull NSArray<NSDictionary <NSString *, id> *> *)results
+{
+    NSMutableArray<SCCAlbum *> *albums = [[NSMutableArray alloc] initWithCapacity:[results count]];
+    for (NSDictionary<NSString *, id> *result in results) {
+        [albums addObject:[[SCCAlbum alloc] initWithDictionary:result]];
+    }
+    return [albums copy];
+}
+
+#pragma mark - API URL Formatting
+
++ (NSString *)albumURLFromSearchTerms:(NSString *)searchTerms;
+{
+    NSArray *individualSearchTerms = [searchTerms componentsSeparatedByString:@" "];
+    NSString *albumBaseURL = [[NSString alloc] initWithFormat:SCCPerformSearchOperationRootURL];
+    NSString *formattedSearchTerms = [individualSearchTerms componentsJoinedByString:@"+"];
+    NSString *albumEntity = [[NSString alloc] initWithFormat:SCCPerformSearchOperation25AlbumURLSuffix];
+    return [[NSString alloc] initWithFormat:@"%@%@%@", albumBaseURL, formattedSearchTerms, albumEntity];
 }
 
 @end

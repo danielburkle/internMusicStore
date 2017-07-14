@@ -5,7 +5,7 @@
 
 @import Foundation;
 
-#import "SCCAlbum.h"
+@class SCCAlbum;
 
 @interface SCCPerformSearchOperation : NSOperation
 

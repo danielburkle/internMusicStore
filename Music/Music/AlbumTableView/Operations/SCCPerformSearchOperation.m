@@ -13,7 +13,8 @@
 @end
 
 static NSString *const SCCPerformSearchOperationRootURL = @"https://itunes.apple.com/search?term=";
-static NSString *const SCCPerformSearchOperation25AlbumURLSuffix = @"&entity=album&limit=25";
+static NSString *const SCCPerformSearchOperationAlbumEntitySuffix = @"&entity=album";
+static NSString *const SCCPerformSearchOperationResultLimit = @"&limit=25";
 
 #pragma mark - Object Life Cycle
 
@@ -41,7 +42,8 @@ static NSString *const SCCPerformSearchOperation25AlbumURLSuffix = @"&entity=alb
     if (![self isCancelled]) {
         NSError *error = nil;
         NSDictionary<NSString *, NSArray *> *json = [SCCPerformSearchOperation jsonFromPath:[SCCPerformSearchOperation albumURLFromSearchTerms:_searchCriteria] error:&error];
-        _operationCompletion([SCCPerformSearchOperation resultsFromJSON:json], error);
+        NSArray<SCCAlbum *> *results = [SCCPerformSearchOperation resultsFromJSON:json];
+        _operationCompletion(results, error);
     }
 }
 
@@ -78,13 +80,14 @@ static NSString *const SCCPerformSearchOperation25AlbumURLSuffix = @"&entity=alb
 
 #pragma mark - API URL Formatting
 
-+ (NSString *)albumURLFromSearchTerms:(NSString *)searchTerms;
++ (nonnull NSString *)albumURLFromSearchTerms:(nonnull NSString *)searchTerms
 {
     NSArray *individualSearchTerms = [searchTerms componentsSeparatedByString:@" "];
     NSString *albumBaseURL = [[NSString alloc] initWithFormat:SCCPerformSearchOperationRootURL];
     NSString *formattedSearchTerms = [individualSearchTerms componentsJoinedByString:@"+"];
-    NSString *albumEntity = [[NSString alloc] initWithFormat:SCCPerformSearchOperation25AlbumURLSuffix];
-    return [[NSString alloc] initWithFormat:@"%@%@%@", albumBaseURL, formattedSearchTerms, albumEntity];
+    NSString *albumEntity = [[NSString alloc] initWithFormat:SCCPerformSearchOperationAlbumEntitySuffix];
+    NSString *albumResultLimit = [[NSString alloc] initWithFormat:SCCPerformSearchOperationResultLimit];
+    return [[NSString alloc] initWithFormat:@"%@%@%@%@", albumBaseURL, formattedSearchTerms, albumEntity, albumResultLimit];
 }
 
 @end

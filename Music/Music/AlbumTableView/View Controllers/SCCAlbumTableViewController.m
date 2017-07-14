@@ -154,10 +154,9 @@ static NSString *const searchPlaceholder = @"Search Albums";
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf searchOperationDidFinish];
             });
-        } else {
-            if (error != NULL) {
-                [weakSelf searchOperationDidFinishWithError:error];
-            }
+        }
+        if (error != NULL) {
+            [weakSelf searchOperationDidFinishWithError:error];
         }
     }];
     [[self searchOperationQueue] addOperation:_searchOperation];

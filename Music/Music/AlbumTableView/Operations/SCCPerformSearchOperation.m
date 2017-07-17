@@ -19,6 +19,9 @@ static NSString *const SCCPerformSearchOperationAlbumEntitySuffix = @"&entity=al
 static NSString *const SCCPerformSearchOperationResultLimit = @"&limit=25";
 static NSString *const SCCPerformSearchOperationTrackRootURL = @"https://itunes.apple.com/lookup?id=";
 static NSString *const SCCPerformSearchOperationTrackEntitySuffix = @"&entity=song";
+static NSString *const SCCPerformSearchOperationResults = @"results";
+static NSString *const SCCPerformSearchOperationKind = @"kind";
+static NSString *const SCCPerformSearchOperationSong = @"song";
 
 #pragma mark - Object Life Cycle
 
@@ -47,7 +50,7 @@ static NSString *const SCCPerformSearchOperationTrackEntitySuffix = @"&entity=so
     if (![self isCancelled]) {
         NSError *error = nil;
         NSDictionary<NSString *, NSArray *> *json = [SCCPerformSearchOperation jsonFromPath:[self entityURLFromSearchTerms:_searchCriteria] error:&error];
-        NSArray<NSObject *> *results = [SCCPerformSearchOperation resultsFromJSON:json];
+        NSArray<id> *results = [SCCPerformSearchOperation resultsFromJSON:json];
         _operationCompletion(results, error);
     }
 }
@@ -64,12 +67,12 @@ static NSString *const SCCPerformSearchOperationTrackEntitySuffix = @"&entity=so
     }
 }
 
-+ (nullable NSArray<NSObject *> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json
++ (nullable NSArray<id> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json
 {
-    NSArray<NSDictionary<NSString *, id> *> *results = [json objectForKey:@"results"];
+    NSArray<NSDictionary<NSString *, id> *> *results = [json objectForKey:SCCPerformSearchOperationResults];
     if (results == nil) {
         return nil;
-    } else if ([[results[1] objectForKey:@"kind"] isEqualToString:@"song"]) {
+    } else if ([[results[1] objectForKey:SCCPerformSearchOperationKind] isEqualToString:SCCPerformSearchOperationSong]) {
         return [self tracksFromResults:results];
     } else {
         return [self albumsFromResults:results];
@@ -99,7 +102,7 @@ static NSString *const SCCPerformSearchOperationTrackEntitySuffix = @"&entity=so
 - (nonnull NSString *)entityURLFromSearchTerms:(nonnull NSString *)searchTerms
 {
     if ([_entityType isEqualToString:NSStringFromClass([SCCAlbum class])]) {
-        NSArray *individualSearchTerms = [searchTerms componentsSeparatedByString:@" "];
+        NSArray<NSString *> *individualSearchTerms = [searchTerms componentsSeparatedByString:@" "];
         NSString *albumBaseURL = [[NSString alloc] initWithFormat:SCCPerformSearchOperationAlbumRootURL];
         NSString *formattedSearchTerms = [individualSearchTerms componentsJoinedByString:@"+"];
         NSString *albumEntity = [[NSString alloc] initWithFormat:SCCPerformSearchOperationAlbumEntitySuffix];

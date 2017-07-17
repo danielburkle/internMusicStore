@@ -9,7 +9,7 @@
 
 @interface SCCPerformSearchOperation : NSOperation
 
-@property (nullable, nonatomic, copy, readwrite) void(^operationCompletion)(NSArray<NSObject *> *_Nullable NSObject, NSError *_Nullable error);
+@property (nullable, nonatomic, copy, readwrite) void(^operationCompletion)(NSArray<id> *_Nullable id, NSError *_Nullable error);
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 

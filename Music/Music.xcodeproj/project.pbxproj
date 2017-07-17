@@ -8,10 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C20FB5D1EE89ADC00FAD125 /* SCCAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB581EE89ADC00FAD125 /* SCCAlbum.m */; };
-		4C20FB5E1EE89ADC00FAD125 /* SCCImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB5A1EE89ADC00FAD125 /* SCCImporter.m */; };
 		4C20FB5F1EE89ADC00FAD125 /* SCCTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB5C1EE89ADC00FAD125 /* SCCTrack.m */; };
-		4C20FB631EE89B1400FAD125 /* AlbumResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C20FB611EE89B1400FAD125 /* AlbumResults.json */; };
-		4C20FB641EE89B1400FAD125 /* TrackResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C20FB621EE89B1400FAD125 /* TrackResults.json */; };
 		57D0433304F4EAE4C9E6E438 /* TrackArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D04C5BC876229CD1ED6E0F /* TrackArt.png */; };
 		57D044AAD3640D2E816711B2 /* SCCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04E0AC18A1F3AA5AB625B /* SCCUtility.m */; };
 		57D045B6FD014506CEB64FCE /* SCCPerformSearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D047981F6D4C3DEA50A4C2 /* SCCPerformSearchOperation.m */; };
@@ -32,12 +29,8 @@
 /* Begin PBXFileReference section */
 		4C20FB571EE89ADC00FAD125 /* SCCAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCCAlbum.h; path = Model/SCCAlbum.h; sourceTree = "<group>"; };
 		4C20FB581EE89ADC00FAD125 /* SCCAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCCAlbum.m; path = Model/SCCAlbum.m; sourceTree = "<group>"; };
-		4C20FB591EE89ADC00FAD125 /* SCCImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCCImporter.h; path = Model/SCCImporter.h; sourceTree = "<group>"; };
-		4C20FB5A1EE89ADC00FAD125 /* SCCImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCCImporter.m; path = Model/SCCImporter.m; sourceTree = "<group>"; };
 		4C20FB5B1EE89ADC00FAD125 /* SCCTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCCTrack.h; path = Model/SCCTrack.h; sourceTree = "<group>"; };
 		4C20FB5C1EE89ADC00FAD125 /* SCCTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCCTrack.m; path = Model/SCCTrack.m; sourceTree = "<group>"; };
-		4C20FB611EE89B1400FAD125 /* AlbumResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AlbumResults.json; path = "JSON Files/AlbumResults.json"; sourceTree = "<group>"; };
-		4C20FB621EE89B1400FAD125 /* TrackResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TrackResults.json; path = "JSON Files/TrackResults.json"; sourceTree = "<group>"; };
 		57D04340E7F505AD1E044824 /* SCCAlbumDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCAlbumDetailHeaderView.h; sourceTree = "<group>"; };
 		57D043BBCF975D4A537E1183 /* SCCTrackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCTrackTableViewCell.m; sourceTree = "<group>"; };
 		57D04569E71C5A49B35C8082 /* SCCAlbumTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCAlbumTableViewController.m; sourceTree = "<group>"; };
@@ -83,21 +76,10 @@
 			children = (
 				4C20FB571EE89ADC00FAD125 /* SCCAlbum.h */,
 				4C20FB581EE89ADC00FAD125 /* SCCAlbum.m */,
-				4C20FB591EE89ADC00FAD125 /* SCCImporter.h */,
-				4C20FB5A1EE89ADC00FAD125 /* SCCImporter.m */,
 				4C20FB5B1EE89ADC00FAD125 /* SCCTrack.h */,
 				4C20FB5C1EE89ADC00FAD125 /* SCCTrack.m */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		4C20FB601EE89AEC00FAD125 /* JSON Files */ = {
-			isa = PBXGroup;
-			children = (
-				4C20FB611EE89B1400FAD125 /* AlbumResults.json */,
-				4C20FB621EE89B1400FAD125 /* TrackResults.json */,
-			);
-			name = "JSON Files";
 			sourceTree = "<group>";
 		};
 		57D040C181A17A414893D096 /* Image Files */ = {
@@ -112,8 +94,8 @@
 		57D0419916DB71C2BCCBD947 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				57D047981F6D4C3DEA50A4C2 /* SCCPerformSearchOperation.m */,
 				57D04B38FC5A9600F14E9110 /* SCCPerformSearchOperation.h */,
+				57D047981F6D4C3DEA50A4C2 /* SCCPerformSearchOperation.m */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -177,7 +159,6 @@
 				5DEF828E1CE66B2B00985B5D /* App Delegate */,
 				5DEF82911CE66B2B00985B5D /* AlbumTableView */,
 				57D040C181A17A414893D096 /* Image Files */,
-				4C20FB601EE89AEC00FAD125 /* JSON Files */,
 				4C20FB561EE89ABC00FAD125 /* Model */,
 				5DEF82831CE66A0800985B5D /* Assets.xcassets */,
 				5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */,
@@ -272,10 +253,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C20FB641EE89B1400FAD125 /* TrackResults.json in Resources */,
 				5DEF82871CE66A0800985B5D /* LaunchScreen.storyboard in Resources */,
 				5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */,
-				4C20FB631EE89B1400FAD125 /* AlbumResults.json in Resources */,
 				57D04DDDD99C55A83A23B09E /* AlbumArt.png in Resources */,
 				57D0433304F4EAE4C9E6E438 /* TrackArt.png in Resources */,
 			);
@@ -290,7 +269,6 @@
 			files = (
 				4C20FB5F1EE89ADC00FAD125 /* SCCTrack.m in Sources */,
 				5DEF82951CE66B2B00985B5D /* SCCAppDelegate.m in Sources */,
-				4C20FB5E1EE89ADC00FAD125 /* SCCImporter.m in Sources */,
 				5DEF82791CE66A0800985B5D /* main.m in Sources */,
 				4C20FB5D1EE89ADC00FAD125 /* SCCAlbum.m in Sources */,
 				57D04FFEE5BD83A0D4A185A9 /* SCCTrackDetailViewUIViewController.m in Sources */,

@@ -6,15 +6,19 @@
 #import "SCCPerformSearchOperation.h"
 
 #import "SCCAlbum.h"
+#import "SCCTrack.h"
 
 @interface SCCPerformSearchOperation () {
     NSString *_searchCriteria;
+    NSString *_entityType;
 }
 @end
 
-static NSString *const SCCPerformSearchOperationRootURL = @"https://itunes.apple.com/search?term=";
+static NSString *const SCCPerformSearchOperationAlbumRootURL = @"https://itunes.apple.com/search?term=";
 static NSString *const SCCPerformSearchOperationAlbumEntitySuffix = @"&entity=album";
 static NSString *const SCCPerformSearchOperationResultLimit = @"&limit=25";
+static NSString *const SCCPerformSearchOperationTrackRootURL = @"https://itunes.apple.com/lookup?id=";
+static NSString *const SCCPerformSearchOperationTrackEntitySuffix = @"&entity=song";
 
 #pragma mark - Object Life Cycle
 
@@ -26,11 +30,12 @@ static NSString *const SCCPerformSearchOperationResultLimit = @"&limit=25";
     abort();
 }
 
-- (instancetype)initWithSearchCriteria:(NSString *)searchCriteria
+- (instancetype)initWithSearchCriteria:(NSString *)searchCriteria entityType:(NSString *)entityType
 {
     self = [super init];
     if (self) {
         _searchCriteria = searchCriteria;
+        _entityType = entityType;
     }
     return self;
 }
@@ -41,8 +46,8 @@ static NSString *const SCCPerformSearchOperationResultLimit = @"&limit=25";
 {
     if (![self isCancelled]) {
         NSError *error = nil;
-        NSDictionary<NSString *, NSArray *> *json = [SCCPerformSearchOperation jsonFromPath:[SCCPerformSearchOperation albumURLFromSearchTerms:_searchCriteria] error:&error];
-        NSArray<SCCAlbum *> *results = [SCCPerformSearchOperation resultsFromJSON:json];
+        NSDictionary<NSString *, NSArray *> *json = [SCCPerformSearchOperation jsonFromPath:[self entityURLFromSearchTerms:_searchCriteria] error:&error];
+        NSArray<NSObject *> *results = [SCCPerformSearchOperation resultsFromJSON:json];
         _operationCompletion(results, error);
     }
 }
@@ -59,11 +64,13 @@ static NSString *const SCCPerformSearchOperationResultLimit = @"&limit=25";
     }
 }
 
-+ (nullable NSArray<SCCAlbum *> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json
++ (nullable NSArray<NSObject *> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json
 {
     NSArray<NSDictionary<NSString *, id> *> *results = [json objectForKey:@"results"];
     if (results == nil) {
         return nil;
+    } else if ([[results[1] objectForKey:@"kind"] isEqualToString:@"song"]) {
+        return [self tracksFromResults:results];
     } else {
         return [self albumsFromResults:results];
     }
@@ -78,16 +85,35 @@ static NSString *const SCCPerformSearchOperationResultLimit = @"&limit=25";
     return [albums copy];
 }
 
++ (nonnull NSArray<SCCTrack *> *)tracksFromResults:(nonnull NSArray<NSDictionary <NSString *, id> *> *)results
+{
+    NSMutableArray<SCCTrack *> *tracks = [[NSMutableArray alloc] initWithCapacity:[results count] - 1 ];
+    for (NSUInteger i = 1; i < [results count]; i++) {
+        [tracks addObject:[[SCCTrack alloc] initWithDictionary:results[i]]];
+    }
+    return [tracks copy];
+}
+
 #pragma mark - API URL Formatting
 
-+ (nonnull NSString *)albumURLFromSearchTerms:(nonnull NSString *)searchTerms
+- (nonnull NSString *)entityURLFromSearchTerms:(nonnull NSString *)searchTerms
 {
-    NSArray *individualSearchTerms = [searchTerms componentsSeparatedByString:@" "];
-    NSString *albumBaseURL = [[NSString alloc] initWithFormat:SCCPerformSearchOperationRootURL];
-    NSString *formattedSearchTerms = [individualSearchTerms componentsJoinedByString:@"+"];
-    NSString *albumEntity = [[NSString alloc] initWithFormat:SCCPerformSearchOperationAlbumEntitySuffix];
-    NSString *albumResultLimit = [[NSString alloc] initWithFormat:SCCPerformSearchOperationResultLimit];
-    return [[NSString alloc] initWithFormat:@"%@%@%@%@", albumBaseURL, formattedSearchTerms, albumEntity, albumResultLimit];
+    if ([_entityType isEqualToString:NSStringFromClass([SCCAlbum class])]) {
+        NSArray *individualSearchTerms = [searchTerms componentsSeparatedByString:@" "];
+        NSString *albumBaseURL = [[NSString alloc] initWithFormat:SCCPerformSearchOperationAlbumRootURL];
+        NSString *formattedSearchTerms = [individualSearchTerms componentsJoinedByString:@"+"];
+        NSString *albumEntity = [[NSString alloc] initWithFormat:SCCPerformSearchOperationAlbumEntitySuffix];
+        NSString *albumResultLimit = [[NSString alloc] initWithFormat:SCCPerformSearchOperationResultLimit];
+        return [[NSString alloc] initWithFormat:@"%@%@%@%@", albumBaseURL, formattedSearchTerms, albumEntity, albumResultLimit];
+    } else if ([_entityType isEqualToString:NSStringFromClass([SCCTrack class])]) {
+        NSString *trackBaseURL = [[NSString alloc] initWithFormat:SCCPerformSearchOperationTrackRootURL];
+        NSString *formattedSearchTerms = searchTerms;
+        NSString *trackEntity = [[NSString alloc] initWithFormat:SCCPerformSearchOperationTrackEntitySuffix];
+        return [[NSString alloc] initWithFormat:@"%@%@%@", trackBaseURL, formattedSearchTerms, trackEntity];
+    } else {
+        NSLog(@"This type is not supported by entityURLFromSearchTerms");
+        abort();
+    }
 }
 
 @end

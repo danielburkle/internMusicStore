@@ -5,7 +5,7 @@
 
 #import "SCCAlbumTableViewController.h"
 
-#import "SCCImporter.h"
+#import "SCCAlbum.h"
 #import "SCCAlbumTableViewCell.h"
 #import "SCCAlbumDetailViewTableViewController.h"
 #import "SCCPerformSearchOperation.h"
@@ -147,7 +147,7 @@ static NSString *const searchPlaceholder = @"Search Albums";
     [self activityIndicatorStartAnimating];
     [self cancelOperation];
     SCCAlbumTableViewController *__weak weakSelf = self;
-    _searchOperation = [[SCCPerformSearchOperation alloc] initWithSearchCriteria:[[NSString alloc] initWithFormat:@"%@", [searchBar text]]];
+    _searchOperation = [[SCCPerformSearchOperation alloc] initWithSearchCriteria:[[NSString alloc] initWithFormat:@"%@", [searchBar text]] entityType:NSStringFromClass([SCCAlbum class])];
     [_searchOperation setOperationCompletion:^(NSArray<SCCAlbum *> *albums, NSError *error) {
         if (albums != nil) {
             _albums = albums;

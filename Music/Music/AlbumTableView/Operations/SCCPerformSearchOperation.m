@@ -7,6 +7,7 @@
 
 #import "SCCAlbum.h"
 #import "SCCTrack.h"
+#import "SCCImporter.h"
 
 @interface SCCPerformSearchOperation () {
     NSString *_searchCriteria;
@@ -19,9 +20,6 @@ static NSString *const SCCPerformSearchOperationAlbumEntitySuffix = @"&entity=al
 static NSString *const SCCPerformSearchOperationResultLimit = @"&limit=25";
 static NSString *const SCCPerformSearchOperationTrackRootURL = @"https://itunes.apple.com/lookup?id=";
 static NSString *const SCCPerformSearchOperationTrackEntitySuffix = @"&entity=song";
-static NSString *const SCCPerformSearchOperationResults = @"results";
-static NSString *const SCCPerformSearchOperationKind = @"kind";
-static NSString *const SCCPerformSearchOperationSong = @"song";
 
 #pragma mark - Object Life Cycle
 
@@ -49,52 +47,9 @@ static NSString *const SCCPerformSearchOperationSong = @"song";
 {
     if (![self isCancelled]) {
         NSError *error = nil;
-        NSDictionary<NSString *, NSArray *> *json = [SCCPerformSearchOperation jsonFromPath:[self entityURLFromSearchTerms:_searchCriteria] error:&error];
-        NSArray<id> *results = [SCCPerformSearchOperation resultsFromJSON:json];
+        NSArray<id> *results = [SCCImporter entityFromPath:[self entityURLFromSearchTerms:_searchCriteria] error:&error];
         _operationCompletion(results, error);
     }
-}
-
-#pragma mark - Result Formatting
-
-+ (nullable NSDictionary<NSString *, NSArray *> *)jsonFromPath:(nonnull NSString *)path error:(NSError **)error
-{
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path] options:kNilOptions error:error];
-    if (data != nil) {
-        return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:error];
-    } else {
-        return nil;
-    }
-}
-
-+ (nullable NSArray<id> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json
-{
-    NSArray<NSDictionary<NSString *, id> *> *results = [json objectForKey:SCCPerformSearchOperationResults];
-    if (results == nil) {
-        return nil;
-    } else if ([[results[1] objectForKey:SCCPerformSearchOperationKind] isEqualToString:SCCPerformSearchOperationSong]) {
-        return [self tracksFromResults:results];
-    } else {
-        return [self albumsFromResults:results];
-    }
-}
-
-+ (nonnull NSArray<SCCAlbum *> *)albumsFromResults:(nonnull NSArray<NSDictionary <NSString *, id> *> *)results
-{
-    NSMutableArray<SCCAlbum *> *albums = [[NSMutableArray alloc] initWithCapacity:[results count]];
-    for (NSDictionary<NSString *, id> *result in results) {
-        [albums addObject:[[SCCAlbum alloc] initWithDictionary:result]];
-    }
-    return [albums copy];
-}
-
-+ (nonnull NSArray<SCCTrack *> *)tracksFromResults:(nonnull NSArray<NSDictionary <NSString *, id> *> *)results
-{
-    NSMutableArray<SCCTrack *> *tracks = [[NSMutableArray alloc] initWithCapacity:[results count] - 1 ];
-    for (NSUInteger i = 1; i < [results count]; i++) {
-        [tracks addObject:[[SCCTrack alloc] initWithDictionary:results[i]]];
-    }
-    return [tracks copy];
 }
 
 #pragma mark - API URL Formatting

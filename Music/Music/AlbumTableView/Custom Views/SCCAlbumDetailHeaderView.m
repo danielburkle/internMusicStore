@@ -8,6 +8,7 @@
 #import "SCCAlbum.h"
 #import "SCCImageUtility.h"
 #import "SCCUtility.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 
 @interface SCCAlbumDetailHeaderView () {
     SCCAlbum *_album;
@@ -15,6 +16,9 @@
 }
 
 @end
+
+static NSString *const SCCAlbumDetailHeaderViewFileName = @"AlbumArt";
+static NSString *const SCCAlbumDetailHeaderViewFileType = @"png";
 
 @implementation SCCAlbumDetailHeaderView
 
@@ -65,11 +69,18 @@
     [self applyAutoLayoutConstraints];
     [self applyFonts];
     [[self contentView] setBackgroundColor:[UIColor lightGrayColor]];
+    [self updateAlbumArtWithAlbumURL:[_album albumArtwork]];
 }
 
 - (void)initializeAlbumArt
 {
     _albumArtImageView = [SCCImageUtility albumPlaceHolderImageView];
+}
+
+- (void)updateAlbumArtWithAlbumURL:(nonnull NSString *)albumURL
+{
+    [_albumArtImageView sd_setImageWithURL:[NSURL URLWithString:albumURL]
+                          placeholderImage:[UIImage imageNamed:[[NSString alloc] initWithFormat:@"%@%@", SCCAlbumDetailHeaderViewFileName, SCCAlbumDetailHeaderViewFileType]]];
 }
 
 - (void)initializeLabels

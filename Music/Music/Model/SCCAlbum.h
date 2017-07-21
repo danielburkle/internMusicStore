@@ -17,6 +17,7 @@
 @property (nonatomic, assign, readonly) int32_t numberOfTracks;
 @property (nonatomic, assign, readonly) float_t price;
 @property (nonnull, nonatomic, copy, readonly) NSDate *releaseDate;
+@property (nonnull, nonatomic, copy, readonly) NSString *albumArtwork;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 

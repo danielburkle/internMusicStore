@@ -16,6 +16,7 @@ static NSString *const AlbumExplicitness = @"collectionExplicitness";
 static NSString *const AlbumGenreName = @"primaryGenreName";
 static NSString *const AlbumReleaseDate = @"releaseDate";
 static NSString *const AlbumTrackCount = @"trackCount";
+static NSString *const AlbumArtworkURL = @"artworkUrl100";
 
 #pragma mark - Object Life Cycle
 
@@ -38,6 +39,7 @@ static NSString *const AlbumTrackCount = @"trackCount";
         _numberOfTracks = [[dictionary objectForKey:AlbumTrackCount] intValue];
         _price = [[dictionary objectForKey:AlbumCollectionPrice] floatValue];
         _releaseDate = [SCCAlbum formatJSONDate:[dictionary objectForKey:AlbumReleaseDate]];
+        _albumArtwork = [dictionary objectForKey:AlbumArtworkURL];
     }
     return self;
 }

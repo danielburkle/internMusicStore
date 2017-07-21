@@ -12,4 +12,6 @@
 @property (nonnull, nonatomic, strong, readwrite) UILabel *artistName;
 @property (nonnull, nonatomic, strong, readwrite) UILabel *releaseYear;
 
+- (void)updateAlbumArtWithAlbumURL:(nonnull NSString *)albumURL;
+
 @end

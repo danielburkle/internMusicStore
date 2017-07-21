@@ -5,8 +5,10 @@
 
 @import Foundation;
 
+@class SCCAlbum;
+
 @interface SCCImporter : NSObject
 
-+ (nullable NSArray<id> *)entityFromPath:(nonnull NSString *)path error:(NSError *_Nullable *_Nullable)error;
++ (nullable NSArray<id> *)entityFromPath:(nonnull NSString *)path error:(NSError *_Nullable *_Nullable)error entityType:(nonnull NSString *)entityType;
 
 @end

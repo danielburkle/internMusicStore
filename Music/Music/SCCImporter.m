@@ -14,9 +14,9 @@ static NSString *const SCCImporterSong = @"song";
 
 @implementation SCCImporter
 
-+ (NSArray<id> *)entityFromPath:(NSString *)path error:(NSError **)error
++ (NSArray<id> *)entityFromPath:(NSString *)path error:(NSError **)error entityType:(NSString *)entityType
 {
-    return [self resultsFromJSON:[self jsonFromPath:path error:error]];
+    return [self resultsFromJSON:[self jsonFromPath:path error:error] entityType:entityType];
 }
 
 + (nullable NSDictionary<NSString *, NSArray *> *)jsonFromPath:(nonnull NSString *)path error:(NSError **)error
@@ -29,12 +29,12 @@ static NSString *const SCCImporterSong = @"song";
     }
 }
 
-+ (nullable NSArray<id> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json
++ (nullable NSArray<id> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json entityType:(NSString *)entityType
 {
     NSArray<NSDictionary<NSString *, id> *> *results = [json objectForKey:SCCImporterResults];
     if (results == nil) {
         return nil;
-    } else if ([[results[1] objectForKey:SCCImporterKind] isEqualToString:SCCImporterSong]) {
+    } else if ([entityType isEqualToString:NSStringFromClass([SCCTrack class])]) {
         return [self tracksFromResults:results];
     } else {
         return [self albumsFromResults:results];

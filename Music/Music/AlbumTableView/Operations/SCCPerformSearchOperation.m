@@ -47,7 +47,7 @@ static NSString *const SCCPerformSearchOperationTrackEntitySuffix = @"&entity=so
 {
     if (![self isCancelled]) {
         NSError *error = nil;
-        NSArray<id> *results = [SCCImporter entityFromPath:[self entityURLFromSearchTerms:_searchCriteria] error:&error];
+        NSArray<id> *results = [SCCImporter entityFromPath:[self entityURLFromSearchTerms:_searchCriteria] error:&error entityType:_entityType];
         _operationCompletion(results, error);
     }
 }

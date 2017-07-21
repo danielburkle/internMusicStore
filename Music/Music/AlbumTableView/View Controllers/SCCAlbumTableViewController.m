@@ -114,6 +114,7 @@ static NSString *const searchPlaceholder = @"Search Albums";
     [[cell artistName] setText:[album artistName]];
     [[cell releaseYear] setText:[self formattedYearFromDate:[album releaseDate]]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    [cell updateAlbumArtWithAlbumURL:[album albumArtwork]];
     return cell;
 }
 
@@ -168,6 +169,9 @@ static NSString *const searchPlaceholder = @"Search Albums";
     [_loadingIcon stopAnimating];
     [[self tableView] setUserInteractionEnabled:YES];
     [_searchController setActive:NO];
+    if ([_albums count] > 0) {
+        [[self tableView] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
 }
 
 - (nonnull NSOperationQueue *)searchOperationQueue

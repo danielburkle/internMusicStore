@@ -29,7 +29,7 @@ static NSString *const SCCImporterSong = @"song";
     }
 }
 
-+ (nullable NSArray<id> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json entityType:(NSString *)entityType
++ (nullable NSArray<id> *)resultsFromJSON:(nonnull NSDictionary<NSString *, NSArray *> *)json entityType:(nonnull NSString *)entityType
 {
     NSArray<NSDictionary<NSString *, id> *> *results = [json objectForKey:SCCImporterResults];
     if (results == nil) {

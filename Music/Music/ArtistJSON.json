@@ -1,0 +1,105 @@
+{
+  "resultCount": 10,
+  "results": [
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Lindsey Stirling",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsey-stirling/id403025113?uo=4",
+      "artistId": 403025113,
+      "amgArtistId": 2632602,
+      "primaryGenreName": "Pop",
+      "primaryGenreId": 14
+    },
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Lindsey",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsey/id68232384?uo=4",
+      "artistId": 68232384,
+      "amgArtistId": 3013520,
+      "primaryGenreName": "Pop",
+      "primaryGenreId": 14
+    },
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Lindsey Buckingham",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsey-buckingham/id201419?uo=4",
+      "artistId": 201419,
+      "amgArtistId": 3792,
+      "primaryGenreName": "Rock",
+      "primaryGenreId": 21
+    },
+    {
+      "wrapperType": "artist",
+      "artistType": "Movie Artist",
+      "artistName": "Lindsay Lohan",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsay-lohan/id20541815?uo=4",
+      "artistId": 20541815,
+      "amgArtistId": 606537,
+      "primaryGenreName": "Pop",
+      "primaryGenreId": 14
+    },
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Lindsey Haun",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsey-haun/id168642472?uo=4",
+      "artistId": 168642472,
+      "amgArtistId": 829062,
+      "primaryGenreName": "Country",
+      "primaryGenreId": 6
+    },
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Lindsey Pavao",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsey-pavao/id458635688?uo=4",
+      "artistId": 458635688,
+      "amgArtistId": 2585056,
+      "primaryGenreName": "Alternative",
+      "primaryGenreId": 20
+    },
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Lindsey Ray",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsey-ray/id284628468?uo=4",
+      "artistId": 284628468,
+      "amgArtistId": 1075255,
+      "primaryGenreName": "Pop",
+      "primaryGenreId": 14
+    },
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Lindsey Webster",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsey-webster/id402530464?uo=4",
+      "artistId": 402530464,
+      "amgArtistId": 2768239,
+      "primaryGenreName": "Jazz",
+      "primaryGenreId": 11
+    },
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Lindsay Ell",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsay-ell/id309273947?uo=4",
+      "artistId": 309273947,
+      "amgArtistId": 1598575,
+      "primaryGenreName": "Country",
+      "primaryGenreId": 6
+    },
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Lindsay McCaul",
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/lindsay-mccaul/id434927425?uo=4",
+      "artistId": 434927425,
+      "amgArtistId": 2185311,
+      "primaryGenreName": "Christian & Gospel",
+      "primaryGenreId": 22
+    }
+  ]
+}

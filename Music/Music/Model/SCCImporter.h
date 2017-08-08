@@ -11,4 +11,6 @@
 
 + (nullable NSArray<id> *)entityFromPath:(nonnull NSString *)path error:(NSError *_Nullable *_Nullable)error entityType:(nonnull NSString *)entityType;
 
++ (void)configureArtistsForPrinting;
+
 @end

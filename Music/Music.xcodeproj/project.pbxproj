@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		4C20FB5D1EE89ADC00FAD125 /* SCCAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB581EE89ADC00FAD125 /* SCCAlbum.m */; };
 		4C20FB5F1EE89ADC00FAD125 /* SCCTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20FB5C1EE89ADC00FAD125 /* SCCTrack.m */; };
+		4C2A0F7B1F3A03FF004EA0B2 /* SCCArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A0F7A1F3A03FF004EA0B2 /* SCCArtist.m */; };
 		4C7FF3D01F228627006E071A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7FF3CF1F228627006E071A /* ImageIO.framework */; };
 		4C7FF5C21F22888C006E071A /* libSDWebImage iOS static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7FF5B71F228883006E071A /* libSDWebImage iOS static.a */; };
-		57D042FE042308E467FD6C3A /* SCCImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D044F3557C2BB020079E07 /* SCCImporter.m */; };
 		57D0433304F4EAE4C9E6E438 /* TrackArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D04C5BC876229CD1ED6E0F /* TrackArt.png */; };
 		57D044AAD3640D2E816711B2 /* SCCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04E0AC18A1F3AA5AB625B /* SCCUtility.m */; };
 		57D045B6FD014506CEB64FCE /* SCCPerformSearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D047981F6D4C3DEA50A4C2 /* SCCPerformSearchOperation.m */; };
@@ -19,6 +19,8 @@
 		57D049FEAB50E44F9EE34601 /* SCCAlbumTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04569E71C5A49B35C8082 /* SCCAlbumTableViewController.m */; };
 		57D04B823490BFC537943FEE /* SCCTrackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D043BBCF975D4A537E1183 /* SCCTrackTableViewCell.m */; };
 		57D04B90550744561ECC0D2B /* SCCAlbumDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D047D23669F043AADD4A82 /* SCCAlbumDetailHeaderView.m */; };
+		57D04BF32929B99167A3455E /* ArtistJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 57D045D34328A021CF96CF48 /* ArtistJSON.json */; };
+		57D04DB3A340326F337B066F /* SCCImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04A2DA17F076E42FD76AF /* SCCImporter.m */; };
 		57D04DDDD99C55A83A23B09E /* AlbumArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D045F11E81AEC32E4C5CCC /* AlbumArt.png */; };
 		57D04EDB7050D2B8D30D6299 /* SCCAlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04F20274BA236F7DE73EB /* SCCAlbumTableViewCell.m */; };
 		57D04EE9802571CF6E5290DD /* SCCAlbumDetailViewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D04C7453762F66BE0C2413 /* SCCAlbumDetailViewTableViewController.m */; };
@@ -135,6 +137,8 @@
 		4C20FB581EE89ADC00FAD125 /* SCCAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCCAlbum.m; path = Model/SCCAlbum.m; sourceTree = "<group>"; };
 		4C20FB5B1EE89ADC00FAD125 /* SCCTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCCTrack.h; path = Model/SCCTrack.h; sourceTree = "<group>"; };
 		4C20FB5C1EE89ADC00FAD125 /* SCCTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCCTrack.m; path = Model/SCCTrack.m; sourceTree = "<group>"; };
+		4C2A0F791F3A03FF004EA0B2 /* SCCArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCCArtist.h; path = Model/SCCArtist.h; sourceTree = "<group>"; };
+		4C2A0F7A1F3A03FF004EA0B2 /* SCCArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCCArtist.m; path = Model/SCCArtist.m; sourceTree = "<group>"; };
 		4C7FF3CF1F228627006E071A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4C7FF3D21F228882006E071A /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		4C7FF3D41F228882006E071A /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
@@ -535,19 +539,20 @@
 		4C7FF5971F228883006E071A /* SDWebImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDWebImage.h; sourceTree = "<group>"; };
 		57D04340E7F505AD1E044824 /* SCCAlbumDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCAlbumDetailHeaderView.h; sourceTree = "<group>"; };
 		57D043BBCF975D4A537E1183 /* SCCTrackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCTrackTableViewCell.m; sourceTree = "<group>"; };
-		57D044F3557C2BB020079E07 /* SCCImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCImporter.m; sourceTree = "<group>"; };
 		57D04569E71C5A49B35C8082 /* SCCAlbumTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCAlbumTableViewController.m; sourceTree = "<group>"; };
 		57D045C8971D710B56A162C1 /* SCCImageUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCImageUtility.h; sourceTree = "<group>"; };
 		57D045D0E5744605A1F29D18 /* SCCTrackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCTrackTableViewCell.h; sourceTree = "<group>"; };
+		57D045D34328A021CF96CF48 /* ArtistJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ArtistJSON.json; sourceTree = "<group>"; };
 		57D045F11E81AEC32E4C5CCC /* AlbumArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlbumArt.png; sourceTree = "<group>"; };
 		57D04782A94999ED5EB5F8FC /* SCCTrackDetailViewUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCTrackDetailViewUIViewController.m; sourceTree = "<group>"; };
 		57D047981F6D4C3DEA50A4C2 /* SCCPerformSearchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCPerformSearchOperation.m; sourceTree = "<group>"; };
 		57D047CCCECFFBC642948EE0 /* SCCUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCUtility.h; sourceTree = "<group>"; };
 		57D047D23669F043AADD4A82 /* SCCAlbumDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCAlbumDetailHeaderView.m; sourceTree = "<group>"; };
 		57D0488C805B34B5043D93D2 /* SCCTrackDetailViewUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCTrackDetailViewUIViewController.h; sourceTree = "<group>"; };
-		57D04B0AF14C1982C47590C0 /* SCCImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCImporter.h; sourceTree = "<group>"; };
+		57D04A2DA17F076E42FD76AF /* SCCImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCCImporter.m; path = Model/SCCImporter.m; sourceTree = "<group>"; };
 		57D04B163EFDDDDD08DDC4B4 /* SCCAlbumDetailViewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCAlbumDetailViewTableViewController.h; sourceTree = "<group>"; };
 		57D04B38FC5A9600F14E9110 /* SCCPerformSearchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCPerformSearchOperation.h; sourceTree = "<group>"; };
+		57D04B80068FF1C4F035926B /* SCCImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCCImporter.h; path = Model/SCCImporter.h; sourceTree = "<group>"; };
 		57D04C4CE1C160C90DB0DAEB /* SCCAlbumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCAlbumTableViewCell.h; sourceTree = "<group>"; };
 		57D04C5BC876229CD1ED6E0F /* TrackArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TrackArt.png; sourceTree = "<group>"; };
 		57D04C7453762F66BE0C2413 /* SCCAlbumDetailViewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCAlbumDetailViewTableViewController.m; sourceTree = "<group>"; };
@@ -582,10 +587,12 @@
 			children = (
 				4C20FB571EE89ADC00FAD125 /* SCCAlbum.h */,
 				4C20FB581EE89ADC00FAD125 /* SCCAlbum.m */,
-				57D04B0AF14C1982C47590C0 /* SCCImporter.h */,
-				57D044F3557C2BB020079E07 /* SCCImporter.m */,
+				4C2A0F791F3A03FF004EA0B2 /* SCCArtist.h */,
+				4C2A0F7A1F3A03FF004EA0B2 /* SCCArtist.m */,
 				4C20FB5B1EE89ADC00FAD125 /* SCCTrack.h */,
 				4C20FB5C1EE89ADC00FAD125 /* SCCTrack.m */,
+				57D04B80068FF1C4F035926B /* SCCImporter.h */,
+				57D04A2DA17F076E42FD76AF /* SCCImporter.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1438,6 +1445,7 @@
 				5DEF82831CE66A0800985B5D /* Assets.xcassets */,
 				5DEF82851CE66A0800985B5D /* LaunchScreen.storyboard */,
 				5DEF82881CE66A0800985B5D /* Info.plist */,
+				57D045D34328A021CF96CF48 /* ArtistJSON.json */,
 				5DEF82771CE66A0800985B5D /* Supporting Files */,
 			);
 			path = Music;
@@ -1655,6 +1663,7 @@
 				5DEF82841CE66A0800985B5D /* Assets.xcassets in Resources */,
 				57D04DDDD99C55A83A23B09E /* AlbumArt.png in Resources */,
 				57D0433304F4EAE4C9E6E438 /* TrackArt.png in Resources */,
+				57D04BF32929B99167A3455E /* ArtistJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1670,6 +1679,7 @@
 				5DEF82791CE66A0800985B5D /* main.m in Sources */,
 				4C20FB5D1EE89ADC00FAD125 /* SCCAlbum.m in Sources */,
 				57D04FFEE5BD83A0D4A185A9 /* SCCTrackDetailViewUIViewController.m in Sources */,
+				4C2A0F7B1F3A03FF004EA0B2 /* SCCArtist.m in Sources */,
 				57D049FEAB50E44F9EE34601 /* SCCAlbumTableViewController.m in Sources */,
 				57D04EE9802571CF6E5290DD /* SCCAlbumDetailViewTableViewController.m in Sources */,
 				57D04B90550744561ECC0D2B /* SCCAlbumDetailHeaderView.m in Sources */,
@@ -1678,7 +1688,7 @@
 				57D04883949B7AEDE271B92F /* SCCImageUtility.m in Sources */,
 				57D044AAD3640D2E816711B2 /* SCCUtility.m in Sources */,
 				57D045B6FD014506CEB64FCE /* SCCPerformSearchOperation.m in Sources */,
-				57D042FE042308E467FD6C3A /* SCCImporter.m in Sources */,
+				57D04DB3A340326F337B066F /* SCCImporter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

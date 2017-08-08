@@ -7,12 +7,15 @@
 
 #import "SCCAlbum.h"
 #import "SCCTrack.h"
+#import "SCCArtist.h"
 
 static NSString *const SCCImporterResults = @"results";
 static NSString *const SCCImporterKind = @"kind";
 static NSString *const SCCImporterSong = @"song";
 
 @implementation SCCImporter
+
+#pragma mark - Importing Methods
 
 + (NSArray<id> *)entityFromPath:(NSString *)path error:(NSError **)error entityType:(NSString *)entityType
 {
@@ -41,6 +44,8 @@ static NSString *const SCCImporterSong = @"song";
     }
 }
 
+#pragma mark - Object Array Builders
+
 + (nonnull NSArray<SCCAlbum *> *)albumsFromResults:(nonnull NSArray<NSDictionary <NSString *, id> *> *)results
 {
     NSMutableArray<SCCAlbum *> *albums = [[NSMutableArray alloc] initWithCapacity:[results count]];
@@ -57,6 +62,37 @@ static NSString *const SCCImporterSong = @"song";
         [tracks addObject:[[SCCTrack alloc] initWithDictionary:results[i]]];
     }
     return [tracks copy];
+}
+
++ (nonnull NSArray<SCCArtist *> *)artistsFromResults:(nonnull NSArray<NSDictionary <NSString *, id> *> *)results
+{
+    NSMutableArray <SCCArtist *> *artists = [[NSMutableArray alloc] initWithCapacity:[results count]];
+    for (NSDictionary<NSString *, id> *result in results) {
+        [artists addObject:[[SCCArtist alloc] initWithDictionary:result]];
+    }
+    return [artists copy];
+}
+
+#pragma mark - Hard Coded JSON methods
+
++ (nonnull NSArray <NSDictionary <NSString *, id> *> *)resultsFromLocalArtistJSON
+{
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"ArtistJSON" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:filepath];
+    NSDictionary<NSString *, NSArray<NSDictionary <NSString *, id>*> *>  *fileContents = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    return [[NSArray alloc] initWithArray:[fileContents objectForKey:@"results"]];
+}
+
++ (void)printDescriptionsFromArtists:(nonnull NSArray<SCCArtist *> *)artists
+{
+    for (SCCArtist *artist in artists) {
+        NSLog(@"%@", [artist description]);
+    }
+}
+
++ (void)configureArtistsForPrinting
+{
+    [self printDescriptionsFromArtists:[self artistsFromResults:[self resultsFromLocalArtistJSON]]];
 }
 
 @end

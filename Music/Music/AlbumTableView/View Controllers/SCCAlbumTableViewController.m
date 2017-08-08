@@ -9,6 +9,7 @@
 #import "SCCAlbumTableViewCell.h"
 #import "SCCAlbumDetailViewTableViewController.h"
 #import "SCCPerformSearchOperation.h"
+#import "SCCImporter.h"
 
 @interface SCCAlbumTableViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
     NSArray<SCCAlbum *> *_albums;
@@ -49,6 +50,7 @@ static NSString *const searchPlaceholder = @"Search Albums";
     [self configureView:[self view]];
     [self configureNavigationItem:[self navigationItem] searchController:_searchController];
     [self configureTableView:[self tableView]];
+    [SCCImporter configureArtistsForPrinting];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
